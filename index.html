@@ -339,6 +339,120 @@
     font-size:12.5px;color:var(--bronze);font-style:italic;
   }
 
+  /* ===== Daily Bonus tracker ===== */
+  .boost-card{
+    display:flex;gap:20px;align-items:center;
+    border:2px solid var(--line);
+    border-radius:16px;
+    padding:24px 28px;
+    margin-bottom:28px;
+    background:var(--paper-2);
+    transition:background .4s, border-color .4s;
+  }
+  .boost-card.hidden{background:linear-gradient(120deg,var(--bronze-tint),var(--white) 70%);border-color:var(--bronze);}
+  .boost-card.shiny{background:linear-gradient(120deg,var(--sky-tint),var(--rose-tint));border-color:var(--rose);}
+  .boost-card.none{background:var(--paper-2);border-color:var(--line);}
+  .boost-icon{
+    font-size:34px;flex:0 0 auto;
+    width:72px;height:72px;border-radius:50%;
+    background:var(--white);
+    display:flex;align-items:center;justify-content:center;
+    border:2px solid var(--line);
+  }
+  .boost-eyebrow{font-size:11px;font-weight:800;color:var(--ink-soft);letter-spacing:.03em;margin-bottom:4px;}
+  .boost-info h3{font-size:21px;margin-bottom:6px;}
+  .boost-info p{font-size:13.5px;color:var(--ink-soft);line-height:1.6;margin:0 0 10px;}
+  .boost-clock{font-size:12px;font-weight:700;color:var(--ink-soft);font-family:'Baloo 2';}
+
+  .sched-list{display:flex;flex-direction:column;gap:8px;}
+  .sched-row{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 16px;
+    border:2px solid var(--line);
+    border-radius:10px;
+    background:var(--white);
+    transition:background .3s, border-color .3s;
+  }
+  .sched-row.active{border-color:var(--rose);background:var(--rose-tint);}
+  .sched-day{font-family:'Baloo 2';font-weight:700;font-size:14px;}
+  .sched-chip{font-size:11px;font-weight:800;padding:5px 11px;border-radius:20px;font-family:'Baloo 2';}
+  .sched-chip.shiny{background:var(--sky-tint);color:var(--sky-dark);}
+  .sched-chip.hidden{background:var(--bronze-tint);color:var(--bronze);}
+  .sched-chip.none{background:var(--paper);color:var(--ink-soft);}
+
+  /* ===== Starter showcase ===== */
+  .region-tabs{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:20px;}
+  .region-tab{
+    padding:7px 15px;border-radius:20px;
+    border:2px solid var(--line);
+    background:var(--white);
+    font-family:'Baloo 2';font-weight:700;font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .region-tab.active{background:var(--rose);border-color:var(--rose);color:var(--white);}
+
+  .starters-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(360px,1fr));
+    gap:16px;
+    margin-bottom:28px;
+  }
+  .starter-card{
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:var(--white);
+    padding:16px 18px 18px;
+  }
+  .starter-card-head{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:12px;
+  }
+  .starter-card-head h4{font-size:15.5px;}
+  .starter-region-tag{
+    font-size:10px;font-weight:800;color:var(--sky-dark);
+    background:var(--sky-tint);padding:3px 9px;border-radius:20px;
+    flex:0 0 auto;
+  }
+  .stage-row{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:8px;margin-bottom:12px;
+  }
+  .stage{
+    text-align:center;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:10px 4px 8px;
+    background:var(--paper-2);
+  }
+  .stage img{width:60px;height:60px;object-fit:contain;display:block;margin:0 auto;}
+  .stage .lvl{font-size:9.5px;color:var(--ink-soft);font-weight:700;margin-bottom:2px;}
+  .stage .name{font-family:'Baloo 2';font-weight:700;font-size:12px;margin:2px 0 5px;}
+  .stage .types{display:flex;gap:3px;justify-content:center;flex-wrap:wrap;}
+  .type-pill{
+    font-size:8.5px;font-weight:800;color:#fff;
+    padding:2px 7px;border-radius:20px;
+    letter-spacing:.02em;
+  }
+  .ability-line{
+    font-size:12px;color:var(--ink-soft);
+    margin-bottom:12px;
+    border-top:1px dashed var(--line);
+    padding-top:10px;
+  }
+  .ability-line b{color:var(--ink);}
+  .stat-bars{display:flex;flex-direction:column;gap:5px;}
+  .stat-bar-row{
+    display:grid;grid-template-columns:30px 1fr 26px;
+    align-items:center;gap:7px;
+    font-size:10px;font-weight:700;color:var(--ink-soft);
+  }
+  .stat-bar-track{
+    background:var(--paper-2);
+    border-radius:6px;height:7px;overflow:hidden;
+  }
+  .stat-bar-fill{height:100%;border-radius:6px;background:var(--rose);}
+  .stat-bar-val{text-align:right;color:var(--ink);}
+
   footer{
     border-top:2px solid var(--line);
     padding:22px 34px 40px;
@@ -387,6 +501,7 @@
     <div class="nav-group">
       <div class="nav-title">BRONZE FRONTIER</div>
       <button class="nav-link" data-page="frontier"><span class="dot"></span>What's New Here</button>
+      <button class="nav-link" data-page="daily"><span class="dot"></span>Daily Bonus</button>
     </div>
   </aside>
 
@@ -625,6 +740,10 @@
             <p>Rival Jake breaks from tradition entirely, choosing an <b>Eevee</b> as his own starter — and it's no pushover in your first battle.</p>
           </div>
         </section>
+
+        <div class="region-tabs" id="region-tabs"></div>
+        <div class="starters-grid" id="starters-grid"></div>
+
         <div class="callout sky">
           Bronze Frontier's later-gen additions mean the starter roster — and Jake's team — may grow further. Log the specifics on <b>What's New Here</b>.
         </div>
@@ -684,6 +803,43 @@
         </section>
       </div>
 
+      <!-- ================= DAILY BONUS ================= -->
+      <div class="page" id="page-daily">
+        <section class="block">
+          <h2>Daily Bonus Tracker</h2>
+          <div class="prose">
+            <p>Bronze Frontier rotates a bonus encounter rate through the week. <b>Wednesdays</b> boost odds for wild Pokémon carrying their <b>Hidden Ability</b>. <b>Friday through Sunday</b> boosts <b>Shiny</b> odds instead. Every boost is tracked on the <b>Eastern Time (EST/EDT)</b> calendar day — so, for example, the Wednesday boost kicks in the instant the clock hits 12:00 AM Eastern on Wednesday, no matter what time zone you're playing from.</p>
+          </div>
+        </section>
+
+        <div class="boost-card" id="boost-card">
+          <div class="boost-icon" id="boost-icon">—</div>
+          <div class="boost-info">
+            <div class="boost-eyebrow">TODAY'S BOOST · <span id="boost-day">—</span></div>
+            <h3 id="boost-title">Loading…</h3>
+            <p id="boost-desc"></p>
+            <div class="boost-clock">Current Eastern Time: <span id="boost-time">—</span></div>
+          </div>
+        </div>
+
+        <section class="block">
+          <h2>Weekly Schedule</h2>
+          <div class="sched-list" id="sched-list">
+            <div class="sched-row" data-day="Sunday"><span class="sched-day">Sunday</span><span class="sched-chip shiny">Shiny Boost</span></div>
+            <div class="sched-row" data-day="Monday"><span class="sched-day">Monday</span><span class="sched-chip none">No Boost</span></div>
+            <div class="sched-row" data-day="Tuesday"><span class="sched-day">Tuesday</span><span class="sched-chip none">No Boost</span></div>
+            <div class="sched-row" data-day="Wednesday"><span class="sched-day">Wednesday</span><span class="sched-chip hidden">Hidden Ability Boost</span></div>
+            <div class="sched-row" data-day="Thursday"><span class="sched-day">Thursday</span><span class="sched-chip none">No Boost</span></div>
+            <div class="sched-row" data-day="Friday"><span class="sched-day">Friday</span><span class="sched-chip shiny">Shiny Boost</span></div>
+            <div class="sched-row" data-day="Saturday"><span class="sched-day">Saturday</span><span class="sched-chip shiny">Shiny Boost</span></div>
+          </div>
+        </section>
+
+        <div class="callout sky">
+          Boosts reset at <b>12:00 AM Eastern Time</b>. This tracker reads your device's clock and converts it to Eastern Time automatically, so it stays accurate no matter where you're playing from.
+        </div>
+      </div>
+
     </div>
 
     <footer>
@@ -707,6 +863,266 @@
   }
 
   links.forEach(l=>l.addEventListener('click', ()=>goTo(l.dataset.page)));
+
+  /* ===== Daily Bonus tracker ===== */
+  function updateDailyBonus(){
+    const now = new Date();
+    const weekday = new Intl.DateTimeFormat('en-US', { timeZone:'America/New_York', weekday:'long' }).format(now);
+    const timeStr = new Intl.DateTimeFormat('en-US', { timeZone:'America/New_York', hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:true }).format(now);
+
+    let type, icon, title, desc;
+    if (weekday === 'Wednesday') {
+      type='hidden'; icon='🔒';
+      title='Hidden Ability Boost';
+      desc='Wild Pokémon encountered today have enhanced odds of carrying their Hidden Ability.';
+    } else if (['Friday','Saturday','Sunday'].includes(weekday)) {
+      type='shiny'; icon='✨';
+      title='Shiny Boost';
+      desc='Wild Pokémon encountered today have enhanced Shiny odds.';
+    } else {
+      type='none'; icon='—';
+      title='No Active Boost';
+      desc='Standard encounter rates today. Hidden Ability odds return Wednesday — Shiny odds return Friday through Sunday.';
+    }
+
+    const card = document.getElementById('boost-card');
+    if(card){
+      card.classList.remove('hidden','shiny','none');
+      card.classList.add(type);
+    }
+    const iconEl = document.getElementById('boost-icon');
+    const dayEl = document.getElementById('boost-day');
+    const titleEl = document.getElementById('boost-title');
+    const descEl = document.getElementById('boost-desc');
+    const timeEl = document.getElementById('boost-time');
+    if(iconEl) iconEl.textContent = icon;
+    if(dayEl) dayEl.textContent = weekday;
+    if(titleEl) titleEl.textContent = title;
+    if(descEl) descEl.textContent = desc;
+    if(timeEl) timeEl.textContent = timeStr + ' ET';
+
+    document.querySelectorAll('.sched-row').forEach(r=>{
+      r.classList.toggle('active', r.dataset.day === weekday);
+    });
+  }
+  updateDailyBonus();
+  setInterval(updateDailyBonus, 1000);
+
+  /* ===== Starter Pokémon showcase ===== */
+  const TYPE_COLORS = {
+    Grass:'#5FAE5A', Fire:'#E8623A', Water:'#3E9CDC', Poison:'#A040A0',
+    Flying:'#8FB8E8', Fighting:'#C03028', Ground:'#C7924A', Steel:'#8E97AE',
+    Psychic:'#F85888', Dark:'#5B5468', Fairy:'#EE99AC', Ghost:'#6C5A8C'
+  };
+
+  const STARTERS = [
+    { region:'Kanto', stages:[
+        {name:'Bulbasaur', dex:1, types:['Grass','Poison'], lvl:'Base'},
+        {name:'Ivysaur', dex:2, types:['Grass','Poison'], lvl:'Lv. 16'},
+        {name:'Venusaur', dex:3, types:['Grass','Poison'], lvl:'Lv. 32'}],
+      ability:'Overgrow', hidden:'Chlorophyll',
+      stats:{hp:80,atk:82,def:83,spa:100,spd:100,spe:80} },
+    { region:'Kanto', stages:[
+        {name:'Charmander', dex:4, types:['Fire'], lvl:'Base'},
+        {name:'Charmeleon', dex:5, types:['Fire'], lvl:'Lv. 16'},
+        {name:'Charizard', dex:6, types:['Fire','Flying'], lvl:'Lv. 36'}],
+      ability:'Blaze', hidden:'Solar Power',
+      stats:{hp:78,atk:84,def:78,spa:109,spd:85,spe:100} },
+    { region:'Kanto', stages:[
+        {name:'Squirtle', dex:7, types:['Water'], lvl:'Base'},
+        {name:'Wartortle', dex:8, types:['Water'], lvl:'Lv. 16'},
+        {name:'Blastoise', dex:9, types:['Water'], lvl:'Lv. 36'}],
+      ability:'Torrent', hidden:'Rain Dish',
+      stats:{hp:79,atk:83,def:100,spa:85,spd:105,spe:78} },
+
+    { region:'Johto', stages:[
+        {name:'Chikorita', dex:152, types:['Grass'], lvl:'Base'},
+        {name:'Bayleef', dex:153, types:['Grass'], lvl:'Lv. 16'},
+        {name:'Meganium', dex:154, types:['Grass'], lvl:'Lv. 32'}],
+      ability:'Overgrow', hidden:'Leaf Guard',
+      stats:{hp:80,atk:82,def:100,spa:83,spd:100,spe:80} },
+    { region:'Johto', stages:[
+        {name:'Cyndaquil', dex:155, types:['Fire'], lvl:'Base'},
+        {name:'Quilava', dex:156, types:['Fire'], lvl:'Lv. 14'},
+        {name:'Typhlosion', dex:157, types:['Fire'], lvl:'Lv. 36'}],
+      ability:'Blaze', hidden:'Flash Fire',
+      stats:{hp:78,atk:84,def:78,spa:109,spd:85,spe:100} },
+    { region:'Johto', stages:[
+        {name:'Totodile', dex:158, types:['Water'], lvl:'Base'},
+        {name:'Croconaw', dex:159, types:['Water'], lvl:'Lv. 18'},
+        {name:'Feraligatr', dex:160, types:['Water'], lvl:'Lv. 30'}],
+      ability:'Torrent', hidden:'Sheer Force',
+      stats:{hp:85,atk:105,def:100,spa:79,spd:83,spe:78} },
+
+    { region:'Hoenn', stages:[
+        {name:'Treecko', dex:252, types:['Grass'], lvl:'Base'},
+        {name:'Grovyle', dex:253, types:['Grass'], lvl:'Lv. 16'},
+        {name:'Sceptile', dex:254, types:['Grass'], lvl:'Lv. 36'}],
+      ability:'Overgrow', hidden:'Unburden',
+      stats:{hp:70,atk:85,def:65,spa:105,spd:85,spe:120} },
+    { region:'Hoenn', stages:[
+        {name:'Torchic', dex:255, types:['Fire'], lvl:'Base'},
+        {name:'Combusken', dex:256, types:['Fire','Fighting'], lvl:'Lv. 16'},
+        {name:'Blaziken', dex:257, types:['Fire','Fighting'], lvl:'Lv. 36'}],
+      ability:'Blaze', hidden:'Speed Boost',
+      stats:{hp:80,atk:120,def:70,spa:110,spd:70,spe:80} },
+    { region:'Hoenn', stages:[
+        {name:'Mudkip', dex:258, types:['Water'], lvl:'Base'},
+        {name:'Marshtomp', dex:259, types:['Water','Ground'], lvl:'Lv. 16'},
+        {name:'Swampert', dex:260, types:['Water','Ground'], lvl:'Lv. 36'}],
+      ability:'Torrent', hidden:'Damp',
+      stats:{hp:100,atk:110,def:90,spa:85,spd:90,spe:60} },
+
+    { region:'Sinnoh', stages:[
+        {name:'Turtwig', dex:387, types:['Grass'], lvl:'Base'},
+        {name:'Grotle', dex:388, types:['Grass'], lvl:'Lv. 18'},
+        {name:'Torterra', dex:389, types:['Grass','Ground'], lvl:'Lv. 32'}],
+      ability:'Overgrow', hidden:'Shell Armor',
+      stats:{hp:95,atk:109,def:105,spa:75,spd:85,spe:56} },
+    { region:'Sinnoh', stages:[
+        {name:'Chimchar', dex:390, types:['Fire'], lvl:'Base'},
+        {name:'Monferno', dex:391, types:['Fire','Fighting'], lvl:'Lv. 14'},
+        {name:'Infernape', dex:392, types:['Fire','Fighting'], lvl:'Lv. 36'}],
+      ability:'Blaze', hidden:'Iron Fist',
+      stats:{hp:76,atk:104,def:71,spa:104,spd:71,spe:108} },
+    { region:'Sinnoh', stages:[
+        {name:'Piplup', dex:393, types:['Water'], lvl:'Base'},
+        {name:'Prinplup', dex:394, types:['Water'], lvl:'Lv. 16'},
+        {name:'Empoleon', dex:395, types:['Water','Steel'], lvl:'Lv. 36'}],
+      ability:'Torrent', hidden:'Defiant',
+      stats:{hp:84,atk:86,def:88,spa:111,spd:101,spe:60} },
+
+    { region:'Unova', stages:[
+        {name:'Snivy', dex:495, types:['Grass'], lvl:'Base'},
+        {name:'Servine', dex:496, types:['Grass'], lvl:'Lv. 17'},
+        {name:'Serperior', dex:497, types:['Grass'], lvl:'Lv. 36'}],
+      ability:'Overgrow', hidden:'Contrary',
+      stats:{hp:75,atk:75,def:95,spa:75,spd:95,spe:113} },
+    { region:'Unova', stages:[
+        {name:'Tepig', dex:498, types:['Fire'], lvl:'Base'},
+        {name:'Pignite', dex:499, types:['Fire','Fighting'], lvl:'Lv. 17'},
+        {name:'Emboar', dex:500, types:['Fire','Fighting'], lvl:'Lv. 36'}],
+      ability:'Blaze', hidden:'Thick Fat / Reckless (Emboar)',
+      stats:{hp:110,atk:123,def:65,spa:100,spd:65,spe:65} },
+    { region:'Unova', stages:[
+        {name:'Oshawott', dex:501, types:['Water'], lvl:'Base'},
+        {name:'Dewott', dex:502, types:['Water'], lvl:'Lv. 17'},
+        {name:'Samurott', dex:503, types:['Water'], lvl:'Lv. 36'}],
+      ability:'Torrent', hidden:'Shell Armor',
+      stats:{hp:95,atk:100,def:85,spa:108,spd:70,spe:70} },
+
+    { region:'Kalos', stages:[
+        {name:'Chespin', dex:650, types:['Grass'], lvl:'Base'},
+        {name:'Quilladin', dex:651, types:['Grass'], lvl:'Lv. 16'},
+        {name:'Chesnaught', dex:652, types:['Grass','Fighting'], lvl:'Lv. 36'}],
+      ability:'Overgrow', hidden:'Bulletproof',
+      stats:{hp:88,atk:107,def:122,spa:74,spd:75,spe:64} },
+    { region:'Kalos', stages:[
+        {name:'Fennekin', dex:653, types:['Fire'], lvl:'Base'},
+        {name:'Braixen', dex:654, types:['Fire'], lvl:'Lv. 16'},
+        {name:'Delphox', dex:655, types:['Fire','Psychic'], lvl:'Lv. 36'}],
+      ability:'Blaze', hidden:'Magician',
+      stats:{hp:75,atk:69,def:72,spa:114,spd:100,spe:104} },
+    { region:'Kalos', stages:[
+        {name:'Froakie', dex:656, types:['Water'], lvl:'Base'},
+        {name:'Frogadier', dex:657, types:['Water'], lvl:'Lv. 16'},
+        {name:'Greninja', dex:658, types:['Water','Dark'], lvl:'Lv. 36'}],
+      ability:'Torrent', hidden:'Protean',
+      stats:{hp:72,atk:95,def:67,spa:103,spd:71,spe:122} },
+
+    { region:'Alola', stages:[
+        {name:'Rowlet', dex:722, types:['Grass','Flying'], lvl:'Base'},
+        {name:'Dartrix', dex:723, types:['Grass','Flying'], lvl:'Lv. 17'},
+        {name:'Decidueye', dex:724, types:['Grass','Ghost'], lvl:'Lv. 34'}],
+      ability:'Overgrow', hidden:'Long Reach',
+      stats:{hp:78,atk:107,def:75,spa:100,spd:100,spe:70} },
+    { region:'Alola', stages:[
+        {name:'Litten', dex:725, types:['Fire'], lvl:'Base'},
+        {name:'Torracat', dex:726, types:['Fire'], lvl:'Lv. 17'},
+        {name:'Incineroar', dex:727, types:['Fire','Dark'], lvl:'Lv. 34'}],
+      ability:'Blaze', hidden:'Intimidate',
+      stats:{hp:95,atk:115,def:90,spa:80,spd:90,spe:60} },
+    { region:'Alola', stages:[
+        {name:'Popplio', dex:728, types:['Water'], lvl:'Base'},
+        {name:'Brionne', dex:729, types:['Water'], lvl:'Lv. 17'},
+        {name:'Primarina', dex:730, types:['Water','Fairy'], lvl:'Lv. 34'}],
+      ability:'Torrent', hidden:'Liquid Voice',
+      stats:{hp:80,atk:74,def:74,spa:126,spd:116,spe:60} },
+  ];
+
+  const STAT_LABELS = [['hp','HP'],['atk','Atk'],['def','Def'],['spa','SpA'],['spd','SpD'],['spe','Spe']];
+  const STAT_MAX = 140;
+
+  function spriteUrl(dex){
+    return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${dex}.png`;
+  }
+
+  function typePill(t){
+    const c = TYPE_COLORS[t] || '#999';
+    return `<span class="type-pill" style="background:${c};">${t.toUpperCase()}</span>`;
+  }
+
+  function renderStarterCard(fam){
+    const stagesHtml = fam.stages.map(s => `
+      <div class="stage">
+        <img src="${spriteUrl(s.dex)}" alt="${s.name}" loading="lazy">
+        <div class="lvl">${s.lvl}</div>
+        <div class="name">${s.name}</div>
+        <div class="types">${s.types.map(typePill).join('')}</div>
+      </div>
+    `).join('');
+
+    const statsHtml = STAT_LABELS.map(([key,label]) => {
+      const val = fam.stats[key];
+      const pct = Math.min(100, Math.round((val / STAT_MAX) * 100));
+      return `
+        <div class="stat-bar-row">
+          <span>${label}</span>
+          <div class="stat-bar-track"><div class="stat-bar-fill" style="width:${pct}%;"></div></div>
+          <span class="stat-bar-val">${val}</span>
+        </div>
+      `;
+    }).join('');
+
+    const finalName = fam.stages[fam.stages.length-1].name;
+
+    return `
+      <div class="starter-card" data-region="${fam.region}">
+        <div class="starter-card-head">
+          <h4>${fam.stages[0].name} Line</h4>
+          <span class="starter-region-tag">${fam.region}</span>
+        </div>
+        <div class="stage-row">${stagesHtml}</div>
+        <div class="ability-line">Ability: <b>${fam.ability}</b> &nbsp;·&nbsp; Hidden Ability: <b>${fam.hidden}</b></div>
+        <div class="stat-bars">${statsHtml}</div>
+      </div>
+    `;
+  }
+
+  function renderStarters(filter){
+    const grid = document.getElementById('starters-grid');
+    if(!grid) return;
+    const list = filter === 'All' ? STARTERS : STARTERS.filter(f => f.region === filter);
+    grid.innerHTML = list.map(renderStarterCard).join('');
+  }
+
+  function initStarterTabs(){
+    const tabsEl = document.getElementById('region-tabs');
+    if(!tabsEl) return;
+    const regions = ['All', ...[...new Set(STARTERS.map(f => f.region))]];
+    tabsEl.innerHTML = regions.map((r,i) =>
+      `<button class="region-tab${i===0?' active':''}" data-region="${r}">${r}</button>`
+    ).join('');
+    tabsEl.querySelectorAll('.region-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabsEl.querySelectorAll('.region-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderStarters(btn.dataset.region);
+      });
+    });
+    renderStarters('All');
+  }
+  initStarterTabs();
   document.querySelectorAll('[data-goto]').forEach(el=>{
     el.addEventListener('click', (e)=>{ e.preventDefault(); goTo(el.dataset.goto); });
   });
