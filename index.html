@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bronze Frontier Wiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF3EE;
+    --paper-2:#F4E9E2;
+    --rose:#D9445E;
+    --rose-dark:#B22D46;
+    --rose-tint:#FBE3E7;
+    --sky:#5FB4DE;
+    --sky-dark:#3B8FB8;
+    --sky-tint:#E4F4FA;
+    --bronze:#B5793A;
+    --bronze-tint:#F1E1CB;
+    --ink:#2C2A3B;
+    --ink-soft:#5C5870;
+    --white:#FFFFFF;
+    --line:#E4D6CC;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,h4,.display{
+    font-family:'Baloo 2',sans-serif;
+    color:var(--ink);
+    margin:0;
+  }
+  a{color:var(--rose-dark);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  button{font-family:inherit;cursor:pointer;}
+
+  /* ===== Layout shell ===== */
+  .shell{
+    display:grid;
+    grid-template-columns:250px 1fr;
+    min-height:100vh;
+  }
+  @media (max-width:820px){
+    .shell{grid-template-columns:1fr;}
+    .sidebar{position:relative;width:100%;}
+  }
+
+  /* ===== Sidebar ===== */
+  .sidebar{
+    background:linear-gradient(180deg,var(--sky-tint) 0%, #EFF8FC 100%);
+    border-right:2px solid var(--line);
+    padding:22px 16px 40px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:22px;
+    padding:0 4px;
+  }
+  .brand-badge{
+    width:38px;height:38px;
+    flex:0 0 auto;
+    background:conic-gradient(from 210deg, var(--rose), var(--bronze), var(--sky), var(--rose));
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .brand-badge span{
+    width:26px;height:26px;background:var(--paper);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Baloo 2';font-weight:800;font-size:12px;color:var(--rose-dark);
+  }
+  .brand-text{line-height:1.05;}
+  .brand-text .b1{font-family:'Baloo 2';font-weight:800;font-size:17px;color:var(--ink);}
+  .brand-text .b2{font-size:10px;letter-spacing:.04em;color:var(--ink-soft);}
+
+  .search-box{
+    display:flex;align-items:center;gap:6px;
+    background:var(--white);
+    border:2px solid var(--line);
+    border-radius:8px;
+    padding:8px 10px;
+    margin-bottom:20px;
+  }
+  .search-box input{
+    border:none;outline:none;background:transparent;
+    font-family:'Manrope';font-size:13px;width:100%;color:var(--ink);
+  }
+  .search-box svg{flex:0 0 auto;opacity:.5;}
+
+  .nav-group{margin-bottom:6px;}
+  .nav-title{
+    font-family:'Baloo 2';
+    font-size:11.5px;
+    font-weight:700;
+    color:var(--bronze);
+    padding:10px 10px 4px;
+  }
+  .nav-link{
+    display:flex;align-items:center;gap:9px;
+    width:100%;
+    text-align:left;
+    padding:8px 10px;
+    border-radius:7px;
+    border:none;
+    background:transparent;
+    color:var(--ink-soft);
+    font-size:13.5px;
+    font-weight:600;
+    font-family:'Manrope';
+  }
+  .nav-link .dot{
+    width:6px;height:6px;border-radius:50%;
+    background:var(--sky-dark);
+    flex:0 0 auto;
+    opacity:.55;
+  }
+  .nav-link:hover{background:var(--white);color:var(--ink);text-decoration:none;}
+  .nav-link.active{background:var(--rose);color:var(--white);}
+  .nav-link.active .dot{background:var(--white);opacity:1;}
+
+  /* ===== Main ===== */
+  .main{padding:0;}
+  .topbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:14px 34px;
+    border-bottom:2px solid var(--line);
+    background:var(--white);
+    position:sticky;top:0;z-index:5;
+  }
+  .crumb{font-size:12.5px;color:var(--ink-soft);font-weight:600;}
+  .crumb b{color:var(--rose-dark);}
+  .status-pill{
+    font-size:11px;font-weight:700;
+    background:var(--bronze-tint);color:var(--bronze);
+    padding:5px 10px;border-radius:20px;
+    font-family:'Baloo 2';
+  }
+
+  .content{
+    max-width:900px;
+    margin:0 auto;
+    padding:38px 34px 90px;
+  }
+  .page{display:none;}
+  .page.active{display:block;animation:fadein .35s ease;}
+  @keyframes fadein{from{opacity:0;transform:translateY(6px);} to{opacity:1;transform:none;}}
+
+  /* ===== Hero (home) ===== */
+  .hero{
+    border:2px solid var(--line);
+    border-radius:16px;
+    overflow:hidden;
+    background:linear-gradient(120deg, var(--rose) 0%, #C93E58 45%, var(--sky-dark) 100%);
+    padding:40px 36px;
+    color:var(--white);
+    position:relative;
+    margin-bottom:28px;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.08) 0 2px, transparent 2px 26px);
+    pointer-events:none;
+  }
+  .hero-eyebrow{
+    font-size:12px;font-weight:700;letter-spacing:.03em;
+    color:var(--paper);opacity:.85;
+    margin-bottom:10px;
+  }
+  .hero h1{
+    font-size:38px;color:var(--white);font-weight:800;line-height:1.05;
+    margin-bottom:12px;
+  }
+  .hero p{
+    max-width:520px;font-size:15px;line-height:1.6;
+    color:#FFECEF;
+  }
+  .hero-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+  .hero-tag{
+    background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.4);
+    padding:5px 12px;border-radius:20px;
+    font-size:12px;font-weight:700;
+  }
+
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media (max-width:700px){.grid-2,.grid-3{grid-template-columns:1fr;}}
+
+  .card{
+    background:var(--white);
+    border:2px solid var(--line);
+    border-radius:12px;
+    padding:18px 20px;
+  }
+  .card h3{font-size:16px;margin-bottom:6px;}
+  .card p{font-size:13.5px;color:var(--ink-soft);line-height:1.55;margin:0;}
+  .card a.readmore{font-size:12.5px;font-weight:700;display:inline-block;margin-top:10px;}
+
+  section.block{margin-bottom:32px;}
+  .block h2{
+    font-size:21px;
+    padding-bottom:10px;
+    margin-bottom:16px;
+    border-bottom:3px solid var(--bronze);
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .block h2 small{
+    font-family:'Manrope';font-size:11.5px;font-weight:700;
+    color:var(--sky-dark);background:var(--sky-tint);
+    padding:4px 9px;border-radius:20px;
+  }
+  .prose p{font-size:14.5px;line-height:1.75;color:var(--ink);margin:0 0 14px;}
+  .prose p:last-child{margin-bottom:0;}
+
+  /* infobox (pokedex/trainer-card style) */
+  .with-infobox{display:grid;grid-template-columns:1fr 260px;gap:26px;align-items:start;}
+  @media (max-width:760px){.with-infobox{grid-template-columns:1fr;}}
+  .infobox{
+    border:2px solid var(--bronze);
+    border-radius:14px;
+    overflow:hidden;
+    background:var(--white);
+  }
+  .infobox-head{
+    background:var(--bronze);
+    color:var(--white);
+    font-family:'Baloo 2';font-weight:700;font-size:14px;
+    padding:10px 14px;
+  }
+  .infobox-img{
+    height:130px;
+    background:linear-gradient(135deg,var(--sky-tint),var(--rose-tint));
+    display:flex;align-items:center;justify-content:center;
+    font-size:34px;
+  }
+  .infobox-rows{padding:6px 0;}
+  .infobox-row{
+    display:flex;justify-content:space-between;gap:10px;
+    padding:8px 14px;
+    border-top:1px solid var(--line);
+    font-size:12.5px;
+  }
+  .infobox-row:first-child{border-top:none;}
+  .infobox-row .k{color:var(--ink-soft);font-weight:700;}
+  .infobox-row .v{text-align:right;font-weight:700;color:var(--ink);}
+
+  /* badge hex */
+  .badge-hex{
+    width:44px;height:44px;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--white);font-family:'Baloo 2';font-weight:800;font-size:14px;
+    flex:0 0 auto;
+  }
+
+  /* gym leader roster */
+  .gym-row{
+    display:grid;
+    grid-template-columns:52px 1fr auto;
+    gap:16px;
+    align-items:center;
+    padding:14px 16px;
+    border:2px solid var(--line);
+    border-radius:12px;
+    background:var(--white);
+    margin-bottom:10px;
+  }
+  .gym-row .num{
+    font-family:'Baloo 2';font-weight:800;color:var(--bronze);
+    font-size:20px;text-align:center;
+  }
+  .gym-row h4{font-size:15.5px;margin-bottom:2px;}
+  .gym-row .meta{font-size:12.5px;color:var(--ink-soft);}
+  .type-chip{
+    font-size:11px;font-weight:800;font-family:'Baloo 2';
+    padding:4px 10px;border-radius:20px;color:var(--white);
+    white-space:nowrap;
+  }
+
+  /* locations list */
+  .loc-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 22px;}
+  @media (max-width:700px){.loc-list{grid-template-columns:1fr;}}
+  .loc-list li{
+    display:flex;align-items:baseline;gap:8px;
+    font-size:13.5px;padding:7px 0;
+    border-bottom:1px dashed var(--line);
+  }
+  .loc-list li .tag{
+    font-size:10px;font-weight:800;color:var(--sky-dark);
+    background:var(--sky-tint);padding:2px 7px;border-radius:5px;
+    flex:0 0 auto;
+  }
+
+  /* callout */
+  .callout{
+    border:2px dashed var(--rose);
+    background:var(--rose-tint);
+    border-radius:12px;
+    padding:16px 18px;
+    font-size:13.5px;
+    color:var(--rose-dark);
+    line-height:1.6;
+    margin-bottom:22px;
+  }
+  .callout b{color:var(--ink);}
+
+  .callout.sky{border-color:var(--sky-dark);background:var(--sky-tint);color:var(--sky-dark);}
+
+  /* editable-looking placeholder blocks for Bronze Frontier additions */
+  .slot{
+    border:2px solid var(--line);
+    border-radius:12px;
+    padding:18px 20px;
+    background:repeating-linear-gradient(135deg, var(--white) 0 12px, #FBF7F4 12px 24px);
+    margin-bottom:14px;
+  }
+  .slot-label{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'Baloo 2';font-weight:700;font-size:12px;
+    color:var(--sky-dark);
+    margin-bottom:8px;
+  }
+  .slot-label::before{
+    content:"";width:8px;height:8px;border-radius:50%;background:var(--sky-dark);
+  }
+  .slot h4{font-size:15px;margin-bottom:4px;}
+  .slot p{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.6;}
+  .slot .fill{
+    font-size:12.5px;color:var(--bronze);font-style:italic;
+  }
+
+  footer{
+    border-top:2px solid var(--line);
+    padding:22px 34px 40px;
+    max-width:900px;margin:0 auto;
+    font-size:12px;color:var(--ink-soft);
+    text-align:center;
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-badge"><span>BF</span></div>
+      <div class="brand-text">
+        <div class="b1">Bronze Frontier</div>
+        <div class="b2">UNOFFICIAL FAN WIKI</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" placeholder="Search the wiki..." />
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">EXPLORE</div>
+      <button class="nav-link active" data-page="home"><span class="dot"></span>Welcome</button>
+      <button class="nav-link" data-page="region"><span class="dot"></span>Roria Region</button>
+      <button class="nav-link" data-page="locations"><span class="dot"></span>Cities &amp; Locations</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">TRAINERS</div>
+      <button class="nav-link" data-page="gyms"><span class="dot"></span>Gym Leaders</button>
+      <button class="nav-link" data-page="characters"><span class="dot"></span>Rivals &amp; Team Eclipse</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">POKÉMON</div>
+      <button class="nav-link" data-page="starters"><span class="dot"></span>Starter Pokémon</button>
+    </div>
+
+    <div class="nav-group">
+      <div class="nav-title">BRONZE FRONTIER</div>
+      <button class="nav-link" data-page="frontier"><span class="dot"></span>What's New Here</button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="main">
+    <div class="topbar">
+      <div class="crumb" id="crumb">Bronze Frontier Wiki &nbsp;›&nbsp; <b>Welcome</b></div>
+      <div class="status-pill">Fan Project</div>
+    </div>
+
+    <div class="content">
+
+      <!-- ================= HOME ================= -->
+      <div class="page active" id="page-home">
+        <div class="hero">
+          <div class="hero-eyebrow">A ROBLOX POKÉMON FANGAME WIKI</div>
+          <h1>Welcome to the<br>Bronze Frontier Wiki</h1>
+          <p>Bronze Frontier is a fan-made continuation of Pokémon Brick Bronze — same region of Roria, same journey, rebuilt with custom route designs and Pokémon from later generations. This wiki tracks everything about the region, its Trainers, and what makes Bronze Frontier its own thing.</p>
+          <div class="hero-tags">
+            <div class="hero-tag">Region: Roria</div>
+            <div class="hero-tag">8 Gyms</div>
+            <div class="hero-tag">Custom Routes</div>
+            <div class="hero-tag">Later-Gen Pokémon</div>
+          </div>
+        </div>
+
+        <div class="callout">
+          <b>Heads up:</b> this wiki covers the shared foundation Bronze Frontier is built on. Anything specific to Bronze Frontier itself — its new routes, added Pokémon, and other changes from the original — lives on the <b>What's New Here</b> page, ready to be filled in as the project takes shape.
+        </div>
+
+        <section class="block">
+          <h2>Start Exploring</h2>
+          <div class="grid-3">
+            <div class="card">
+              <h3>🗺️ Roria</h3>
+              <p>The region every Trainer's journey begins in — from Mitis Town to the volcanic peaks of Frostveil.</p>
+              <a class="readmore" data-goto="region">Read more →</a>
+            </div>
+            <div class="card">
+              <h3>🥊 Gym Leaders</h3>
+              <p>Eight Gym Leaders guard Roria's badges, each one built around a different type specialty.</p>
+              <a class="readmore" data-goto="gyms">Read more →</a>
+            </div>
+            <div class="card">
+              <h3>🔥 Starter Pokémon</h3>
+              <p>Unusually, the Mitis Town Lab lets new Trainers pick from starters spanning many regions.</p>
+              <a class="readmore" data-goto="starters">Read more →</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>The Story So Far</h2>
+          <div class="prose">
+            <p>Every journey starts in <b>Mitis Town</b>, where the player and their childhood friend, <b>Rival Jake</b>, receive their first Pokémon from the region's newly-promoted researcher, <b>Professor Cypress</b>. Before the player can get far down Route 1, tragedy strikes — their parents are abducted by the criminal organization <b>Team Eclipse</b>, kicking off a region-wide journey that's equal parts badge quest and rescue mission.</p>
+            <p>Along the way, players collect eight Gym Badges, clash repeatedly with Team Eclipse, and butt heads with a second rival, <b>Tess</b>, all while exploring a region that stretches from port towns and beaches to frozen mountains and haunted gyms.</p>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= REGION ================= -->
+      <div class="page" id="page-region">
+        <div class="with-infobox">
+          <div>
+            <section class="block">
+              <h2>Roria</h2>
+              <div class="prose">
+                <p>Roria is the region at the heart of Bronze Frontier. It's a varied landmass — forests and archaeology sites near the starting town, coastal beach towns, a multi-district capital city, mountain passes, and a chain of outlying islands reachable by boat once the player is further into their journey.</p>
+                <p>The player's adventure begins in <b>Mitis Town</b>, a quiet starting point with a Pokémon Lab but no Pokémon Center — instead, a local resident on the bridge to Route 1 heals Trainers' teams by hand. From there, the region opens up gym by gym, city by city, all the way to the final Gym on Crescent Island.</p>
+              </div>
+            </section>
+
+            <section class="block">
+              <h2>Key Items</h2>
+              <div class="grid-2">
+                <div class="card">
+                  <h3>Bronze Brick</h3>
+                  <p>A necklace given to the player by their parents — a keepsake that becomes especially meaningful once Team Eclipse enters the story.</p>
+                </div>
+                <div class="card">
+                  <h3>Regional Pokédex</h3>
+                  <p>Tracks every species encountered and caught across Roria as the player explores.</p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="infobox">
+            <div class="infobox-head">Region Infobox</div>
+            <div class="infobox-img">🗺️</div>
+            <div class="infobox-rows">
+              <div class="infobox-row"><span class="k">Region</span><span class="v">Roria</span></div>
+              <div class="infobox-row"><span class="k">Starting Town</span><span class="v">Mitis Town</span></div>
+              <div class="infobox-row"><span class="k">Professor</span><span class="v">Prof. Cypress</span></div>
+              <div class="infobox-row"><span class="k">Gyms</span><span class="v">8</span></div>
+              <div class="infobox-row"><span class="k">Antagonists</span><span class="v">Team Eclipse</span></div>
+              <div class="infobox-row"><span class="k">Final Gym</span><span class="v">Crescent Island</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= LOCATIONS ================= -->
+      <div class="page" id="page-locations">
+        <section class="block">
+          <h2>Cities</h2>
+          <ul class="loc-list">
+            <li><span class="tag">GYM</span> Silvent City</li>
+            <li><span class="tag">GYM</span> Brimber City</li>
+            <li><span class="tag">GYM</span> Rosecove City</li>
+            <li><span class="tag">GYM</span> Anthian City</li>
+            <li><span class="tag">GYM</span> Aredia City</li>
+            <li><span class="tag">GYM</span> Fluoruma City</li>
+            <li><span class="tag">GYM</span> Frostveil City</li>
+            <li><span class="tag">CITY</span> Rosecove Beach</li>
+          </ul>
+        </section>
+
+        <section class="block">
+          <h2>Towns</h2>
+          <ul class="loc-list">
+            <li><span class="tag">START</span> Mitis Town</li>
+            <li><span class="tag">TOWN</span> Cheshma Town</li>
+            <li><span class="tag">TOWN</span> Crescent Town</li>
+            <li><span class="tag">TOWN</span> Port Decca</li>
+            <li><span class="tag">LAKE</span> Lagoona Lake</li>
+            <li><span class="tag">AREA</span> Lagoona Trenches</li>
+            <li><span class="tag">BEACH</span> Decca Beach</li>
+          </ul>
+        </section>
+
+        <section class="block">
+          <h2>Islands</h2>
+          <ul class="loc-list">
+            <li><span class="tag">ISLE</span> Crescent Island — final Gym</li>
+            <li><span class="tag">ISLE</span> Lost Islands</li>
+            <li><span class="tag">ISLE</span> Voltridia Island</li>
+            <li><span class="tag">ISLE</span> Frigidia Island</li>
+            <li><span class="tag">ISLE</span> Obsidia Island</li>
+          </ul>
+        </section>
+
+        <div class="callout sky">
+          Bronze Frontier's <b>custom routes</b> connect and expand on these same locations. Head to <b>What's New Here</b> to start logging them.
+        </div>
+      </div>
+
+      <!-- ================= GYMS ================= -->
+      <div class="page" id="page-gyms">
+        <section class="block">
+          <h2>Gym Leaders of Roria</h2>
+        </section>
+
+        <div class="gym-row">
+          <div class="num">1</div>
+          <div><h4>Chad</h4><div class="meta">Silvent City · Arc Badge</div></div>
+          <div class="type-chip" style="background:#E8B23A;">ELECTRIC</div>
+        </div>
+        <div class="gym-row">
+          <div class="num">2</div>
+          <div><h4>Sebastian</h4><div class="meta">Brimber City · Brimstone Badge</div></div>
+          <div class="type-chip" style="background:#E8623A;">FIRE</div>
+        </div>
+        <div class="gym-row">
+          <div class="num">3</div>
+          <div><h4>Quentin</h4><div class="meta">Rosecove City · Float Badge</div></div>
+          <div class="type-chip" style="background:#3E9CDC;">WATER</div>
+        </div>
+        <div class="gym-row">
+          <div class="num">4</div>
+          <div><h4>Stephen</h4><div class="meta">Anthian City · oversees the Anthian Airport</div></div>
+          <div class="type-chip" style="background:#8FB8E8;">FLYING</div>
+        </div>
+        <div class="gym-row">
+          <div class="num">5</div>
+          <div><h4>Prince Ryan</h4><div class="meta">Aredia City · Roria's warrior prince, first Leader to Mega Evolve</div></div>
+          <div class="type-chip" style="background:#C7924A;">GROUND</div>
+        </div>
+        <div class="gym-row">
+          <div class="num">6</div>
+          <div><h4>Fissy</h4><div class="meta">Fluoruma City</div></div>
+          <div class="type-chip" style="background:#5FAE5A;">GRASS</div>
+        </div>
+        <div class="gym-row">
+          <div class="num">7</div>
+          <div><h4>Zeek</h4><div class="meta">Frostveil City · Contrast Badge</div></div>
+          <div class="type-chip" style="background:#5B5468;">DARK</div>
+        </div>
+        <div class="gym-row">
+          <div class="num">8</div>
+          <div><h4>Captain B.</h4><div class="meta">Crescent Gym · Haunted Badge · Roria's only female Gym Leader</div></div>
+          <div class="type-chip" style="background:#6C5A8C;">GHOST</div>
+        </div>
+
+        <div class="callout" style="margin-top:22px;">
+          Gym teams and strategies will differ in Bronze Frontier once later-gen Pokémon are folded in — track those changes on <b>What's New Here</b>.
+        </div>
+      </div>
+
+      <!-- ================= CHARACTERS ================= -->
+      <div class="page" id="page-characters">
+        <section class="block">
+          <h2>Rivals</h2>
+          <div class="grid-2">
+            <div class="card">
+              <h3>Jake</h3>
+              <p>The player's childhood friend from Mitis Town. He picks Eevee as his own starter and challenges the player to their very first battle before the journey properly begins.</p>
+            </div>
+            <div class="card">
+              <h3>Tess</h3>
+              <p>A second rival Trainer the player crosses paths with throughout Roria, adding her own competitive pressure alongside Jake's.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Team Eclipse</h2>
+          <div class="prose">
+            <p>The region's criminal organization, and the reason the player's journey turns personal early on — Team Eclipse is behind the abduction of the player's parents shortly after leaving Mitis Town. They resurface across Roria as the player advances, clashing with both the player and Gym Leaders like Prince Ryan along the way.</p>
+          </div>
+          <div class="grid-2" style="margin-top:14px;">
+            <div class="card"><h3>Boss Cypress</h3><p>The leader at the top of Team Eclipse's chain of command.</p></div>
+            <div class="card"><h3>Admin Linda</h3><p>A high-ranking Eclipse member introduced early in the story.</p></div>
+            <div class="card"><h3>Admin Harry</h3><p>One of Team Eclipse's ranking Admins.</p></div>
+            <div class="card"><h3>Admin Gabe &amp; Admin Tyler</h3><p>Additional Admins the player encounters as Team Eclipse's plans unfold.</p></div>
+          </div>
+        </section>
+      </div>
+
+      <!-- ================= STARTERS ================= -->
+      <div class="page" id="page-starters">
+        <section class="block">
+          <h2>Starter Pokémon</h2>
+          <div class="prose">
+            <p>Mitis Town's Pokémon Lab does things a little differently — instead of picking between just three starters, new Trainers choose from a whole roster spanning the classic Grass/Fire/Water trios of multiple core-series regions, all offered by the newly-promoted Professor Cypress and his assistant, David.</p>
+            <p>Rival Jake breaks from tradition entirely, choosing an <b>Eevee</b> as his own starter — and it's no pushover in your first battle.</p>
+          </div>
+        </section>
+        <div class="callout sky">
+          Bronze Frontier's later-gen additions mean the starter roster — and Jake's team — may grow further. Log the specifics on <b>What's New Here</b>.
+        </div>
+      </div>
+
+      <!-- ================= FRONTIER ADDITIONS ================= -->
+      <div class="page" id="page-frontier">
+        <section class="block">
+          <h2>What's New in Bronze Frontier <small>WORK IN PROGRESS</small></h2>
+          <div class="prose">
+            <p>This is where Bronze Frontier breaks from the original Brick Bronze formula: custom-designed routes threaded through the familiar region of Roria, plus Pokémon from generations that the original game never reached. The slots below are ready to be filled in as the project's specifics come together.</p>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Custom Routes</h2>
+          <div class="slot">
+            <div class="slot-label">ROUTE SLOT</div>
+            <h4>Route name goes here</h4>
+            <p class="fill">Add a description — location within Roria, connecting towns, notable Trainers, wild Pokémon found here.</p>
+          </div>
+          <div class="slot">
+            <div class="slot-label">ROUTE SLOT</div>
+            <h4>Route name goes here</h4>
+            <p class="fill">Add a description — location within Roria, connecting towns, notable Trainers, wild Pokémon found here.</p>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Later-Generation Pokémon</h2>
+          <div class="grid-3">
+            <div class="slot">
+              <div class="slot-label">POKÉMON SLOT</div>
+              <h4>Name / Gen</h4>
+              <p class="fill">Where it's found, type, notes.</p>
+            </div>
+            <div class="slot">
+              <div class="slot-label">POKÉMON SLOT</div>
+              <h4>Name / Gen</h4>
+              <p class="fill">Where it's found, type, notes.</p>
+            </div>
+            <div class="slot">
+              <div class="slot-label">POKÉMON SLOT</div>
+              <h4>Name / Gen</h4>
+              <p class="fill">Where it's found, type, notes.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Other Changes From Brick Bronze</h2>
+          <div class="slot">
+            <div class="slot-label">CHANGE LOG SLOT</div>
+            <h4>Change title goes here</h4>
+            <p class="fill">Anything else Bronze Frontier does differently — gym team updates, new areas, reworked story beats, etc.</p>
+          </div>
+        </section>
+      </div>
+
+    </div>
+
+    <footer>
+      Bronze Frontier Wiki is an unofficial fan project. Pokémon is a trademark of Nintendo, Game Freak, and Creatures Inc. Not affiliated with Nintendo, The Pokémon Company, or the original Brick Bronze development team.
+    </footer>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('.nav-link');
+  const pages = document.querySelectorAll('.page');
+  const crumb = document.getElementById('crumb');
+
+  function goTo(id){
+    links.forEach(l=>l.classList.toggle('active', l.dataset.page===id));
+    pages.forEach(p=>p.classList.toggle('active', p.id==='page-'+id));
+    const label = document.querySelector('.nav-link[data-page="'+id+'"]').textContent.trim();
+    crumb.innerHTML = 'Bronze Frontier Wiki &nbsp;›&nbsp; <b>'+label+'</b>';
+    document.querySelector('.content').scrollTop = 0;
+    window.scrollTo({top:0, behavior:'instant'});
+  }
+
+  links.forEach(l=>l.addEventListener('click', ()=>goTo(l.dataset.page)));
+  document.querySelectorAll('[data-goto]').forEach(el=>{
+    el.addEventListener('click', (e)=>{ e.preventDefault(); goTo(el.dataset.goto); });
+  });
+</script>
+
+</body>
+</html>
