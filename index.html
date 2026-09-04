@@ -424,6 +424,107 @@
     background:var(--sky-tint);padding:3px 9px;border-radius:20px;
     flex:0 0 auto;
   }
+
+  /* ===== Legendary showcase ===== */
+  .legend-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+    gap:14px;
+    margin-bottom:28px;
+  }
+  .legend-card{
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:var(--white);
+    padding:16px 14px 14px;
+    text-align:center;
+  }
+  .legend-card img{width:74px;height:74px;object-fit:contain;display:block;margin:0 auto 8px;}
+  .legend-card .legend-group-tag{
+    font-size:9.5px;font-weight:800;color:var(--bronze);
+    background:var(--bronze-tint);padding:2px 9px;border-radius:20px;
+    display:inline-block;margin-bottom:8px;
+  }
+  .legend-card .name{font-family:'Baloo 2';font-weight:800;font-size:14.5px;margin-bottom:6px;}
+  .legend-card .types{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-bottom:10px;}
+  .legend-encounter{
+    font-size:11.5px;color:var(--ink-soft);
+    border-top:1px dashed var(--line);
+    padding-top:9px;text-align:left;
+    min-height:32px;
+  }
+  .legend-encounter b{color:var(--ink);}
+  .legend-encounter.tbd{color:var(--rose-dark);font-style:italic;text-align:center;}
+  .legend-card{cursor:pointer;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;}
+  .legend-card:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(44,42,59,.12);border-color:var(--bronze);}
+  .legend-card .guide-hint{
+    margin-top:8px;font-size:10.5px;font-weight:800;
+    color:var(--sky-dark);letter-spacing:.02em;
+  }
+
+  /* ===== Legendary guide modal ===== */
+  .guide-overlay{
+    display:none;position:fixed;inset:0;z-index:1000;
+    background:rgba(22,20,40,.55);
+    padding:24px;
+    align-items:flex-start;justify-content:center;
+    overflow-y:auto;
+  }
+  .guide-overlay.open{display:flex;}
+  .guide-modal{
+    background:var(--paper);
+    border-radius:18px;
+    border:2px solid var(--line);
+    max-width:560px;width:100%;
+    margin-top:36px;
+    padding:26px 26px 24px;
+    position:relative;
+  }
+  .guide-close{
+    position:absolute;top:14px;right:14px;
+    width:30px;height:30px;border-radius:50%;
+    border:none;background:var(--paper-2);color:var(--ink-soft);
+    font-size:16px;line-height:1;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .guide-close:hover{background:var(--rose-tint);color:var(--rose-dark);}
+  .guide-head{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+  .guide-head img{width:56px;height:56px;object-fit:contain;}
+  .guide-head .name{font-family:'Baloo 2';font-weight:800;font-size:20px;}
+  .guide-head .types{display:flex;gap:4px;margin-top:4px;}
+  .guide-encounter{
+    font-size:12.5px;color:var(--ink-soft);margin:12px 0 18px;
+    border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);
+    padding:10px 0;
+  }
+  .guide-encounter b{color:var(--ink);}
+  .guide-steps-label{
+    font-family:'Baloo 2';font-weight:700;font-size:13.5px;
+    color:var(--sky-dark);margin-bottom:10px;
+  }
+  .guide-step{
+    display:flex;gap:12px;
+    border:2px solid var(--line);
+    border-radius:12px;
+    padding:12px 14px;
+    background:var(--white);
+    margin-bottom:10px;
+  }
+  .guide-step .num{
+    flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+    background:var(--bronze-tint);color:var(--bronze);
+    font-family:'Baloo 2';font-weight:800;font-size:13px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .guide-step .step-title{font-weight:800;font-size:13.5px;margin-bottom:3px;}
+  .guide-step .step-text{font-size:12.5px;color:var(--ink-soft);line-height:1.5;}
+  .guide-empty{
+    border:2px solid var(--line);
+    border-radius:12px;
+    padding:18px 20px;
+    background:repeating-linear-gradient(135deg, var(--white) 0 12px, #FBF7F4 12px 24px);
+    font-size:12.5px;color:var(--bronze);font-style:italic;line-height:1.6;
+  }
   .stage-row{
     display:grid;grid-template-columns:repeat(3,1fr);
     gap:8px;margin-bottom:12px;
@@ -507,6 +608,7 @@
     <div class="nav-group">
       <div class="nav-title">POKÉMON</div>
       <button class="nav-link" data-page="starters"><span class="dot"></span>Starter Pokémon</button>
+      <button class="nav-link" data-page="legendaries"><span class="dot"></span>Legendary Pokémon</button>
     </div>
 
     <div class="nav-group">
@@ -758,6 +860,25 @@
         <div class="callout sky">
           Bronze Frontier's later-gen additions mean the starter roster — and Jake's team — may grow further. Log the specifics on <b>What's New Here</b>.
         </div>
+      </div>
+
+      <!-- ================= LEGENDARY POKÉMON ================= -->
+      <div class="page" id="page-legendaries">
+        <section class="block">
+          <h2>Legendary Pokémon</h2>
+          <div class="prose">
+            <p>Roria is home to the same stationary Legendary Pokémon found in the original Pokémon Brick Bronze, each guarding a chamber, cavern, or landmark somewhere across the region. <i>Italicized encounter notes</i> mean the Pokémon can only be seen in that spot rather than caught, and "→ Roaming Pokémon" means it becomes a rare roaming encounter after its first Set Encounter.</p>
+            <p>The cards tagged <b>Bronze Frontier Addition</b> are new to this project — Ho-Oh, Regieleki, Zygarde, Chi-Yu, Magearna, and Kubfu. Their encounter methods are intentionally left blank for now.</p>
+          </div>
+        </section>
+
+        <div class="region-tabs" id="legend-tabs"></div>
+        <div class="legend-grid" id="legend-grid"></div>
+      </div>
+
+      <!-- ================= LEGENDARY GUIDE MODAL ================= -->
+      <div class="guide-overlay" id="guide-overlay">
+        <div class="guide-modal" id="guide-modal"></div>
       </div>
 
       <!-- ================= FRONTIER ADDITIONS ================= -->
@@ -1059,6 +1180,44 @@
         {name:'Primarina', dex:730, types:['Water','Fairy'], lvl:'Lv. 34'}],
       ability:'Torrent', hidden:'Liquid Voice',
       stats:{hp:80,atk:74,def:74,spa:126,spd:116,spe:60} },
+
+    { region:'Galar', stages:[
+        {name:'Grookey', dex:810, types:['Grass'], lvl:'Base'},
+        {name:'Thwackey', dex:811, types:['Grass'], lvl:'Lv. 16'},
+        {name:'Rillaboom', dex:812, types:['Grass'], lvl:'Lv. 35'}],
+      ability:'Overgrow', hidden:'Grassy Surge',
+      stats:{hp:100,atk:125,def:90,spa:60,spd:70,spe:85} },
+    { region:'Galar', stages:[
+        {name:'Scorbunny', dex:813, types:['Fire'], lvl:'Base'},
+        {name:'Raboot', dex:814, types:['Fire'], lvl:'Lv. 16'},
+        {name:'Cinderace', dex:815, types:['Fire'], lvl:'Lv. 35'}],
+      ability:'Blaze', hidden:'Libero',
+      stats:{hp:80,atk:116,def:75,spa:65,spd:75,spe:119} },
+    { region:'Galar', stages:[
+        {name:'Sobble', dex:816, types:['Water'], lvl:'Base'},
+        {name:'Drizzile', dex:817, types:['Water'], lvl:'Lv. 16'},
+        {name:'Inteleon', dex:818, types:['Water'], lvl:'Lv. 35'}],
+      ability:'Torrent', hidden:'Sniper',
+      stats:{hp:70,atk:85,def:65,spa:125,spd:65,spe:120} },
+
+    { region:'Paldea', stages:[
+        {name:'Sprigatito', dex:906, types:['Grass'], lvl:'Base'},
+        {name:'Floragato', dex:907, types:['Grass'], lvl:'Lv. 16'},
+        {name:'Meowscarada', dex:908, types:['Grass','Dark'], lvl:'Lv. 36'}],
+      ability:'Overgrow', hidden:'Protean',
+      stats:{hp:76,atk:110,def:70,spa:81,spd:70,spe:123} },
+    { region:'Paldea', stages:[
+        {name:'Fuecoco', dex:909, types:['Fire'], lvl:'Base'},
+        {name:'Crocalor', dex:910, types:['Fire'], lvl:'Lv. 16'},
+        {name:'Skeledirge', dex:911, types:['Fire','Ghost'], lvl:'Lv. 36'}],
+      ability:'Blaze', hidden:'Unaware',
+      stats:{hp:104,atk:75,def:100,spa:110,spd:75,spe:66} },
+    { region:'Paldea', stages:[
+        {name:'Quaxly', dex:912, types:['Water'], lvl:'Base'},
+        {name:'Quaxwell', dex:913, types:['Water'], lvl:'Lv. 16'},
+        {name:'Quaquaval', dex:914, types:['Water','Fighting'], lvl:'Lv. 36'}],
+      ability:'Torrent', hidden:'Moxie',
+      stats:{hp:85,atk:120,def:80,spa:85,spd:75,spe:85} },
   ];
 
   const STAT_LABELS = [['hp','HP'],['atk','Atk'],['def','Def'],['spa','SpA'],['spd','SpD'],['spe','Spe']];
@@ -1134,6 +1293,200 @@
     renderStarters('All');
   }
   initStarterTabs();
+
+  /* ===== Legendary Pokémon showcase ===== */
+  const LEGENDARIES = [
+    { group:'Weather Trio', name:'Groudon', dex:383, types:['Ground'], location:'Mt. Igneus', seenOnly:true },
+    { group:'Weather Trio', name:'Kyogre', dex:382, types:['Water'], location:'Rosecove Beach', seenOnly:true },
+
+    { group:'Lake Guardians', name:'Uxie', dex:480, types:['Psychic'], location:'Lagoona Trenches (Fossilized Egg)' },
+    { group:'Lake Guardians', name:'Mesprit', dex:481, types:['Psychic'], location:'Lagoona Trenches (Fossilized Egg)' },
+    { group:'Lake Guardians', name:'Azelf', dex:482, types:['Psychic'], location:'Lagoona Trenches (Fossilized Egg)' },
+
+    { group:'Creation Trio', name:'Dialga', dex:483, types:['Steel','Dragon'], location:'Anthian Park, Anthian City', seenOnly:true },
+    { group:'Creation Trio', name:'Palkia', dex:484, types:['Water','Dragon'], location:'Anthian Park, Anthian City', seenOnly:true },
+
+    { group:'Forces of Nature', name:'Tornadus', dex:641, types:['Flying'], location:"Nature's Den → Roaming Pokémon" },
+    { group:'Forces of Nature', name:'Thundurus', dex:642, types:['Electric','Flying'], location:"Nature's Den → Roaming Pokémon" },
+    { group:'Forces of Nature', name:'Landorus', dex:645, types:['Ground','Flying'], location:"Nature's Den" },
+    { group:'Forces of Nature', name:'Heatran', dex:485, types:['Fire','Steel'], location:'Igneus Depths' },
+
+    { group:'Legendary Beasts', name:'Raikou', dex:243, types:['Electric'], location:'Cragonos Sanctuary → Roaming Pokémon' },
+    { group:'Legendary Beasts', name:'Entei', dex:244, types:['Fire'], location:'Cragonos Sanctuary → Roaming Pokémon' },
+    { group:'Legendary Beasts', name:'Suicune', dex:245, types:['Water'], location:'Cragonos Sanctuary → Roaming Pokémon' },
+
+    { group:'Eon Duo', name:'Latias', dex:380, types:['Dragon','Psychic'], location:'Route 15 → Roaming Pokémon' },
+    { group:'Eon Duo', name:'Latios', dex:381, types:['Dragon','Psychic'], location:'Route 15 → Roaming Pokémon' },
+
+    { group:'Legendary Titans', name:'Regirock', dex:377, types:['Rock'], location:'Calcite Chamber' },
+    { group:'Legendary Titans', name:'Registeel', dex:379, types:['Steel'], location:'Martensite Chamber' },
+    { group:'Legendary Titans', name:'Regice', dex:378, types:['Ice'], location:'Dendrite Chamber' },
+    { group:'Legendary Titans', name:'Regigigas', dex:486, types:['Normal'], location:"Titans' Throng → Roaming Pokémon" },
+
+    { group:'Swords of Justice', name:'Cobalion', dex:638, types:['Steel','Fighting'], location:'Secret Grove → Roaming Pokémon' },
+    { group:'Swords of Justice', name:'Terrakion', dex:639, types:['Rock','Fighting'], location:'Secret Grove → Roaming Pokémon' },
+    { group:'Swords of Justice', name:'Virizion', dex:640, types:['Grass','Fighting'], location:'Secret Grove → Roaming Pokémon' },
+
+    { group:'Legendary Birds', name:'Zapdos', dex:145, types:['Electric','Flying'], location:'Voltridia Cavern' },
+    { group:'Legendary Birds', name:'Articuno', dex:144, types:['Ice','Flying'], location:'Frigidia Cavern' },
+    { group:'Legendary Birds', name:'Moltres', dex:146, types:['Fire','Flying'], location:'Obsidia Cavern' },
+
+    { group:'Tower Duo', name:'Lugia', dex:249, types:['Psychic','Flying'], location:'Silver Cove' },
+
+    { group:'Bronze Frontier Addition', name:'Ho-Oh', dex:250, types:['Fire','Flying'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Regieleki', dex:894, types:['Electric'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Zygarde', dex:718, types:['Dragon','Ground'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Chi-Yu', dex:1004, types:['Dark','Fire'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Magearna', dex:801, types:['Steel','Fairy'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Kubfu', dex:891, types:['Fighting'], location:'' },
+  ];
+
+  const LEGEND_GUIDES = {
+    'Groudon': [
+          { title: 'NOT OBTAINABLE', text: 'This Pokemon is not currently obtainable in Bronze Frontier. Keep an eye out for future updates!'}
+    ],
+    'Kyogre': [
+          { title: 'NOT OBTAINABLE', text: 'This Pokemon is not currently obtainable in Bronze Frontier. Keep an eye out for future updates!'}
+    ],
+    'Uxie': [
+          { title: 'Make your way to the Lagoona Trenches', text: 'Head over to Lagoona Lake, and go to the underwater mining facility. Talk to the blonde scientist and go for a dive!'},
+          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is a 85% chance of the egg being Togepi, while having an 15% chance of being a lake spirit. Roughly meaning that getting Uxie specifically is an 5% chance.'},
+          { title: 'Revive the Egg', text: 'Talk to the scientist at the back of the lab and select the egg to be revived. Doing this will provide you with either a Togepi egg, or a lake spirit egg.'},    
+    ],
+    'Mesprit': [],
+    'Azelf': [],
+    'Dialga': [
+          { title: 'NOT OBTAINABLE', text: 'This Pokemon is not currently obtainable in Bronze Frontier. Keep an eye out for future updates!'}
+    ],
+    'Palkia': [
+          { title: 'NOT OBTAINABLE', text: 'This Pokemon is not currently obtainable in Bronze Frontier. Keep an eye out for future updates!'}
+    ],
+    'Tornadus': [],
+    'Thundurus': [],
+    'Landorus': [],
+    'Heatran': [],
+    'Raikou': [],
+    'Entei': [],
+    'Suicune': [],
+    'Latias': [],
+    'Latios': [],
+    'Regirock': [],
+    'Registeel': [],
+    'Regice': [],
+    'Regigigas': [],
+    'Cobalion': [],
+    'Terrakion': [],
+    'Virizion': [],
+    'Zapdos': [],
+    'Articuno': [],
+    'Moltres': [],
+    'Lugia': [],
+    'Ho-Oh': [],
+    'Regieleki': [],
+    'Zygarde': [],
+    'Chi-Yu': [],
+    'Magearna': [],
+    'Kubfu': [],
+  };
+
+  function renderLegendCard(l){
+    const typesHtml = l.types.map(typePill).join('');
+    const groupTagHtml = l.group === 'Bronze Frontier Addition'
+      ? `<span class="legend-group-tag" style="color:var(--rose-dark);background:var(--rose-tint);">${l.group}</span>`
+      : `<span class="legend-group-tag">${l.group}</span>`;
+    const encounterHtml = l.location
+      ? `<div class="legend-encounter"><b>Encounter:</b> ${l.location}${l.seenOnly ? ' <i>(Seen Only)</i>' : ''}</div>`
+      : `<div class="legend-encounter tbd">Encounter method TBD</div>`;
+
+    return `
+      <div class="legend-card" data-group="${l.group}" data-name="${l.name}">
+        <img src="${spriteUrl(l.dex)}" alt="${l.name}" loading="lazy">
+        ${groupTagHtml}
+        <div class="name">${l.name}</div>
+        <div class="types">${typesHtml}</div>
+        ${encounterHtml}
+        <div class="guide-hint">VIEW CAPTURE GUIDE →</div>
+      </div>
+    `;
+  }
+
+  function renderLegendaries(filter){
+    const grid = document.getElementById('legend-grid');
+    if(!grid) return;
+    const list = filter === 'All' ? LEGENDARIES : LEGENDARIES.filter(l => l.group === filter);
+    grid.innerHTML = list.map(renderLegendCard).join('');
+    grid.querySelectorAll('.legend-card').forEach(card => {
+      card.addEventListener('click', () => openGuide(card.dataset.name));
+    });
+  }
+
+  function openGuide(name){
+    const l = LEGENDARIES.find(x => x.name === name);
+    if(!l) return;
+    const overlay = document.getElementById('guide-overlay');
+    const modal = document.getElementById('guide-modal');
+    const steps = LEGEND_GUIDES[l.name] || [];
+    const typesHtml = l.types.map(typePill).join('');
+    const encounterHtml = l.location
+      ? `<div class="guide-encounter"><b>Encounter:</b> ${l.location}${l.seenOnly ? ' <i>(Seen Only)</i>' : ''}</div>`
+      : `<div class="guide-encounter"><i>Encounter method TBD</i></div>`;
+    const stepsHtml = steps.length
+      ? steps.map((s,i) => `
+          <div class="guide-step">
+            <div class="num">${i+1}</div>
+            <div>
+              <div class="step-title">${s.title || ''}</div>
+              <div class="step-text">${s.text || ''}</div>
+            </div>
+          </div>
+        `).join('')
+      : `<div class="guide-empty">No steps added yet — fill in LEGEND_GUIDES['${l.name}'] in the page's script with each step's title and description, and they'll show up here.</div>`;
+
+    modal.innerHTML = `
+      <button class="guide-close" id="guide-close" aria-label="Close">✕</button>
+      <div class="guide-head">
+        <img src="${spriteUrl(l.dex)}" alt="${l.name}">
+        <div>
+          <div class="name">${l.name}</div>
+          <div class="types">${typesHtml}</div>
+        </div>
+      </div>
+      ${encounterHtml}
+      <div class="guide-steps-label">HOW TO GET ${l.name.toUpperCase()}</div>
+      ${stepsHtml}
+    `;
+    overlay.classList.add('open');
+    document.getElementById('guide-close').addEventListener('click', closeGuide);
+  }
+
+  function closeGuide(){
+    document.getElementById('guide-overlay').classList.remove('open');
+  }
+
+  document.getElementById('guide-overlay').addEventListener('click', (e) => {
+    if(e.target.id === 'guide-overlay') closeGuide();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeGuide();
+  });
+
+  function initLegendTabs(){
+    const tabsEl = document.getElementById('legend-tabs');
+    if(!tabsEl) return;
+    const groups = ['All', ...[...new Set(LEGENDARIES.map(l => l.group))]];
+    tabsEl.innerHTML = groups.map((g,i) =>
+      `<button class="region-tab${i===0?' active':''}" data-group="${g}">${g}</button>`
+    ).join('');
+    tabsEl.querySelectorAll('.region-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabsEl.querySelectorAll('.region-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderLegendaries(btn.dataset.group);
+      });
+    });
+    renderLegendaries('All');
+  }
+  initLegendTabs();
   document.querySelectorAll('[data-goto]').forEach(el=>{
     el.addEventListener('click', (e)=>{ e.preventDefault(); goTo(el.dataset.goto); });
   });
