@@ -292,6 +292,27 @@
   }
   .gym-row h4{font-size:15.5px;margin-bottom:2px;}
   .gym-row .meta{font-size:12.5px;color:var(--ink-soft);}
+  .gym-row{cursor:pointer;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;}
+  .gym-row:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(44,42,59,.12);border-color:var(--bronze);}
+  .guide-quote{font-size:13px;color:var(--ink-soft);font-style:italic;margin:2px 0 0;}
+  .team-slot-row{
+    display:grid;grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
+    gap:10px;
+  }
+  .team-slot{
+    border:2px solid var(--line);
+    border-radius:10px;
+    padding:12px 8px;
+    text-align:center;
+    background:repeating-linear-gradient(135deg, var(--white) 0 10px, #FBF7F4 10px 20px);
+  }
+  .team-slot .ts-num{
+    width:24px;height:24px;border-radius:50%;margin:0 auto 6px;
+    background:var(--paper-2);color:var(--ink-soft);
+    font-family:'Baloo 2';font-weight:800;font-size:11.5px;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .team-slot .ts-label{font-size:10.5px;color:var(--bronze);font-style:italic;}
   .type-chip{
     font-size:11px;font-weight:800;font-family:'Baloo 2';
     padding:4px 10px;border-radius:20px;color:var(--white);
@@ -525,6 +546,72 @@
     background:repeating-linear-gradient(135deg, var(--white) 0 12px, #FBF7F4 12px 24px);
     font-size:12.5px;color:var(--bronze);font-style:italic;line-height:1.6;
   }
+
+  /* ===== Redeemable Codes tracker ===== */
+  .code-form{
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:var(--white);
+    padding:18px 20px;
+    margin-bottom:22px;
+    display:grid;gap:12px;
+  }
+  .code-field label{
+    display:block;font-family:'Baloo 2';font-weight:700;font-size:12.5px;
+    color:var(--sky-dark);margin-bottom:5px;
+  }
+  .code-field input, .code-field textarea{
+    width:100%;
+    border:2px solid var(--line);
+    border-radius:9px;
+    padding:9px 11px;
+    font-family:'Manrope';font-size:13.5px;color:var(--ink);
+    background:var(--paper);
+    outline:none;
+    resize:vertical;
+  }
+  .code-field input:focus, .code-field textarea:focus{border-color:var(--sky-dark);}
+  .code-field textarea{min-height:64px;}
+  .code-submit{
+    justify-self:start;
+    background:var(--rose);color:var(--white);border:none;
+    font-family:'Baloo 2';font-weight:700;font-size:13.5px;
+    padding:10px 22px;border-radius:22px;
+  }
+  .code-submit:hover{background:var(--rose-dark);}
+  .codes-grid{display:grid;gap:12px;}
+  .code-card{
+    position:relative;
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:var(--white);
+    padding:16px 44px 16px 18px;
+  }
+  .code-chip{
+    display:inline-block;
+    font-family:'Baloo 2';font-weight:800;font-size:14px;letter-spacing:.03em;
+    color:var(--bronze-dark, var(--bronze));background:var(--bronze-tint);
+    padding:5px 12px;border-radius:8px;margin-bottom:9px;
+  }
+  .code-rewards{font-size:13px;color:var(--ink-soft);line-height:1.6;}
+  .code-delete{
+    position:absolute;top:12px;right:12px;
+    width:26px;height:26px;border-radius:50%;
+    border:none;background:var(--paper-2);color:var(--ink-soft);
+    font-size:13px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .code-delete:hover{background:var(--rose-tint);color:var(--rose-dark);}
+  .code-status{
+    display:inline-block;
+    font-size:10px;font-weight:800;letter-spacing:.03em;
+    padding:3px 10px;border-radius:20px;
+    margin-left:8px;vertical-align:middle;
+  }
+  .code-status.active{color:var(--sky-dark);background:var(--sky-tint);}
+  .code-status.expired{color:var(--rose-dark);background:var(--rose-tint);}
+  .code-status.soon{color:#8A6D1E;background:#FBF0D2;}
+  .code-expiry{font-size:11px;color:var(--ink-soft);margin-top:2px;}
   .stage-row{
     display:grid;grid-template-columns:repeat(3,1fr);
     gap:8px;margin-bottom:12px;
@@ -615,6 +702,7 @@
       <div class="nav-title">BRONZE FRONTIER</div>
       <button class="nav-link" data-page="frontier"><span class="dot"></span>What's New Here</button>
       <button class="nav-link" data-page="daily"><span class="dot"></span>Daily Bonus</button>
+      <button class="nav-link" data-page="codes"><span class="dot"></span>In-Game Codes</button>
     </div>
   </aside>
 
@@ -768,50 +856,16 @@
           <h2>Gym Leaders of Roria</h2>
         </section>
 
-        <div class="gym-row">
-          <div class="num">1</div>
-          <div><h4>Chad</h4><div class="meta">Silvent City · Arc Badge</div></div>
-          <div class="type-chip" style="background:#E8B23A;">ELECTRIC</div>
-        </div>
-        <div class="gym-row">
-          <div class="num">2</div>
-          <div><h4>Sebastian</h4><div class="meta">Brimber City · Brimstone Badge</div></div>
-          <div class="type-chip" style="background:#E8623A;">FIRE</div>
-        </div>
-        <div class="gym-row">
-          <div class="num">3</div>
-          <div><h4>Quentin</h4><div class="meta">Rosecove City · Float Badge</div></div>
-          <div class="type-chip" style="background:#3E9CDC;">WATER</div>
-        </div>
-        <div class="gym-row">
-          <div class="num">4</div>
-          <div><h4>Stephen</h4><div class="meta">Anthian City · oversees the Anthian Airport</div></div>
-          <div class="type-chip" style="background:#8FB8E8;">FLYING</div>
-        </div>
-        <div class="gym-row">
-          <div class="num">5</div>
-          <div><h4>Prince Ryan</h4><div class="meta">Aredia City · Roria's warrior prince, first Leader to Mega Evolve</div></div>
-          <div class="type-chip" style="background:#C7924A;">GROUND</div>
-        </div>
-        <div class="gym-row">
-          <div class="num">6</div>
-          <div><h4>Fissy</h4><div class="meta">Fluoruma City</div></div>
-          <div class="type-chip" style="background:#5FAE5A;">GRASS</div>
-        </div>
-        <div class="gym-row">
-          <div class="num">7</div>
-          <div><h4>Zeek</h4><div class="meta">Frostveil City · Contrast Badge</div></div>
-          <div class="type-chip" style="background:#5B5468;">DARK</div>
-        </div>
-        <div class="gym-row">
-          <div class="num">8</div>
-          <div><h4>Captain B.</h4><div class="meta">Crescent Gym · Haunted Badge · Roria's only female Gym Leader</div></div>
-          <div class="type-chip" style="background:#6C5A8C;">GHOST</div>
-        </div>
+        <div id="gym-list"></div>
 
         <div class="callout" style="margin-top:22px;">
-          Gym teams and strategies will differ in Bronze Frontier once later-gen Pokémon are folded in — track those changes on <b>What's New Here</b>.
+          Gym teams and strategies will differ in Bronze Frontier once later-gen Pokémon are folded in — track those changes on <b>What's New Here</b>. Click any Gym Leader below for a closer look — team rosters are ready to be filled in.
         </div>
+      </div>
+
+      <!-- ================= GYM LEADER MODAL ================= -->
+      <div class="guide-overlay" id="gym-overlay">
+        <div class="guide-modal" id="gym-modal"></div>
       </div>
 
       <!-- ================= CHARACTERS ================= -->
@@ -970,6 +1024,34 @@
         <div class="callout sky">
           Boosts reset at <b>12:00 AM Eastern Time</b>. This tracker reads your device's clock and converts it to Eastern Time automatically, so it stays accurate no matter where you're playing from.
         </div>
+      </div>
+
+      <!-- ================= IN-GAME CODES ================= -->
+      <div class="page" id="page-codes">
+        <section class="block">
+          <h2>In-Game Codes</h2>
+          <div class="prose">
+            <p>Log redeemable codes for Bronze Frontier here, along with whatever they give. Entries are saved right in this browser, so they'll still be here next time you open this page.</p>
+          </div>
+        </section>
+
+        <form class="code-form" id="code-form">
+          <div class="code-field">
+            <label for="code-input">Code</label>
+            <input type="text" id="code-input" placeholder="e.g. BRONZEFRONTIER2026" autocomplete="off">
+          </div>
+          <div class="code-field">
+            <label for="rewards-input">Rewards</label>
+            <textarea id="rewards-input" placeholder="e.g. 5,000 Poké Dollars&#10;3x Rare Candy&#10;1x Master Ball"></textarea>
+          </div>
+          <div class="code-field">
+            <label for="expiry-input">Expires on <span style="font-weight:400;font-style:italic;color:var(--ink-soft);">(optional — leave blank if it doesn't expire)</span></label>
+            <input type="date" id="expiry-input">
+          </div>
+          <button type="submit" class="code-submit">Add Code</button>
+        </form>
+
+        <div class="codes-grid" id="codes-list"></div>
       </div>
 
     </div>
@@ -1339,8 +1421,16 @@
     { group:'Bronze Frontier Addition', name:'Chi-Yu', dex:1004, types:['Dark','Fire'], location:'' },
     { group:'Bronze Frontier Addition', name:'Magearna', dex:801, types:['Steel','Fairy'], location:'' },
     { group:'Bronze Frontier Addition', name:'Kubfu', dex:891, types:['Fighting'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Articuno-Galar', dex:'10169', types:['Psychic','Flying'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Zapdos-Galar', dex:'10170', types:['Fighting','Flying'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Moltres-Galar', dex:'10171', types:['Dark','Flying'], location:'' },
   ];
 
+  /* Step-by-step capture guides, keyed by Pokémon name. Add steps here as
+     { title:'Short step title', text:'Longer description of what to do.' }
+     — the modal renders whatever's in each array, in order. Leave a
+     Pokémon's array empty ( [] ) and the modal will show a placeholder
+     until steps are added. */
   const LEGEND_GUIDES = {
     'Groudon': [
           { title: 'NOT OBTAINABLE', text: 'This Pokemon is not currently obtainable in Bronze Frontier. Keep an eye out for future updates!'}
@@ -1350,20 +1440,38 @@
     ],
     'Uxie': [
           { title: 'Make your way to the Lagoona Trenches', text: 'Head over to Lagoona Lake, and go to the underwater mining facility. Talk to the blonde scientist and go for a dive!'},
-          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is a 85% chance of the egg being Togepi, while having an 15% chance of being a lake spirit. Roughly meaning that getting Uxie specifically is an 5% chance.'},
-          { title: 'Revive the Egg', text: 'Talk to the scientist at the back of the lab and select the egg to be revived. Doing this will provide you with either a Togepi egg, or a lake spirit egg.'},    
+          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is an 85% chance the egg is Togepi, with a 15% chance it is a lake spirit. Roughly meaning that getting Uxie specifically is a 5% chance.'},
+          { title: 'Revive the Egg', text: 'Talk to the scientist at the back of the lab and select the egg to be revived. Doing this will provide you with either a Togepi egg or a lake spirit egg.'},    
     ],
-    'Mesprit': [],
-    'Azelf': [],
+    'Mesprit': [
+          { title: 'Make your way to the Lagoona Trenches', text: 'Head over to Lagoona Lake, and go to the underwater mining facility. Talk to the blonde scientist and go for a dive!'},
+          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is an 85% chance the egg is Togepi, with a 15% chance it is a lake spirit. Roughly meaning that getting Mespirit specifically is a 5% chance.'},
+          { title: 'Revive the Egg', text: 'Talk to the scientist at the back of the lab and select the egg to be revived. Doing this will provide you with either a Togepi egg or a lake spirit egg.'},    
+    ],
+    'Azelf': [
+          { title: 'Make your way to the Lagoona Trenches', text: 'Head over to Lagoona Lake, and go to the underwater mining facility. Talk to the blonde scientist and go for a dive!'},
+          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is an 85% chance the egg is Togepi, with a 15% chance it is a lake spirit. Roughly meaning that getting Azelf specifically is a 5% chance.'},
+          { title: 'Revive the Egg', text: 'Talk to the scientist at the back of the lab and select the egg to be revived. Doing this will provide you with either a Togepi egg or a lake spirit egg.'},    
+    ],
     'Dialga': [
           { title: 'NOT OBTAINABLE', text: 'This Pokemon is not currently obtainable in Bronze Frontier. Keep an eye out for future updates!'}
     ],
     'Palkia': [
           { title: 'NOT OBTAINABLE', text: 'This Pokemon is not currently obtainable in Bronze Frontier. Keep an eye out for future updates!'}
     ],
-    'Tornadus': [],
-    'Thundurus': [],
-    'Landorus': [],
+    'Tornadus': [
+          { title: 'Make your way to Natures Den', text: 'Head over to Aredia City, and go to Route 12. Take the usual path over the three rock smash rocks, and upon breaking them, turn left and follow that path down to Natures Den.'},
+          { title: 'Initiate the quest', text: 'Entering the Den and making your way over the shrine causes Tornadus and Thundurus to roam free. This allows them to be found anywhere in the wild.'},
+    ],
+    'Thundurus': [
+          { title: 'Make your way to Natures Den', text: 'Head over to Aredia City, and go to Route 12. Take the usual path over the three rock smash rocks, and upon breaking them, turn left and follow that path down to Natures Den.'},
+          { title: 'Initiate the quest', text: 'Entering the Den and making your way over the shrine causes Tornadus and Thundurus to roam free. This allows them to be found anywhere in the wild.'},
+    ],
+    'Landorus': [
+          { title: 'Make your way to Natures Den', text: 'Head over to Aredia City, and go to Route 12. Take the usual path over the three rock smash rocks, and upon breaking them, turn left and follow that path down to Natures Den.'},
+          { title: 'Initiate the quest', text: 'Entering the Den and making your way over the shrine causes Tornadus and Thundurus to roam free. This allows them to be found anywhere in the wild.'},
+          { title: 'Bring Both to the Den', text: 'After capturing both Tornadus and Thundurus, put both in the party and make your way back to the Den in order to start the battle with Landorus. (Resettable)'},
+    ],
     'Heatran': [],
     'Raikou': [],
     'Entei': [],
@@ -1387,6 +1495,9 @@
     'Chi-Yu': [],
     'Magearna': [],
     'Kubfu': [],
+    'Articuno-Galar': [],
+    'Zapdos-Galar': [],
+    'Moltres-Galar': [],
   };
 
   function renderLegendCard(l){
@@ -1490,6 +1601,165 @@
   document.querySelectorAll('[data-goto]').forEach(el=>{
     el.addEventListener('click', (e)=>{ e.preventDefault(); goTo(el.dataset.goto); });
   });
+
+  /* ===== Gym Leaders ===== */
+  const GYMS = [
+    { num:1, name:'Chad', meta:'Silvent City · Arc Badge', type:'Electric', color:'#E8B23A', team:[] },
+    { num:2, name:'Sebastian', meta:'Brimber City · Brimstone Badge', type:'Fire', color:'#E8623A', team:[] },
+    { num:3, name:'Quentin', meta:'Rosecove City · Float Badge', type:'Water', color:'#3E9CDC', team:[] },
+    { num:4, name:'Stephen', meta:'Anthian City · oversees the Anthian Airport', type:'Flying', color:'#8FB8E8', team:[] },
+    { num:5, name:'Prince Ryan', meta:"Aredia City · Roria's warrior prince, first Leader to Mega Evolve", type:'Ground', color:'#C7924A', team:[] },
+    { num:6, name:'Fissy', meta:'Fluoruma City', type:'Grass', color:'#5FAE5A', team:[] },
+    { num:7, name:'Zeek', meta:'Frostveil City · Contrast Badge', type:'Dark', color:'#5B5468', team:[] },
+    { num:8, name:'Captain B.', meta:"Crescent Gym · Haunted Badge · Roria's only female Gym Leader", type:'Ghost', color:'#6C5A8C', team:[] },
+  ];
+
+  /* Fill in each Gym Leader's team here, e.g.
+     team: [ { name:'Magnemite', dex:81, level:14 }, { name:'Voltorb', dex:100, level:14 } ]
+     — leave a Leader's team as [] and the modal shows a placeholder until it's added. */
+
+  function renderGymRow(g){
+    return `
+      <div class="gym-row" data-num="${g.num}">
+        <div class="num">${g.num}</div>
+        <div><h4>${g.name}</h4><div class="meta">${g.meta}</div></div>
+        <div class="type-chip" style="background:${g.color};">${g.type.toUpperCase()}</div>
+      </div>
+    `;
+  }
+
+  function renderGymList(){
+    const list = document.getElementById('gym-list');
+    if(!list) return;
+    list.innerHTML = GYMS.map(renderGymRow).join('');
+    list.querySelectorAll('.gym-row').forEach(row => {
+      row.addEventListener('click', () => openGymModal(Number(row.dataset.num)));
+    });
+  }
+  renderGymList();
+
+  function openGymModal(num){
+    const g = GYMS.find(x => x.num === num);
+    if(!g) return;
+    const overlay = document.getElementById('gym-overlay');
+    const modal = document.getElementById('gym-modal');
+    const team = g.team || [];
+    const teamHtml = team.length
+      ? `<div class="team-slot-row">${team.map((p,i) => `
+          <div class="team-slot">
+            ${p.dex ? `<img src="${spriteUrl(p.dex)}" alt="${p.name}" style="width:52px;height:52px;object-fit:contain;margin:0 auto 4px;display:block;">` : ''}
+            <div style="font-weight:800;font-size:12px;">${p.name || ''}</div>
+            ${p.level ? `<div style="font-size:10.5px;color:var(--ink-soft);">Lv. ${p.level}</div>` : ''}
+          </div>
+        `).join('')}</div>`
+      : `<div class="guide-empty">Team not yet added — fill in GYMS[${num-1}].team in the page's script (name, dex number, level) and the roster will show up here.</div>`;
+
+    modal.innerHTML = `
+      <button class="guide-close" id="gym-close" aria-label="Close">✕</button>
+      <div class="guide-head">
+        <div class="num" style="width:44px;height:44px;background:${g.color};color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;">${g.num}</div>
+        <div>
+          <div class="name">${g.name}</div>
+          <div class="guide-quote">${g.meta}</div>
+        </div>
+      </div>
+      <div class="guide-encounter"><span class="type-chip" style="background:${g.color};">${g.type.toUpperCase()}</span></div>
+      <div class="guide-steps-label">TEAM</div>
+      ${teamHtml}
+    `;
+    overlay.classList.add('open');
+    document.getElementById('gym-close').addEventListener('click', closeGymModal);
+  }
+
+  function closeGymModal(){
+    document.getElementById('gym-overlay').classList.remove('open');
+  }
+
+  document.getElementById('gym-overlay').addEventListener('click', (e) => {
+    if(e.target.id === 'gym-overlay') closeGymModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if(e.key === 'Escape') closeGymModal();
+  });
+
+  /* ===== Redeemable Codes tracker ===== */
+  function escapeHtml(str){
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
+  function loadCodes(){
+    try{
+      return JSON.parse(localStorage.getItem('bf_codes') || '[]');
+    }catch(e){ return []; }
+  }
+  function saveCodes(codes){
+    try{ localStorage.setItem('bf_codes', JSON.stringify(codes)); }catch(e){}
+  }
+
+  function getCodeStatus(expiry){
+    if(!expiry) return { label:'No expiration', cls:'active' };
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const expDate = new Date(expiry + 'T00:00:00');
+    const daysLeft = Math.round((expDate - today) / 86400000);
+    if(daysLeft < 0) return { label:'Expired', cls:'expired' };
+    if(daysLeft <= 3) return { label: daysLeft === 0 ? 'Expires today' : `Expires in ${daysLeft}d`, cls:'soon' };
+    return { label:`Expires ${expDate.toLocaleDateString()}`, cls:'active' };
+  }
+
+  function renderCodes(){
+    const list = document.getElementById('codes-list');
+    if(!list) return;
+    const codes = loadCodes();
+    if(!codes.length){
+      list.innerHTML = `<div class="guide-empty">No codes added yet — use the form above to log a code and the rewards it gives.</div>`;
+      return;
+    }
+    list.innerHTML = codes.map((c,i) => {
+      const status = getCodeStatus(c.expiry);
+      return `
+      <div class="code-card">
+        <button class="code-delete" data-idx="${i}" aria-label="Delete code">✕</button>
+        <div class="code-chip">${escapeHtml(c.code)}</div>
+        <span class="code-status ${status.cls}">${status.label}</span>
+        <div class="code-rewards">${escapeHtml(c.rewards).replace(/\n/g,'<br>')}</div>
+      </div>
+    `;
+    }).join('');
+    list.querySelectorAll('.code-delete').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const codes = loadCodes();
+        codes.splice(Number(btn.dataset.idx), 1);
+        saveCodes(codes);
+        renderCodes();
+      });
+    });
+  }
+
+  function initCodesForm(){
+    const form = document.getElementById('code-form');
+    if(!form) return;
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const codeInput = document.getElementById('code-input');
+      const rewardsInput = document.getElementById('rewards-input');
+      const expiryInput = document.getElementById('expiry-input');
+      const code = codeInput.value.trim();
+      const rewards = rewardsInput.value.trim();
+      const expiry = expiryInput.value;
+      if(!code || !rewards) return;
+      const codes = loadCodes();
+      codes.unshift({ code, rewards, expiry });
+      saveCodes(codes);
+      codeInput.value = '';
+      rewardsInput.value = '';
+      expiryInput.value = '';
+      renderCodes();
+    });
+    renderCodes();
+  }
+  initCodesForm();
 </script>
 
 </body>
