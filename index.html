@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bronze Frontier Wiki</title>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://bronzefrontier.github.io/">
+<meta property="og:title" content="Bronze Frontier Wiki">
+<meta property="og:description" content="An unofficial fan wiki for Bronze Frontier — Gym Leaders, Legendary Pokémon capture guides, starters, in-game codes, and everything else about the Roria region.">
+<meta property="og:image" content="https://bronzefrontier.github.io/og-image.png">
+<meta name="theme-color" content="#D9445E">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Bronze Frontier Wiki">
+<meta name="twitter:description" content="An unofficial fan wiki for Bronze Frontier — Gym Leaders, Legendary Pokémon capture guides, starters, in-game codes, and everything else about the Roria region.">
+<meta name="twitter:image" content="https://bronzefrontier.github.io/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -89,13 +99,13 @@
   .brand-text .b1{font-family:'Baloo 2';font-weight:800;font-size:17px;color:var(--on-royal);}
   .brand-text .b2{font-size:10px;letter-spacing:.04em;color:var(--on-royal-soft);}
 
+  .search-wrap{position:relative;margin-bottom:20px;}
   .search-box{
     display:flex;align-items:center;gap:6px;
     background:rgba(255,255,255,.08);
     border:2px solid rgba(255,255,255,.16);
     border-radius:8px;
     padding:8px 10px;
-    margin-bottom:20px;
   }
   .search-box input{
     border:none;outline:none;background:transparent;
@@ -103,6 +113,33 @@
   }
   .search-box input::placeholder{color:var(--on-royal-soft);}
   .search-box svg{flex:0 0 auto;opacity:.6;color:var(--on-royal-soft);}
+
+  .search-results{
+    display:none;
+    position:absolute;top:calc(100% + 6px);left:0;right:0;
+    background:var(--paper);
+    border:2px solid var(--line);
+    border-radius:10px;
+    max-height:360px;overflow-y:auto;
+    z-index:80;
+    box-shadow:0 12px 28px rgba(0,0,0,.32);
+  }
+  .search-results.open{display:block;}
+  .search-result-item{
+    padding:9px 12px;cursor:pointer;
+    border-bottom:1px solid var(--line);
+  }
+  .search-result-item:last-child{border-bottom:none;}
+  .search-result-item:hover, .search-result-item.active{background:var(--paper-2);}
+  .search-result-item .sr-title{font-weight:700;font-size:13px;color:var(--ink);}
+  .search-result-item .sr-meta{font-size:10.5px;color:var(--bronze);margin-top:2px;}
+  .search-empty{padding:12px;font-size:12.5px;color:var(--ink-soft);font-style:italic;}
+
+  @keyframes searchFlash{
+    0%{background:var(--rose-tint);}
+    100%{background:transparent;}
+  }
+  .search-hit{animation:searchFlash 1.8s ease-out;border-radius:8px;}
 
   .nav-group{margin-bottom:6px;}
   .nav-title{
@@ -612,6 +649,35 @@
   .code-status.expired{color:var(--rose-dark);background:var(--rose-tint);}
   .code-status.soon{color:#8A6D1E;background:#FBF0D2;}
   .code-expiry{font-size:11px;color:var(--ink-soft);margin-top:2px;}
+  .code-lock{
+    border:2px dashed var(--bronze);
+    border-radius:14px;
+    background:var(--bronze-tint);
+    padding:18px 20px;
+    margin-bottom:22px;
+  }
+  .code-lock-label{
+    font-family:'Baloo 2';font-weight:800;font-size:14.5px;
+    color:var(--bronze);margin-bottom:4px;
+  }
+  .code-lock p{font-size:12.5px;color:var(--ink-soft);margin:0 0 12px;}
+  .code-lock-row{display:flex;gap:10px;flex-wrap:wrap;}
+  .code-lock-row input{
+    flex:1;min-width:160px;
+    border:2px solid var(--line);
+    border-radius:9px;
+    padding:9px 11px;
+    font-family:'Manrope';font-size:13.5px;color:var(--ink);
+    background:var(--white);
+    outline:none;
+  }
+  .code-lock-row input:focus{border-color:var(--sky-dark);}
+  .code-lock-error{font-size:12px;color:var(--rose-dark);margin-top:8px;min-height:14px;}
+  .code-relock{
+    background:none;border:none;color:var(--ink-soft);
+    font-size:12px;text-decoration:underline;cursor:pointer;
+    margin-bottom:14px;padding:0;
+  }
   .stage-row{
     display:grid;grid-template-columns:repeat(3,1fr);
     gap:8px;margin-bottom:12px;
@@ -674,9 +740,12 @@
       </div>
     </div>
 
-    <div class="search-box">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" placeholder="Search the wiki..." />
+    <div class="search-wrap">
+      <div class="search-box">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="wiki-search-input" placeholder="Search the wiki..." autocomplete="off">
+      </div>
+      <div class="search-results" id="search-results"></div>
     </div>
 
     <div class="nav-group">
@@ -1031,11 +1100,23 @@
         <section class="block">
           <h2>In-Game Codes</h2>
           <div class="prose">
-            <p>Log redeemable codes for Bronze Frontier here, along with whatever they give. Entries are saved right in this browser, so they'll still be here next time you open this page.</p>
+            <p>Redeemable codes for Bronze Frontier logged here, along with whatever they give.</p>
           </div>
         </section>
 
-        <form class="code-form" id="code-form">
+        <div class="code-lock" id="code-lock">
+          <div class="code-lock-label">🔒 Adding codes is locked</div>
+          <p>Enter the editor password to add or remove codes.</p>
+          <div class="code-lock-row">
+            <input type="password" id="code-password-input" placeholder="Password" autocomplete="off">
+            <button type="button" class="code-submit" id="code-unlock-btn">Unlock</button>
+          </div>
+          <div class="code-lock-error" id="code-lock-error"></div>
+        </div>
+
+        <button type="button" class="code-relock" id="code-relock-btn" style="display:none;">🔒 Lock this section again</button>
+
+        <form class="code-form" id="code-form" style="display:none;">
           <div class="code-field">
             <label for="code-input">Code</label>
             <input type="text" id="code-input" placeholder="e.g. BRONZEFRONTIER2026" autocomplete="off">
@@ -1473,11 +1554,24 @@
           { title: 'Bring Both to the Den', text: 'After capturing both Tornadus and Thundurus, put both in the party and make your way back to the Den in order to start the battle with Landorus. (Resettable)'},
     ],
     'Heatran': [],
-    'Raikou': [],
-    'Entei': [],
-    'Suicune': [],
-    'Latias': [],
-    'Latios': [],
+    'Raikou': [
+          { title: 'Make your way to Cragonos Sancturary', text: 'Head over to Anthian City, and head backwards to Cragonos Peak. Upon arriving, locate the rock climb wall near the entrance of the sky train. Scale the wall and enter the sanctuary.'},
+          { title: 'Set the beasts free', text: 'Make your way deeper into the sanctuary until you locate the three beasts and walk up to them. This sets Raikou, Entei, and Suicune free into the wild. They will then be findable at roaming encounter rates.'},
+    ],
+    'Entei': [
+          { title: 'Make your way to Cragonos Sancturary', text: 'Head over to Anthian City, and head backwards to Cragonos Peak. Upon arriving, locate the rock climb wall near the entrance of the sky train. Scale the wall and enter the sanctuary.'},
+          { title: 'Set the beasts free', text: 'Make your way deeper into the sanctuary until you locate the three beasts and walk up to them. This sets Raikou, Entei, and Suicune free into the wild. They will then be findable at roaming encounter rates.'},
+    ],
+    'Suicune': [
+          { title: 'Make your way to Cragonos Sancturary', text: 'Head over to Anthian City, and head backwards to Cragonos Peak. Upon arriving, locate the rock climb wall near the entrance of the sky train. Scale the wall and enter the sanctuary.'},
+          { title: 'Set the beasts free', text: 'Make your way deeper into the sanctuary until you locate the three beasts and walk up to them. This sets Raikou, Entei, and Suicune free into the wild. They will then be findable at roaming encounter rates.'},
+    ],
+    'Latias': [
+          { title: 'STORY PROGRESSION', text: 'Upon entering Route 15, the player spots Latias and Latios. This triggers a cutscene concluding with them becoming roaming legendaries.'},
+    ],
+    'Latios': [
+          { title: 'STORY PROGRESSION', text: 'Upon entering Route 15, the player spots Latias and Latios. This triggers a cutscene concluding with them becoming roaming legendaries.'},
+    ],
     'Regirock': [],
     'Registeel': [],
     'Regice': [],
@@ -1604,7 +1698,10 @@
 
   /* ===== Gym Leaders ===== */
   const GYMS = [
-    { num:1, name:'Chad', meta:'Silvent City · Arc Badge', type:'Electric', color:'#E8B23A', team:[] },
+    { num:1, name:'Chad', meta:'Silvent City · Arc Badge', type:'Electric', color:'#E8B23A', team:[
+    { name: 'Shinx', dex: 403, level: 14 },
+    { name: 'Pikachu', dex: 25, level: 14 },
+] },
     { num:2, name:'Sebastian', meta:'Brimber City · Brimstone Badge', type:'Fire', color:'#E8623A', team:[] },
     { num:3, name:'Quentin', meta:'Rosecove City · Float Badge', type:'Water', color:'#3E9CDC', team:[] },
     { num:4, name:'Stephen', meta:'Anthian City · oversees the Anthian Airport', type:'Flying', color:'#8FB8E8', team:[] },
@@ -1683,6 +1780,13 @@
   });
 
   /* ===== Redeemable Codes tracker ===== */
+  /* Change this to whatever password you want to require before someone
+     can add or delete codes. Note: this is a simple front-end lock meant
+     to stop casual visitors from editing — anyone who views this file's
+     source code can find the password, so don't rely on it for anything
+     truly sensitive. */
+  const CODES_EDIT_PASSWORD = 'icecoldbronzefrontier';
+
   function escapeHtml(str){
     const div = document.createElement('div');
     div.textContent = str;
@@ -1695,6 +1799,9 @@
   }
   function saveCodes(codes){
     try{ localStorage.setItem('bf_codes', JSON.stringify(codes)); }catch(e){}
+  }
+  function isCodesUnlocked(){
+    try{ return sessionStorage.getItem('bf_codes_unlocked') === '1'; }catch(e){ return false; }
   }
 
   function getCodeStatus(expiry){
@@ -1712,6 +1819,7 @@
     const list = document.getElementById('codes-list');
     if(!list) return;
     const codes = loadCodes();
+    const unlocked = isCodesUnlocked();
     if(!codes.length){
       list.innerHTML = `<div class="guide-empty">No codes added yet — use the form above to log a code and the rewards it gives.</div>`;
       return;
@@ -1720,20 +1828,64 @@
       const status = getCodeStatus(c.expiry);
       return `
       <div class="code-card">
-        <button class="code-delete" data-idx="${i}" aria-label="Delete code">✕</button>
+        ${unlocked ? `<button class="code-delete" data-idx="${i}" aria-label="Delete code">✕</button>` : ''}
         <div class="code-chip">${escapeHtml(c.code)}</div>
         <span class="code-status ${status.cls}">${status.label}</span>
         <div class="code-rewards">${escapeHtml(c.rewards).replace(/\n/g,'<br>')}</div>
       </div>
     `;
     }).join('');
-    list.querySelectorAll('.code-delete').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const codes = loadCodes();
-        codes.splice(Number(btn.dataset.idx), 1);
-        saveCodes(codes);
-        renderCodes();
+    if(unlocked){
+      list.querySelectorAll('.code-delete').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const codes = loadCodes();
+          codes.splice(Number(btn.dataset.idx), 1);
+          saveCodes(codes);
+          renderCodes();
+        });
       });
+    }
+  }
+
+  function setCodesLockUI(unlocked){
+    const lockEl = document.getElementById('code-lock');
+    const formEl = document.getElementById('code-form');
+    const relockBtn = document.getElementById('code-relock-btn');
+    if(!lockEl || !formEl || !relockBtn) return;
+    lockEl.style.display = unlocked ? 'none' : 'block';
+    formEl.style.display = unlocked ? 'grid' : 'none';
+    relockBtn.style.display = unlocked ? 'block' : 'none';
+  }
+
+  function initCodesLock(){
+    const unlockBtn = document.getElementById('code-unlock-btn');
+    const relockBtn = document.getElementById('code-relock-btn');
+    const passwordInput = document.getElementById('code-password-input');
+    const errorEl = document.getElementById('code-lock-error');
+    if(!unlockBtn || !relockBtn || !passwordInput) return;
+
+    setCodesLockUI(isCodesUnlocked());
+
+    function tryUnlock(){
+      if(passwordInput.value === CODES_EDIT_PASSWORD){
+        try{ sessionStorage.setItem('bf_codes_unlocked', '1'); }catch(e){}
+        errorEl.textContent = '';
+        passwordInput.value = '';
+        setCodesLockUI(true);
+        renderCodes();
+      }else{
+        errorEl.textContent = 'Incorrect password.';
+      }
+    }
+
+    unlockBtn.addEventListener('click', tryUnlock);
+    passwordInput.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter'){ e.preventDefault(); tryUnlock(); }
+    });
+    relockBtn.addEventListener('click', () => {
+      try{ sessionStorage.removeItem('bf_codes_unlocked'); }catch(e){}
+      setCodesLockUI(false);
+      renderCodes();
     });
   }
 
@@ -1742,6 +1894,7 @@
     if(!form) return;
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      if(!isCodesUnlocked()) return;
       const codeInput = document.getElementById('code-input');
       const rewardsInput = document.getElementById('rewards-input');
       const expiryInput = document.getElementById('expiry-input');
@@ -1759,7 +1912,217 @@
     });
     renderCodes();
   }
+  initCodesLock();
   initCodesForm();
+
+  /* ===== Wiki Search ===== */
+  function buildSearchIndex(){
+    const idx = [
+      { title:'Welcome to the Bronze Frontier Wiki', page:'home', category:'Home', match:'Welcome to the' },
+      { title:'Mitis Town', page:'home', category:'Story', match:'Mitis Town' },
+      { title:'Rival Jake', page:'home', category:'Story', match:'Rival Jake' },
+      { title:'Professor Cypress', page:'home', category:'Story', match:'Professor Cypress' },
+      { title:'Team Eclipse', page:'home', category:'Story', match:'Team Eclipse' },
+      { title:'Tess (Story)', page:'home', category:'Story', match:'Tess' },
+
+      { title:'Roria (Region)', page:'region', category:'Region', match:'Roria is the region' },
+      { title:'Bronze Brick', page:'region', category:'Key Item', match:'Bronze Brick' },
+      { title:'Regional Pokédex', page:'region', category:'Key Item', match:'Regional Pokédex' },
+
+      { title:'Silvent City', page:'locations', category:'City', match:'Silvent City' },
+      { title:'Brimber City', page:'locations', category:'City', match:'Brimber City' },
+      { title:'Rosecove City', page:'locations', category:'City', match:'Rosecove City' },
+      { title:'Anthian City', page:'locations', category:'City', match:'Anthian City' },
+      { title:'Aredia City', page:'locations', category:'City', match:'Aredia City' },
+      { title:'Fluoruma City', page:'locations', category:'City', match:'Fluoruma City' },
+      { title:'Frostveil City', page:'locations', category:'City', match:'Frostveil City' },
+      { title:'Rosecove Beach', page:'locations', category:'City', match:'Rosecove Beach' },
+      { title:'Mitis Town', page:'locations', category:'Town', match:'Mitis Town' },
+      { title:'Cheshma Town', page:'locations', category:'Town', match:'Cheshma Town' },
+      { title:'Crescent Town', page:'locations', category:'Town', match:'Crescent Town' },
+      { title:'Port Decca', page:'locations', category:'Town', match:'Port Decca' },
+      { title:'Lagoona Lake', page:'locations', category:'Town', match:'Lagoona Lake' },
+      { title:'Lagoona Trenches', page:'locations', category:'Town', match:'Lagoona Trenches' },
+      { title:'Decca Beach', page:'locations', category:'Town', match:'Decca Beach' },
+      { title:'Crescent Island', page:'locations', category:'Island', match:'Crescent Island' },
+      { title:'Lost Islands', page:'locations', category:'Island', match:'Lost Islands' },
+      { title:'Voltridia Island', page:'locations', category:'Island', match:'Voltridia Island' },
+      { title:'Frigidia Island', page:'locations', category:'Island', match:'Frigidia Island' },
+      { title:'Obsidia Island', page:'locations', category:'Island', match:'Obsidia Island' },
+
+      { title:'Jake (Rival)', page:'characters', category:'Rival', match:'Jake' },
+      { title:'Tess (Rival)', page:'characters', category:'Rival', match:'Tess' },
+      { title:'Team Eclipse (Organization)', page:'characters', category:'Villains', match:'Team Eclipse' },
+      { title:'Boss Cypress', page:'characters', category:'Villains', match:'Boss Cypress' },
+      { title:'Admin Linda', page:'characters', category:'Villains', match:'Admin Linda' },
+      { title:'Admin Harry', page:'characters', category:'Villains', match:'Admin Harry' },
+      { title:'Admin Gabe & Admin Tyler', page:'characters', category:'Villains', match:'Admin Gabe' },
+
+      { title:"What's New in Bronze Frontier", page:'frontier', category:'Frontier', match:"What's New in Bronze Frontier" },
+      { title:'Custom Routes', page:'frontier', category:'Frontier', match:'Custom Routes' },
+      { title:'Later-Generation Pokémon', page:'frontier', category:'Frontier', match:'Later-Generation Pokémon' },
+      { title:'Other Changes From Brick Bronze', page:'frontier', category:'Frontier', match:'Other Changes From Brick Bronze' },
+
+      { title:'Daily Bonus Tracker', page:'daily', category:'Daily Bonus', match:'Daily Bonus Tracker' },
+      { title:'Weekly Schedule', page:'daily', category:'Daily Bonus', match:'Weekly Schedule' },
+
+      { title:'In-Game Codes', page:'codes', category:'Codes', match:'In-Game Codes' },
+    ];
+
+    GYMS.forEach(g => {
+      idx.push({ title:g.name, page:'gyms', category:'Gym Leader · '+g.type, action:{ type:'gym', num:g.num } });
+    });
+
+    STARTERS.forEach(fam => {
+      const first = fam.stages[0].name;
+      idx.push({ title:`${first} Line`, page:'starters', category:'Starter · '+fam.region, action:{ type:'starter', region:fam.region, family:first } });
+      fam.stages.forEach(st => {
+        idx.push({ title:st.name, page:'starters', category:'Starter · '+fam.region, action:{ type:'starter', region:fam.region, family:first } });
+      });
+    });
+
+    LEGENDARIES.forEach(l => {
+      idx.push({ title:l.name, page:'legendaries', category:'Legendary · '+l.group, action:{ type:'legend', name:l.name } });
+    });
+
+    return idx;
+  }
+
+  function scrollToAndHighlight(containerSelector, textMatch){
+    const container = document.querySelector(containerSelector);
+    if(!container || !textMatch) return;
+    const candidates = container.querySelectorAll('h1,h2,h3,h4,li,.card,.infobox-row,.hero-tag,p');
+    const needle = textMatch.toLowerCase();
+    let target = null;
+    for(const el of candidates){
+      if(el.textContent.trim().toLowerCase().includes(needle)){ target = el; break; }
+    }
+    if(target){
+      target.scrollIntoView({ behavior:'smooth', block:'center' });
+      target.classList.add('search-hit');
+      setTimeout(() => target.classList.remove('search-hit'), 1800);
+    }
+  }
+
+  function initSearch(){
+    const SEARCH_INDEX = buildSearchIndex();
+    const input = document.getElementById('wiki-search-input');
+    const resultsEl = document.getElementById('search-results');
+    if(!input || !resultsEl) return;
+
+    let activeIdx = -1;
+    let currentMatches = [];
+
+    function closeResults(){
+      resultsEl.classList.remove('open');
+      resultsEl.innerHTML = '';
+      currentMatches = [];
+      activeIdx = -1;
+    }
+
+    function updateActiveHighlight(){
+      resultsEl.querySelectorAll('.search-result-item').forEach((el,i) => {
+        el.classList.toggle('active', i===activeIdx);
+      });
+      if(activeIdx>=0){
+        const activeEl = resultsEl.querySelector('.search-result-item.active');
+        if(activeEl) activeEl.scrollIntoView({ block:'nearest' });
+      }
+    }
+
+    function runSearch(){
+      const q = input.value.trim().toLowerCase();
+      if(!q){ closeResults(); return; }
+      currentMatches = SEARCH_INDEX.filter(e =>
+        e.title.toLowerCase().includes(q) || (e.category && e.category.toLowerCase().includes(q))
+      ).slice(0, 8);
+      activeIdx = -1;
+
+      if(!currentMatches.length){
+        resultsEl.innerHTML = `<div class="search-empty">No results for "${escapeHtml(input.value.trim())}"</div>`;
+        resultsEl.classList.add('open');
+        return;
+      }
+
+      resultsEl.innerHTML = currentMatches.map((m,i) => `
+        <div class="search-result-item" data-idx="${i}">
+          <div class="sr-title">${escapeHtml(m.title)}</div>
+          <div class="sr-meta">${escapeHtml(m.category || '')}</div>
+        </div>
+      `).join('');
+      resultsEl.classList.add('open');
+      resultsEl.querySelectorAll('.search-result-item').forEach(el => {
+        el.addEventListener('click', () => selectSearchResult(currentMatches[Number(el.dataset.idx)]));
+      });
+    }
+
+    function selectSearchResult(entry){
+      if(!entry) return;
+      goTo(entry.page);
+      closeResults();
+      input.value = '';
+      input.blur();
+      setTimeout(() => {
+        if(entry.action && entry.action.type === 'legend'){
+          const tabsEl = document.getElementById('legend-tabs');
+          if(tabsEl){
+            tabsEl.querySelectorAll('.region-tab').forEach(b => b.classList.toggle('active', b.dataset.group === 'All'));
+          }
+          renderLegendaries('All');
+          openGuide(entry.action.name);
+        } else if(entry.action && entry.action.type === 'gym'){
+          openGymModal(entry.action.num);
+        } else if(entry.action && entry.action.type === 'starter'){
+          const tabsEl = document.getElementById('region-tabs');
+          if(tabsEl){
+            tabsEl.querySelectorAll('.region-tab').forEach(b => b.classList.toggle('active', b.dataset.region === 'All'));
+          }
+          renderStarters('All');
+          setTimeout(() => {
+            const grid = document.getElementById('starters-grid');
+            if(!grid) return;
+            const card = [...grid.querySelectorAll('.starter-card')].find(c => {
+              const h4 = c.querySelector('h4');
+              return h4 && h4.textContent.trim().toLowerCase().startsWith(entry.action.family.toLowerCase());
+            });
+            if(card){
+              card.scrollIntoView({ behavior:'smooth', block:'center' });
+              card.classList.add('search-hit');
+              setTimeout(() => card.classList.remove('search-hit'), 1800);
+            }
+          }, 30);
+        } else {
+          scrollToAndHighlight('#page-'+entry.page, entry.match || entry.title);
+        }
+      }, 60);
+    }
+
+    input.addEventListener('input', runSearch);
+    input.addEventListener('focus', () => { if(input.value.trim()) runSearch(); });
+    input.addEventListener('keydown', (e) => {
+      if(!currentMatches.length) return;
+      if(e.key === 'ArrowDown'){
+        e.preventDefault();
+        activeIdx = Math.min(activeIdx+1, currentMatches.length-1);
+        updateActiveHighlight();
+      } else if(e.key === 'ArrowUp'){
+        e.preventDefault();
+        activeIdx = Math.max(activeIdx-1, 0);
+        updateActiveHighlight();
+      } else if(e.key === 'Enter'){
+        e.preventDefault();
+        selectSearchResult(activeIdx >= 0 ? currentMatches[activeIdx] : currentMatches[0]);
+      } else if(e.key === 'Escape'){
+        closeResults();
+        input.blur();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if(!e.target.closest('.search-wrap')) closeResults();
+    });
+  }
+  initSearch();
 </script>
 
 </body>
