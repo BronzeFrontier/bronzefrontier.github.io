@@ -583,6 +583,96 @@
     background:repeating-linear-gradient(135deg, var(--white) 0 12px, #FBF7F4 12px 24px);
     font-size:12.5px;color:var(--bronze);font-style:italic;line-height:1.6;
   }
+  .guide-extras-label{
+    font-family:'Baloo 2';font-weight:700;font-size:13.5px;
+    color:var(--rose-dark);margin:18px 0 10px;
+    border-top:1px dashed var(--line);padding-top:16px;
+  }
+  .guide-extra{
+    display:flex;gap:10px;align-items:flex-start;
+    border:2px solid var(--line);
+    border-radius:12px;
+    padding:10px 14px;
+    background:var(--white);
+    margin-bottom:8px;
+  }
+  .guide-extra .tag{
+    flex:0 0 auto;font-family:'Baloo 2';font-weight:800;font-size:9.5px;
+    text-transform:uppercase;letter-spacing:.03em;
+    padding:3px 9px;border-radius:20px;margin-top:1px;
+  }
+  .guide-extra .tag.note{color:var(--sky-dark);background:var(--sky-tint);}
+  .guide-extra .tag.video{color:var(--rose-dark);background:var(--rose-tint);}
+  .guide-extra .tag.tip{color:var(--bronze);background:var(--bronze-tint);}
+  .guide-extra .extra-title{font-weight:800;font-size:13px;margin-bottom:2px;}
+  .guide-extra .extra-text{font-size:12.5px;color:var(--ink-soft);line-height:1.5;}
+  .guide-extra .extra-text a{font-weight:700;}
+  .video-embed{
+    margin-top:9px;
+    position:relative;
+    width:100%;max-width:320px;
+    aspect-ratio:16/9;
+    border-radius:10px;
+    overflow:hidden;
+    background:#000;
+    border:2px solid var(--line);
+  }
+  .video-embed img{width:100%;height:100%;object-fit:cover;display:block;}
+  .video-embed iframe{width:100%;height:100%;display:block;border:0;position:absolute;inset:0;}
+  .video-embed-thumb{
+    position:absolute;inset:0;
+    display:block;cursor:pointer;
+  }
+  .video-embed-thumb .play-btn{
+    position:absolute;inset:0;margin:auto;
+    width:44px;height:44px;border-radius:50%;
+    background:rgba(20,18,30,.72);
+    display:flex;align-items:center;justify-content:center;
+    transition:background .2s ease, transform .2s ease;
+  }
+  .video-embed-thumb .play-btn svg{width:16px;height:16px;fill:#fff;margin-left:2px;}
+  .video-embed-thumb:hover .play-btn{background:var(--rose-dark);transform:scale(1.1);}
+
+  /* ===== Hover focus effect for steps & extras ===== */
+  .guide-step, .guide-extra{
+    transition:transform .3s cubic-bezier(.22,.61,.36,1), box-shadow .3s ease, border-color .2s ease, opacity .3s ease;
+    transform-origin:center;
+    will-change:transform;
+  }
+  .guide-steps-list:hover .guide-step,
+  .guide-extras-list:hover .guide-extra{
+    transform:scale(.965) translateY(5px);
+    opacity:.8;
+  }
+  .guide-steps-list:hover .guide-step:hover,
+  .guide-extras-list:hover .guide-extra:hover{
+    transform:scale(1.04);
+    opacity:1;
+    box-shadow:0 10px 22px rgba(44,42,59,.16);
+    border-color:var(--bronze);
+    position:relative;
+    z-index:2;
+  }
+  .guide-extras-blurwrap{position:relative;border-radius:12px;overflow:hidden;min-height:96px;}
+  .guide-extras-blurcontent{filter:blur(6px);pointer-events:none;user-select:none;}
+  .guide-extras-unknown{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:9px;
+    background:rgba(251,243,238,.7);
+    border:2px solid var(--line);border-radius:12px;
+    padding:18px 22px;
+  }
+  .guide-extras-unknown .unknown-badge{
+    font-family:'Baloo 2';font-weight:800;font-size:13px;
+    letter-spacing:.06em;text-transform:uppercase;
+    color:var(--bronze);background:var(--bronze-tint);
+    padding:5px 18px;border-radius:20px;
+  }
+  .guide-extras-unknown .unknown-caption{
+    font-family:'Manrope';font-weight:600;font-size:11.5px;
+    color:var(--ink-soft);line-height:1.5;text-align:center;max-width:280px;
+  }
 
   /* ===== Redeemable Codes tracker ===== */
   .code-form{
@@ -765,6 +855,7 @@
       <div class="nav-title">POKÉMON</div>
       <button class="nav-link" data-page="starters"><span class="dot"></span>Starter Pokémon</button>
       <button class="nav-link" data-page="legendaries"><span class="dot"></span>Legendary Pokémon</button>
+      <button class="nav-link" data-page="mythicals"><span class="dot"></span>Mythical Pokémon</button>
     </div>
 
     <div class="nav-group">
@@ -991,12 +1082,26 @@
           <h2>Legendary Pokémon</h2>
           <div class="prose">
             <p>Roria is home to the same stationary Legendary Pokémon found in the original Pokémon Brick Bronze, each guarding a chamber, cavern, or landmark somewhere across the region. <i>Italicized encounter notes</i> mean the Pokémon can only be seen in that spot rather than caught, and "→ Roaming Pokémon" means it becomes a rare roaming encounter after its first Set Encounter.</p>
-            <p>The cards tagged <b>Bronze Frontier Addition</b> are new to this project — Ho-Oh, Regieleki, Zygarde, Chi-Yu, Magearna, and Kubfu. Their encounter methods are intentionally left blank for now.</p>
+            <p>The cards tagged <b>Bronze Frontier Addition</b> are new to this project — Ho-Oh, Regieleki, Zygarde, Chi-Yu, and Kubfu. Their encounter methods are intentionally left blank for now.</p>
           </div>
         </section>
 
         <div class="region-tabs" id="legend-tabs"></div>
         <div class="legend-grid" id="legend-grid"></div>
+      </div>
+
+      <!-- ================= MYTHICAL POKÉMON ================= -->
+      <div class="page" id="page-mythicals">
+        <section class="block">
+          <h2>Mythical Pokémon</h2>
+          <div class="prose">
+            <p>Just like the original Pokémon Brick Bronze, Roria is also home to a handful of elusive Mythical Pokémon, each with its own quest or hidden encounter. <i>Italicized encounter notes</i> mean the Pokémon can only be seen in that spot rather than caught, and "→ Roaming Pokémon" means it becomes a rare roaming encounter after its first Set Encounter.</p>
+            <p>The card tagged <b>Bronze Frontier Addition</b> is new to this project — Magearna. Its encounter method is intentionally left blank for now.</p>
+          </div>
+        </section>
+
+        <div class="region-tabs" id="mythical-tabs"></div>
+        <div class="legend-grid" id="mythical-grid"></div>
       </div>
 
       <!-- ================= LEGENDARY GUIDE MODAL ================= -->
@@ -1207,7 +1312,9 @@
   const TYPE_COLORS = {
     Grass:'#5FAE5A', Fire:'#E8623A', Water:'#3E9CDC', Poison:'#A040A0',
     Flying:'#8FB8E8', Fighting:'#C03028', Ground:'#C7924A', Steel:'#8E97AE',
-    Psychic:'#F85888', Dark:'#5B5468', Fairy:'#EE99AC', Ghost:'#6C5A8C'
+    Psychic:'#F85888', Dark:'#5B5468', Fairy:'#EE99AC', Ghost:'#6C5A8C',
+    Normal:'#A8A878', Electric:'#E8B23A', Ice:'#6FC4C4', Rock:'#B8A038',
+    Bug:'#8FA820', Dragon:'#7038F8'
   };
 
   const STARTERS = [
@@ -1496,15 +1603,14 @@
 
     { group:'Tower Duo', name:'Lugia', dex:249, types:['Psychic','Flying'], location:'Silver Cove' },
 
-    { group:'Bronze Frontier Addition', name:'Ho-Oh', dex:250, types:['Fire','Flying'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Ho-Oh', dex:250, types:['Fire','Flying'], location:'Tinbell Construction Site' },
     { group:'Bronze Frontier Addition', name:'Regieleki', dex:894, types:['Electric'], location:'' },
     { group:'Bronze Frontier Addition', name:'Zygarde', dex:718, types:['Dragon','Ground'], location:'' },
     { group:'Bronze Frontier Addition', name:'Chi-Yu', dex:1004, types:['Dark','Fire'], location:'' },
-    { group:'Bronze Frontier Addition', name:'Magearna', dex:801, types:['Steel','Fairy'], location:'' },
     { group:'Bronze Frontier Addition', name:'Kubfu', dex:891, types:['Fighting'], location:'' },
-    { group:'Bronze Frontier Addition', name:'Articuno-Galar', dex:'10169', types:['Psychic','Flying'], location:'' },
-    { group:'Bronze Frontier Addition', name:'Zapdos-Galar', dex:'10170', types:['Fighting','Flying'], location:'' },
-    { group:'Bronze Frontier Addition', name:'Moltres-Galar', dex:'10171', types:['Dark','Flying'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Articuno-Galar', dex:'10169', types:['Psychic','Flying'], location:'Route 15 → Roaming Pokémon' },
+    { group:'Bronze Frontier Addition', name:'Zapdos-Galar', dex:'10170', types:['Fighting','Flying'], location:'Route 15 → Roaming Pokémon' },
+    { group:'Bronze Frontier Addition', name:'Moltres-Galar', dex:'10171', types:['Dark','Flying'], location:'Route 15 → Roaming Pokémon' },
   ];
 
   /* Step-by-step capture guides, keyed by Pokémon name. Add steps here as
@@ -1521,17 +1627,17 @@
     ],
     'Uxie': [
           { title: 'Make your way to the Lagoona Trenches', text: 'Head over to Lagoona Lake, and go to the underwater mining facility. Talk to the blonde scientist and go for a dive!'},
-          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is an 85% chance the egg is Togepi, with a 15% chance it is a lake spirit. Roughly meaning that getting Uxie specifically is a 5% chance.'},
+          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is an 85% chance the egg is Togepi, with a 15% chance it is a lake spirit. Meaning that getting Uxie specifically is a 5% chance.'},
           { title: 'Revive the Egg', text: 'Talk to the scientist at the back of the lab and select the egg to be revived. Doing this will provide you with either a Togepi egg or a lake spirit egg.'},    
     ],
     'Mesprit': [
           { title: 'Make your way to the Lagoona Trenches', text: 'Head over to Lagoona Lake, and go to the underwater mining facility. Talk to the blonde scientist and go for a dive!'},
-          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is an 85% chance the egg is Togepi, with a 15% chance it is a lake spirit. Roughly meaning that getting Mespirit specifically is a 5% chance.'},
+          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is an 85% chance the egg is Togepi, with a 15% chance it is a lake spirit. Meaning that getting Mespirit specifically is a 5% chance.'},
           { title: 'Revive the Egg', text: 'Talk to the scientist at the back of the lab and select the egg to be revived. Doing this will provide you with either a Togepi egg or a lake spirit egg.'},    
     ],
     'Azelf': [
           { title: 'Make your way to the Lagoona Trenches', text: 'Head over to Lagoona Lake, and go to the underwater mining facility. Talk to the blonde scientist and go for a dive!'},
-          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is an 85% chance the egg is Togepi, with a 15% chance it is a lake spirit. Roughly meaning that getting Azelf specifically is a 5% chance.'},
+          { title: 'Look for a Fossilized Egg', text: 'Each sparkle has a low chance of holding a fossilized egg. There is an 85% chance the egg is Togepi, with a 15% chance it is a lake spirit. Meaning that getting Azelf specifically is a 5% chance.'},
           { title: 'Revive the Egg', text: 'Talk to the scientist at the back of the lab and select the egg to be revived. Doing this will provide you with either a Togepi egg or a lake spirit egg.'},    
     ],
     'Dialga': [
@@ -1616,24 +1722,131 @@
           { title: 'Locate/Battle Articuno', text: 'Inside the cavern resides Articuno. It is quite simple to locate by following the cavern path. Once there, initiate the battle with it by clicking it!'},
     ],
     'Moltres': [
-          { title: 'Get the Obsidian Ticket', text: 'Over at Port Decca, head to the side of the Pokemon Center and go into the Decca Travel Agency. You should see a pirate looking to hand out the tickets for the Legendary Birds in exchange for Heart Scales. Exchange one of your scales for the obsidian Ticket. (GUIDE FOR OBTAINING HEART SCALES UNDER THE GUIDES TAB!'},
+          { title: 'Get the Obsidian Ticket', text: 'Over at Port Decca, head to the side of the Pokemon Center and go into the Decca Travel Agency. You should see a pirate looking to hand out the tickets for the Legendary Birds in exchange for Heart Scales. Exchange one of your scales for the Obsidian Ticket. (GUIDE FOR OBTAINING HEART SCALES UNDER THE GUIDES TAB!'},
           { title: 'Take the ship over to Obsidia Cavern', text: 'Upon grabbing your Obsidian Ticket, make your way down to the aptly named Double Decca ship, and make your way over to Obsidia Island. Once there, simply walk into the cave to enter Obsidia Cavern!'},
           { title: 'Locate/Battle Moltres', text: 'Inside the cavern resides Moltres. It is quite simple to locate by following the cavern path. Once there, initiate the battle with it by clicking it!'},
     ],
     'Lugia': [
           { title: 'Gather the Legendary Birds', text: 'In order to get Lugia, the player must obtain all three Legendary Birds, being: Articuno, Zapdos, and Moltres. If assistance is needed, check the guide attached to each bird!'},
           { title: 'Obtain the Silver Wing', text: 'Once you have captured each of the birds, fly over to Chesma Town. Nearby the Squirtle fountain, there should be an elderly man. Interacting with him while having all three birds on your team will have him tell you a story that concludes with you obtaining the Silver Wing.'},
-          { title: 'Gather the Legendary Birds', text: 'In order to get Lugia, the player must obtain all three Legendary Birds, being: Articuno, Zapdos, and Moltres. If assistance is needed, check the guide attached to each bird!'},
+          { title: 'Enter Silver Cove', text: 'After obtaining the Silver Wing, make your way over to Rosecove City and surf right of the lighthouse. Theres a cave which is identified as Silver Cove. Here resides Lugia, which reacts to the Silver Wing and challenges you to a battle!'},
     ],
-    'Ho-Oh': [],
-    'Regieleki': [],
-    'Zygarde': [],
-    'Chi-Yu': [],
+    'Ho-Oh': [
+          { title: 'Gather the Legendary Beasts', text: 'In order to get Ho-Oh, the player must obtain all three Legendary Beasts, being: Suicune, Raikou, and Entei. All three are roaming encounters and require a lot of luck to obtain.'},
+          { title: 'Obtain the Rainbow Wing', text: 'Once you have captured each of the beasts, fly over to Anthian City. Backtrack to Cragonos Peak; there should be a man in a black hood. Interacting with him while having all three beasts on your team will have him bestow you with the Rainbow Wing!'},
+          { title: 'Summon Ho-Oh', text: 'With the Rainbow Wing obtained, you want to make your way over to the Tinbell Construction Site located South of Cosmeos Valley. Once you are there, find the crane and climb it. At the top, Ho-Oh will react to the Rainbow Wing and challenge you to a battle!'},
+    ],
+    'Regieleki': [
+         { title: 'WILL BE ADDED LATER!', text: 'At this point in time, confirming and double-checking our sources is not possible. Will be added sometime soon!'},
+    ],
+    'Zygarde': [
+         { title: 'WILL BE ADDED LATER!', text: 'At this point in time, confirming and double-checking our sources is not possible. Will be added sometime soon!'},
+    ],
+    'Chi-Yu': [
+         { title: 'WILL BE ADDED LATER!', text: 'At this point in time, confirming and double-checking our sources is not possible. Will be added sometime soon!'},
+    ],
+    'Kubfu': [
+         { title: 'WILL BE ADDED LATER!', text: 'At this point in time, confirming and double-checking our sources is not possible. Will be added sometime soon!'},
+    ],
+    'Articuno-Galar': [
+         { title: 'Gather the Legendary Birds', text: 'In order to get Articuno-G, the player must obtain all three Legendary Birds: Articuno, Zapdos, and Moltres. If assistance is needed, check the guide attached to each bird!'},
+         { title: 'Scour Route 15', text: 'After gathering the birds, just start hunting within Route 15. You dont need the bird trio in your party for them to spawn, though.'},
+    ],
+    'Zapdos-Galar': [
+         { title: 'Gather the Legendary Birds', text: 'In order to get Zapdos-G, the player must obtain all three Legendary Birds: Articuno, Zapdos, and Moltres. If assistance is needed, check the guide attached to each bird!'},
+         { title: 'Scour Route 15', text: 'After gathering the birds, just start hunting within Route 15. You dont need the bird trio in your party for them to spawn t,hough.'},
+    ],
+    'Moltres-Galar': [
+         { title: 'Gather the Legendary Birds', text: 'In order to get Moltres-G, the player must obtain all three Legendary Birds: Articuno, Zapdos, and Moltres. If assistance is needed, check the guide attached to each bird!'},
+         { title: 'Scour Route 15', text: 'After gathering the birds, just start hunting within Route 15. You dont need the bird trio in your party for them to spawn, though.'},
+    ],
+  };
+
+  /* Extra info shown below the step-by-step guide for each Legendary —
+     notes, video walkthroughs, and additional tips. Keyed by Pokémon name,
+     same as LEGEND_GUIDES. Each entry is
+       { type:'note' | 'video' | 'tip', title:'Short title', text:'Details here', url:'https://...' (optional, mainly for videos) }
+     Leave a Pokémon's array empty ( [] ) or omit it entirely and the modal
+     will show a placeholder until entries are added. */
+  const LEGEND_EXTRAS = {
+    'Uxie': [
+      { type:'tip', title:'Stocking up on Batteries', text:"Due to the likelihood of getting this fossilized legend not being quite in your favor, it is in your best interest to get a lot of UMV batteries before starting. You can get a good amount from stocking up the ones given to you via codes and the lucky lotto!" },
+      { type:'tip', title:'Take Advantage of Daily Dives', text:"Similarly, the player has access to one free dive each day. If you have the time, make sure to use that dive, as it will give you a free shot to try and retrieve the fossil." },
+      { type:'note', title:'Even Chances', text:"As mentioned in the guide itself, the three lake spirits share a 15% chance to be obtained, so looking for one in specific is quite hard." },
+    ],
+    'Mesprit': [
+      { type:'tip', title:'Stocking up on Batteries', text:"Due to the likelihood of getting this fossilized legend not being quite in your favor, it is in your best interest to get a lot of UMV batteries before starting. You can get a good amount from stocking up the ones given to you via codes and the lucky lotto!" },
+      { type:'tip', title:'Take Advantage of Daily Dives', text:"Similarly, the player has access to one free dive each day. If you have the time, make sure to use that dive, as it will give you a free shot to try and retrieve the fossil." },
+      { type:'note', title:'Even Chances', text:"As mentioned in the guide itself, the three lake spirits share a 15% chance to be obtained, so looking for one in specific is quite hard." },
+    ],
+    'Azelf': [
+      { type:'tip', title:'Stocking up on Batteries', text:"Due to the likelihood of getting this fossilized legend not being quite in your favor, it is in your best interest to get a lot of UMV batteries before starting. You can get a good amount from stocking up the ones given to you via codes and the lucky lotto!" },
+      { type:'tip', title:'Take Advantage of Daily Dives', text:"Similarly, the player has access to one free dive each day. If you have the time, make sure to use that dive, as it will give you a free shot to try and retrieve the fossil." },
+      { type:'note', title:'Even Chances', text:"As mentioned in the guide itself, the three lake spirits share a 15% chance to be obtained, so looking for one in specific is quite hard." },
+    ],
+    'Tornadus': [
+      { type:'video', title:'', text:'Covers the steps above in visual form. (Sidenote: This guide covers the three Forces of Natures, so ignore why it specifies Landorus.)', url:'https://www.youtube.com/watch?v=YOtL7y2DNCY&t=7s' },
+    ],
+  };
+
+  /* ===== Mythical Pokémon ===== */
+  const MYTHICALS = [
+    { group:'Standalone Mythicals', name:'Jirachi', dex:385, types:['Steel','Psychic'], location:'Grove of Dreams' },
+    { group:'Standalone Mythicals', name:'Shaymin', dex:492, types:['Grass'], location:'Cragonos Cliffs' },
+    { group:'Standalone Mythicals', name:'Victini', dex:494, types:['Psychic','Fire'], location:'Aredia Ruins' },
+    { group:'Standalone Mythicals', name:'Diancie', dex:719, types:['Rock','Fairy'], location:'Chamber of the Jewel' },
+    { group:'Standalone Mythicals', name:'Marshadow', dex:802, types:['Fighting','Ghost'], location:'' },
+    { group:'Standalone Mythicals', name:'Hoopa', dex:720, types:['Psychic','Ghost'], location:"Demon's Tomb" },
+    { group:'Standalone Mythicals', name:'Genesect', dex:649, types:['Bug','Steel'], location:'Gene Lab' },
+    { group:'Standalone Mythicals', name:'Celebi', dex:251, types:['Psychic','Grass'], location:'Route 9 → Roaming Pokémon' },
+    { group:'Standalone Mythicals', name:'Mew', dex:151, types:['Psychic'], location:'Secret Lab → Roaming Pokémon' },
+    { group:'Standalone Mythicals', name:'Volcanion', dex:721, types:['Fire','Water'], location:'Steam Chamber' },
+
+    { group:'Sea Guardians', name:'Manaphy', dex:490, types:['Water'], location:'Rosecove Beach', seenOnly:true },
+    { group:'Sea Guardians', name:'Phione', dex:489, types:['Water'], location:'Breed Manaphy with Ditto' },
+
+    { group:'Swords of Justice', name:'Keldeo', dex:647, types:['Water','Fighting'], location:'Secret Grove' },
+
+    { group:'Bronze Frontier Addition', name:'Magearna', dex:801, types:['Steel','Fairy'], location:'' },
+  ];
+
+  /* Step-by-step capture guides for Mythical Pokémon, same format as
+     LEGEND_GUIDES above — fill these in yourself whenever you're ready. */
+  const MYTHICAL_GUIDES = {
+    'Jirachi': [],
+    'Shaymin': [],
+    'Victini': [],
+    'Diancie': [],
+    'Marshadow': [],
+    'Hoopa': [],
+    'Genesect': [],
+    'Celebi': [],
+    'Manaphy': [],
+    'Phione': [],
+    'Mew': [],
+    'Volcanion': [],
+    'Keldeo': [],
     'Magearna': [],
-    'Kubfu': [],
-    'Articuno-Galar': [],
-    'Zapdos-Galar': [],
-    'Moltres-Galar': [],
+  };
+
+  /* Extra info shown below the step-by-step guide for each Mythical —
+     notes, video walkthroughs, and additional tips. Same format as
+     LEGEND_EXTRAS above — fill these in yourself whenever you're ready. */
+  const MYTHICAL_EXTRAS = {
+    'Jirachi': [],
+    'Shaymin': [],
+    'Victini': [],
+    'Diancie': [],
+    'Marshadow': [],
+    'Hoopa': [],
+    'Genesect': [],
+    'Celebi': [],
+    'Manaphy': [],
+    'Phione': [],
+    'Mew': [],
+    'Volcanion': [],
+    'Keldeo': [],
+    'Magearna': [],
   };
 
   function renderLegendCard(l){
@@ -1667,6 +1880,59 @@
     });
   }
 
+  const EXTRA_TAG_LABEL = { note:'Note', video:'Video', tip:'Tip' };
+
+  function getYouTubeId(url){
+    if(!url) return null;
+    const patterns = [
+      /youtu\.be\/([A-Za-z0-9_-]{11})/,
+      /youtube\.com\/watch\?(?:.*&)?v=([A-Za-z0-9_-]{11})/,
+      /youtube\.com\/embed\/([A-Za-z0-9_-]{11})/,
+      /youtube\.com\/shorts\/([A-Za-z0-9_-]{11})/,
+    ];
+    for(const p of patterns){
+      const m = url.match(p);
+      if(m) return m[1];
+    }
+    return null;
+  }
+
+  function renderExtra(e){
+    const type = (e.type || 'note').toLowerCase();
+    const tagLabel = EXTRA_TAG_LABEL[type] || 'Note';
+    const titleHtml = e.title ? `<div class="extra-title">${e.title}</div>` : '';
+    const ytId = type === 'video' ? getYouTubeId(e.url) : null;
+    const linkHtml = (e.url && !ytId) ? ` <a href="${e.url}" target="_blank" rel="noopener">Watch →</a>` : '';
+    const embedHtml = ytId ? `
+      <div class="video-embed" data-video-id="${ytId}">
+        <span class="video-embed-thumb" role="button" tabindex="0" aria-label="Play video">
+          <img src="https://img.youtube.com/vi/${ytId}/hqdefault.jpg" alt="${(e.title || 'Video thumbnail').replace(/"/g,'&quot;')}" loading="lazy">
+          <span class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        </span>
+      </div>
+    ` : '';
+    return `
+      <div class="guide-extra">
+        <div class="tag ${type}">${tagLabel}</div>
+        <div>
+          ${titleHtml}
+          <div class="extra-text">${e.text || ''}${linkHtml}</div>
+          ${embedHtml}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderExtrasBlock(l, extrasHtml){
+    if(!l.seenOnly) return extrasHtml;
+    return `
+      <div class="guide-extras-blurwrap">
+        <div class="guide-extras-blurcontent">${extrasHtml}</div>
+        <div class="guide-extras-unknown"><span class="unknown-badge">Unknown</span><span class="unknown-caption">Seen-only encounters — no confirmed notes, videos, or tips yet</span></div>
+      </div>
+    `;
+  }
+
   function openGuide(name){
     const l = LEGENDARIES.find(x => x.name === name);
     if(!l) return;
@@ -1678,7 +1944,7 @@
       ? `<div class="guide-encounter"><b>Encounter:</b> ${l.location}${l.seenOnly ? ' <i>(Seen Only)</i>' : ''}</div>`
       : `<div class="guide-encounter"><i>Encounter method TBD</i></div>`;
     const stepsHtml = steps.length
-      ? steps.map((s,i) => `
+      ? `<div class="guide-steps-list">` + steps.map((s,i) => `
           <div class="guide-step">
             <div class="num">${i+1}</div>
             <div>
@@ -1686,8 +1952,12 @@
               <div class="step-text">${s.text || ''}</div>
             </div>
           </div>
-        `).join('')
+        `).join('') + `</div>`
       : `<div class="guide-empty">No steps added yet — fill in LEGEND_GUIDES['${l.name}'] in the page's script with each step's title and description, and they'll show up here.</div>`;
+    const extras = LEGEND_EXTRAS[l.name] || [];
+    const extrasHtml = extras.length
+      ? `<div class="guide-extras-list">` + extras.map(e => renderExtra(e)).join('') + `</div>`
+      : `<div class="guide-empty">No notes, videos, or tips added yet.</div>`;
 
     modal.innerHTML = `
       <button class="guide-close" id="guide-close" aria-label="Close">✕</button>
@@ -1701,6 +1971,8 @@
       ${encounterHtml}
       <div class="guide-steps-label">HOW TO GET ${l.name.toUpperCase()}</div>
       ${stepsHtml}
+      <div class="guide-extras-label">NOTES, VIDEOS &amp; TIPS</div>
+      ${renderExtrasBlock(l, extrasHtml)}
     `;
     overlay.classList.add('open');
     document.getElementById('guide-close').addEventListener('click', closeGuide);
@@ -1711,6 +1983,13 @@
   }
 
   document.getElementById('guide-overlay').addEventListener('click', (e) => {
+    const thumb = e.target.closest('.video-embed-thumb');
+    if(thumb){
+      const wrap = thumb.closest('.video-embed');
+      const id = wrap.dataset.videoId;
+      wrap.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${id}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      return;
+    }
     if(e.target.id === 'guide-overlay') closeGuide();
   });
   document.addEventListener('keydown', (e) => {
@@ -1734,6 +2013,101 @@
     renderLegendaries('All');
   }
   initLegendTabs();
+
+  function renderMythicalCard(l){
+    const typesHtml = l.types.map(typePill).join('');
+    const groupTagHtml = l.group === 'Bronze Frontier Addition'
+      ? `<span class="legend-group-tag" style="color:var(--rose-dark);background:var(--rose-tint);">${l.group}</span>`
+      : `<span class="legend-group-tag">${l.group}</span>`;
+    const encounterHtml = l.location
+      ? `<div class="legend-encounter"><b>Encounter:</b> ${l.location}${l.seenOnly ? ' <i>(Seen Only)</i>' : ''}</div>`
+      : `<div class="legend-encounter tbd">Encounter method TBD</div>`;
+
+    return `
+      <div class="legend-card" data-group="${l.group}" data-name="${l.name}">
+        <img src="${spriteUrl(l.dex)}" alt="${l.name}" loading="lazy">
+        ${groupTagHtml}
+        <div class="name">${l.name}</div>
+        <div class="types">${typesHtml}</div>
+        ${encounterHtml}
+        <div class="guide-hint">VIEW CAPTURE GUIDE →</div>
+      </div>
+    `;
+  }
+
+  function renderMythicals(filter){
+    const grid = document.getElementById('mythical-grid');
+    if(!grid) return;
+    const list = filter === 'All' ? MYTHICALS : MYTHICALS.filter(l => l.group === filter);
+    grid.innerHTML = list.map(renderMythicalCard).join('');
+    grid.querySelectorAll('.legend-card').forEach(card => {
+      card.addEventListener('click', () => openMythicalGuide(card.dataset.name));
+    });
+  }
+
+  function openMythicalGuide(name){
+    const l = MYTHICALS.find(x => x.name === name);
+    if(!l) return;
+    const overlay = document.getElementById('guide-overlay');
+    const modal = document.getElementById('guide-modal');
+    const steps = MYTHICAL_GUIDES[l.name] || [];
+    const typesHtml = l.types.map(typePill).join('');
+    const encounterHtml = l.location
+      ? `<div class="guide-encounter"><b>Encounter:</b> ${l.location}${l.seenOnly ? ' <i>(Seen Only)</i>' : ''}</div>`
+      : `<div class="guide-encounter"><i>Encounter method TBD</i></div>`;
+    const stepsHtml = steps.length
+      ? `<div class="guide-steps-list">` + steps.map((s,i) => `
+          <div class="guide-step">
+            <div class="num">${i+1}</div>
+            <div>
+              <div class="step-title">${s.title || ''}</div>
+              <div class="step-text">${s.text || ''}</div>
+            </div>
+          </div>
+        `).join('') + `</div>`
+      : `<div class="guide-empty">No steps added yet — fill in MYTHICAL_GUIDES['${l.name}'] in the page's script with each step's title and description, and they'll show up here.</div>`;
+    const extras = MYTHICAL_EXTRAS[l.name] || [];
+    const extrasHtml = extras.length
+      ? `<div class="guide-extras-list">` + extras.map(e => renderExtra(e)).join('') + `</div>`
+      : `<div class="guide-empty">No notes, videos, or tips added yet — fill in MYTHICAL_EXTRAS['${l.name}'] in the page's script and they'll show up here.</div>`;
+
+    modal.innerHTML = `
+      <button class="guide-close" id="guide-close" aria-label="Close">✕</button>
+      <div class="guide-head">
+        <img src="${spriteUrl(l.dex)}" alt="${l.name}">
+        <div>
+          <div class="name">${l.name}</div>
+          <div class="types">${typesHtml}</div>
+        </div>
+      </div>
+      ${encounterHtml}
+      <div class="guide-steps-label">HOW TO GET ${l.name.toUpperCase()}</div>
+      ${stepsHtml}
+      <div class="guide-extras-label">NOTES, VIDEOS &amp; TIPS</div>
+      ${renderExtrasBlock(l, extrasHtml)}
+    `;
+    overlay.classList.add('open');
+    document.getElementById('guide-close').addEventListener('click', closeGuide);
+  }
+
+  function initMythicalTabs(){
+    const tabsEl = document.getElementById('mythical-tabs');
+    if(!tabsEl) return;
+    const groups = ['All', ...[...new Set(MYTHICALS.map(l => l.group))]];
+    tabsEl.innerHTML = groups.map((g,i) =>
+      `<button class="region-tab${i===0?' active':''}" data-group="${g}">${g}</button>`
+    ).join('');
+    tabsEl.querySelectorAll('.region-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabsEl.querySelectorAll('.region-tab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderMythicals(btn.dataset.group);
+      });
+    });
+    renderMythicals('All');
+  }
+  initMythicalTabs();
+
   document.querySelectorAll('[data-goto]').forEach(el=>{
     el.addEventListener('click', (e)=>{ e.preventDefault(); goTo(el.dataset.goto); });
   });
@@ -2027,6 +2401,10 @@
       idx.push({ title:l.name, page:'legendaries', category:'Legendary · '+l.group, action:{ type:'legend', name:l.name } });
     });
 
+    MYTHICALS.forEach(l => {
+      idx.push({ title:l.name, page:'mythicals', category:'Mythical · '+l.group, action:{ type:'mythical', name:l.name } });
+    });
+
     return idx;
   }
 
@@ -2112,6 +2490,13 @@
           }
           renderLegendaries('All');
           openGuide(entry.action.name);
+        } else if(entry.action && entry.action.type === 'mythical'){
+          const tabsEl = document.getElementById('mythical-tabs');
+          if(tabsEl){
+            tabsEl.querySelectorAll('.region-tab').forEach(b => b.classList.toggle('active', b.dataset.group === 'All'));
+          }
+          renderMythicals('All');
+          openMythicalGuide(entry.action.name);
         } else if(entry.action && entry.action.type === 'gym'){
           openGymModal(entry.action.num);
         } else if(entry.action && entry.action.type === 'starter'){
