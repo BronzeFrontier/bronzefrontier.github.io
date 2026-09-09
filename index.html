@@ -976,6 +976,7 @@
       <button class="nav-link" data-page="frontier"><span class="dot"></span>What's New Here</button>
       <button class="nav-link" data-page="daily"><span class="dot"></span>Daily Bonus</button>
       <button class="nav-link" data-page="codes"><span class="dot"></span>In-Game Codes</button>
+      <button class="nav-link" data-page="credits"><span class="dot"></span>Credits</button>
     </div>
   </aside>
 
@@ -1230,7 +1231,7 @@
             <p>Every Pokémon from Generations 1–9, in one searchable dex. Click any Pokémon to see its base stats, abilities, wild held items, and where it's found in Bronze Frontier. Location notes are filled in as they're documented — most are still <span class="dex-tbd-inline">TBD</span>.</p>
           </div>
           <div class="callout sky">
-            <b>Wiki editors:</b> toggle <b>Mark Unavailable Mode</b> below, then click any Pokémon that isn't obtainable in Bronze Frontier to gray it out. Your changes save automatically in this browser.
+            <b>Wiki editors:</b> enter the editor password below to unlock <b>Mark Unavailable Mode</b>, then click any Pokémon that isn't obtainable in Bronze Frontier to gray it out. Your changes save automatically in this browser.
           </div>
         </section>
 
@@ -1242,9 +1243,23 @@
           <select id="dex-type-filter" class="dex-select">
             <option value="All">All Types</option>
           </select>
+        </div>
+
+        <div class="code-lock" id="dex-lock">
+          <div class="code-lock-label">🔒 Editing the dex is locked</div>
+          <p>Enter the editor password to mark Pokémon as unavailable or reset markings.</p>
+          <div class="code-lock-row">
+            <input type="password" id="dex-password-input" placeholder="Password" autocomplete="off">
+            <button type="button" class="code-submit" id="dex-unlock-btn">Unlock</button>
+          </div>
+          <div class="code-lock-error" id="dex-lock-error"></div>
+        </div>
+
+        <div class="dex-toolbar" id="dex-edit-toolbar" style="display:none;">
           <button type="button" class="dex-toggle-btn" id="dex-edit-toggle">🔒 Mark Unavailable Mode: OFF</button>
           <button type="button" class="dex-reset-btn" id="dex-reset-btn">Reset All</button>
         </div>
+        <button type="button" class="code-relock" id="dex-relock-btn" style="display:none;">🔒 Lock this section again</button>
 
         <div class="region-tabs" id="dex-gen-tabs"></div>
 
@@ -1387,6 +1402,45 @@
         </form>
 
         <div class="codes-grid" id="codes-list"></div>
+      </div>
+
+      <!-- ================= CREDITS ================= -->
+      <div class="page" id="page-credits">
+        <section class="block">
+          <h2>Credits</h2>
+          <div class="prose">
+            <p>Bronze Frontier builds on the world and legacy of the original <b>Pokémon Brick Bronze</b>, and this wiki exists thanks to the people documenting it. Slots below are ready to be filled in with names, roles, and links as they're confirmed.</p>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Bronze Frontier Development</h2>
+          <div class="prose">
+            <p><b>ToastyWriter</b> — Lead Developer, Scripter</p>
+            <p><b>BreadV2</b> — 3D Modeler, Map Designer</p>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Original Pokémon Brick Bronze Team</h2>
+          <div class="prose">
+            <p class="fill">Recognition for the original Brick Bronze developers whose region, routes, and systems Bronze Frontier is built on top of.</p>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Wiki</h2>
+          <div class="prose">
+            <p><b>Shiverisc (Shiver)</b> — HTML Coding, Site Design</p>
+            <p><b>N_Hyliozz (MisterN)</b> — Source Gathering, Question Help, Data Providers</p>
+            <p><b>Tr9ine. (Trixine)</b> — Source Gathering, Question Help, Data Providers</p>
+            <p><b>Mr_Headshot (Headshot)</b> — Source Gathering, Question Help, Data Providers</p>
+          </div>
+        </section>
+
+        <div class="callout sky">
+          This is an unofficial fan project. Pokémon is a trademark of Nintendo, Game Freak, and Creatures Inc. Not affiliated with Nintendo, The Pokémon Company, or the original Brick Bronze development team.
+        </div>
       </div>
 
     </div>
@@ -1732,6 +1786,16 @@
   const DEX_STAT_MAX = 200;
   const UNAVAILABLE_KEY = 'bf-wiki-unavailable-pokemon';
 
+  /* Simple front-end lock for dex editing, same idea as the In-Game Codes
+     lock — stops casual visitors from marking Pokémon unavailable. Anyone
+     who views this file's source can find the password, so don't rely on
+     it for anything truly sensitive. */
+  const DEX_EDIT_PASSWORD = 'icecoldbronzefrontier';
+  const DEX_UNLOCK_KEY = 'bf_dex_unlocked';
+  function isDexUnlocked(){
+    try{ return sessionStorage.getItem(DEX_UNLOCK_KEY) === '1'; }catch(e){ return false; }
+  }
+
   function loadUnavailable(){
     try{
       const raw = localStorage.getItem(UNAVAILABLE_KEY);
@@ -1817,7 +1881,7 @@
     grid.querySelectorAll('.dex-card').forEach(card => {
       card.addEventListener('click', () => {
         const dex = Number(card.dataset.dex);
-        if(dexEditMode){
+        if(dexEditMode && isDexUnlocked()){
           if(dexUnavailable.has(dex)) dexUnavailable.delete(dex);
           else dexUnavailable.add(dex);
           saveUnavailable(dexUnavailable);
@@ -1913,6 +1977,7 @@
     const btn = document.getElementById('dex-edit-toggle');
     if(!btn) return;
     btn.addEventListener('click', () => {
+      if(!isDexUnlocked()) return;
       dexEditMode = !dexEditMode;
       btn.classList.toggle('on', dexEditMode);
       btn.textContent = dexEditMode ? '🔓 Mark Unavailable Mode: ON' : '🔒 Mark Unavailable Mode: OFF';
@@ -1924,6 +1989,7 @@
     const btn = document.getElementById('dex-reset-btn');
     if(!btn) return;
     btn.addEventListener('click', () => {
+      if(!isDexUnlocked()) return;
       if(!dexUnavailable.size) return;
       if(confirm('Clear all "not obtainable" markings for the National Pokédex?')){
         dexUnavailable = new Set();
@@ -1939,6 +2005,53 @@
     input.addEventListener('input', renderDex);
   }
 
+  function setDexLockUI(unlocked){
+    const lockEl = document.getElementById('dex-lock');
+    const toolbarEl = document.getElementById('dex-edit-toolbar');
+    const relockBtn = document.getElementById('dex-relock-btn');
+    if(!lockEl || !toolbarEl || !relockBtn) return;
+    lockEl.style.display = unlocked ? 'none' : 'block';
+    toolbarEl.style.display = unlocked ? 'flex' : 'none';
+    relockBtn.style.display = unlocked ? 'block' : 'none';
+  }
+
+  function initDexLock(){
+    const unlockBtn = document.getElementById('dex-unlock-btn');
+    const relockBtn = document.getElementById('dex-relock-btn');
+    const passwordInput = document.getElementById('dex-password-input');
+    const errorEl = document.getElementById('dex-lock-error');
+    if(!unlockBtn || !relockBtn || !passwordInput) return;
+
+    setDexLockUI(isDexUnlocked());
+
+    function tryUnlock(){
+      if(passwordInput.value === DEX_EDIT_PASSWORD){
+        try{ sessionStorage.setItem(DEX_UNLOCK_KEY, '1'); }catch(e){}
+        errorEl.textContent = '';
+        passwordInput.value = '';
+        setDexLockUI(true);
+      }else{
+        errorEl.textContent = 'Incorrect password.';
+      }
+    }
+
+    unlockBtn.addEventListener('click', tryUnlock);
+    passwordInput.addEventListener('keydown', (e) => {
+      if(e.key === 'Enter'){ e.preventDefault(); tryUnlock(); }
+    });
+    relockBtn.addEventListener('click', () => {
+      try{ sessionStorage.removeItem(DEX_UNLOCK_KEY); }catch(e){}
+      dexEditMode = false;
+      const editBtn = document.getElementById('dex-edit-toggle');
+      if(editBtn){
+        editBtn.classList.remove('on');
+        editBtn.textContent = '🔒 Mark Unavailable Mode: OFF';
+      }
+      setDexLockUI(false);
+      renderDex();
+    });
+  }
+
   function initPokedex(){
     if(!document.getElementById('dex-grid')) return;
     initDexTypeFilter();
@@ -1946,6 +2059,7 @@
     initDexEditToggle();
     initDexReset();
     initDexSearch();
+    initDexLock();
     renderDex();
   }
   initPokedex();
@@ -2816,6 +2930,8 @@
       { title:'Weekly Schedule', page:'daily', category:'Daily Bonus', match:'Weekly Schedule' },
 
       { title:'In-Game Codes', page:'codes', category:'Codes', match:'In-Game Codes' },
+
+      { title:'Credits', page:'credits', category:'Credits', match:'Credits' },
     ];
 
     GYMS.forEach(g => {
