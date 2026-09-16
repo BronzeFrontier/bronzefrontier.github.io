@@ -312,16 +312,21 @@
   }
 
   /* gym leader roster */
-  .gym-row{
-    display:grid;
-    grid-template-columns:52px 1fr auto;
-    gap:16px;
-    align-items:center;
-    padding:14px 16px;
+  .gym-card{
     border:2px solid var(--line);
     border-radius:12px;
     background:var(--white);
     margin-bottom:10px;
+    overflow:hidden;
+    transition:border-color .12s ease, box-shadow .12s ease;
+  }
+  .gym-card.flash{border-color:var(--bronze);box-shadow:0 0 0 3px var(--bronze-tint);}
+  .gym-row{
+    display:grid;
+    grid-template-columns:40px 44px 1fr auto auto;
+    gap:14px;
+    align-items:center;
+    padding:14px 16px;
   }
   .gym-row .num{
     font-family:'Baloo 2';font-weight:800;color:var(--bronze);
@@ -329,8 +334,74 @@
   }
   .gym-row h4{font-size:15.5px;margin-bottom:2px;}
   .gym-row .meta{font-size:12.5px;color:var(--ink-soft);}
-  .gym-row{cursor:pointer;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;}
-  .gym-row:hover{transform:translateY(-2px);box-shadow:0 8px 18px rgba(44,42,59,.12);border-color:var(--bronze);}
+  .gym-badge-slot{
+    width:44px;height:44px;border-radius:50%;flex:0 0 auto;
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;background:var(--paper-2);
+    border:2px dashed var(--line);
+  }
+  .gym-badge-slot img{width:100%;height:100%;object-fit:contain;}
+  .gym-badge-slot.filled{border-style:solid;}
+  .gym-cap-chip{
+    font-size:10.5px;font-weight:800;color:var(--ink-soft);
+    background:var(--paper-2);padding:4px 10px;border-radius:20px;
+    white-space:nowrap;
+  }
+  .gym-team-split{
+    display:grid;grid-template-columns:1fr 1fr;
+    border-top:1px dashed var(--line);
+  }
+  @media (max-width:560px){.gym-team-split{grid-template-columns:1fr;}}
+  .gym-team-col, .gym-rewards-col{padding:12px 16px 14px;}
+  .gym-team-col{
+    display:flex;align-items:center;flex-wrap:wrap;gap:8px;
+    border-right:1px dashed var(--line);
+  }
+  @media (max-width:560px){.gym-team-col{border-right:none;border-bottom:1px dashed var(--line);}}
+  .gym-rewards-col{display:flex;flex-direction:column;gap:6px;}
+  .gts-label{
+    font-size:10px;font-weight:800;color:var(--bronze);
+    text-transform:uppercase;letter-spacing:.03em;margin-right:2px;
+    flex:0 0 auto;
+  }
+  .gym-rewards-col .gts-label{margin-bottom:2px;}
+  .gym-mon-icon{
+    width:60px;height:60px;border-radius:50%;
+    border:2px solid var(--line);background:var(--white);
+    padding:3px;cursor:pointer;position:relative;
+    transition:transform .12s ease, border-color .12s ease;
+  }
+  .gym-mon-icon img{width:100%;height:100%;object-fit:contain;display:block;border-radius:50%;}
+  .gym-mon-icon:hover{transform:translateY(-2px);border-color:var(--bronze);}
+  .gym-team-empty, .gym-rewards-empty{font-size:11.5px;color:var(--bronze);font-style:italic;}
+  .gym-rewards-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;}
+  .gym-rewards-list li{
+    font-size:12.5px;color:var(--ink-soft);line-height:1.4;
+    padding-left:13px;position:relative;
+  }
+  .gym-rewards-list li::before{
+    content:'';position:absolute;left:0;top:6px;
+    width:5px;height:5px;border-radius:50%;background:var(--bronze);
+  }
+  .mega-badge{
+    position:absolute;bottom:-3px;right:-3px;
+    width:22px;height:22px;border-radius:50%;
+    background:linear-gradient(135deg, var(--royal), var(--ruby));
+    color:var(--white);font-family:'Baloo 2';font-weight:800;
+    font-size:12px;display:flex;align-items:center;justify-content:center;
+    border:1.5px solid var(--white);line-height:1;
+  }
+  .guide-head-sprite{position:relative;flex:0 0 auto;}
+  .guide-head-sprite .mega-badge{width:20px;height:20px;font-size:11px;bottom:-2px;right:-2px;}
+  .mega-badge.region-badge{background:linear-gradient(135deg, var(--sky), var(--bronze));}
+  .mega-badge.altform-badge{background:linear-gradient(135deg, var(--bronze), var(--rose));}
+  .mega-tag{
+    display:inline-block;margin-top:5px;font-size:10.5px;font-weight:800;
+    color:var(--white);background:linear-gradient(135deg, var(--royal), var(--ruby));
+    padding:3px 9px;border-radius:20px;letter-spacing:.02em;
+  }
+  .mega-tag.region-tag{background:linear-gradient(135deg, var(--sky), var(--bronze));}
+  .mega-tag.altform-tag{background:linear-gradient(135deg, var(--bronze), var(--rose));}
   .guide-quote{font-size:13px;color:var(--ink-soft);font-style:italic;margin:2px 0 0;}
   .team-slot-row{
     display:grid;grid-template-columns:repeat(auto-fit, minmax(120px,1fr));
@@ -384,6 +455,32 @@
   .callout b{color:var(--ink);}
 
   .callout.sky{border-color:var(--sky-dark);background:var(--sky-tint);color:var(--sky-dark);}
+
+  /* wild pokémon routes */
+  .route-card{margin-bottom:16px;}
+  .route-card-head{
+    display:flex;align-items:baseline;justify-content:space-between;
+    gap:10px;flex-wrap:wrap;margin-bottom:4px;
+  }
+  .route-card-head h3{display:flex;align-items:center;gap:8px;}
+  .route-terrain-tag{
+    font-size:10px;font-weight:800;color:var(--bronze);
+    background:var(--bronze-tint);padding:2px 8px;border-radius:20px;
+    white-space:nowrap;
+  }
+  .route-connects{font-size:12px;color:var(--ink-soft);font-style:italic;white-space:nowrap;}
+  .route-note{font-size:13px;color:var(--ink-soft);line-height:1.55;margin:0 0 12px;}
+  .encounter-table{width:100%;border-collapse:collapse;font-size:12.5px;}
+  .encounter-table th{
+    text-align:left;font-family:'Baloo 2';font-weight:700;font-size:11px;
+    color:var(--bronze);text-transform:uppercase;letter-spacing:.02em;
+    padding:6px 8px;border-bottom:2px solid var(--line);
+  }
+  .encounter-table td{
+    padding:8px;border-bottom:1px dashed var(--line);
+    color:var(--ink-soft);
+  }
+  .encounter-table tbody tr:last-child td{border-bottom:none;}
 
   /* editable-looking placeholder blocks for Bronze Frontier additions */
   .slot{
@@ -960,6 +1057,7 @@
     <div class="nav-group">
       <div class="nav-title">TRAINERS</div>
       <button class="nav-link" data-page="gyms"><span class="dot"></span>Gym Leaders</button>
+      <button class="nav-link" data-page="elite4"><span class="dot"></span>Elite Four &amp; Champion</button>
       <button class="nav-link" data-page="characters"><span class="dot"></span>Rivals &amp; Team Eclipse</button>
     </div>
 
@@ -969,6 +1067,7 @@
       <button class="nav-link" data-page="legendaries"><span class="dot"></span>Legendary Pokémon</button>
       <button class="nav-link" data-page="mythicals"><span class="dot"></span>Mythical Pokémon</button>
       <button class="nav-link" data-page="pokedex"><span class="dot"></span>National Pokédex</button>
+      <button class="nav-link" data-page="routes"><span class="dot"></span>Wild Pokémon Areas</button>
     </div>
 
     <div class="nav-group">
@@ -1133,13 +1232,26 @@
         <div id="gym-list"></div>
 
         <div class="callout" style="margin-top:22px;">
-          Gym teams and strategies will differ in Bronze Frontier once later-gen Pokémon are folded in — track those changes on <b>What's New Here</b>. Click any Gym Leader below for a closer look — team rosters are ready to be filled in.
+          Gym teams and strategies will differ in Bronze Frontier once later-gen Pokémon are folded in — track those changes on <b>What's New Here</b>. Tap any team member below a Gym Leader for their moves and ability.
         </div>
       </div>
 
-      <!-- ================= GYM LEADER MODAL ================= -->
-      <div class="guide-overlay" id="gym-overlay">
-        <div class="guide-modal" id="gym-modal"></div>
+      <!-- ================= ELITE FOUR & CHAMPION ================= -->
+      <div class="page" id="page-elite4">
+        <section class="block">
+          <h2>Elite Four &amp; Champion of Roria</h2>
+        </section>
+
+        <div id="elite4-list"></div>
+
+        <div class="callout" style="margin-top:22px;">
+          The Elite Four and Champion await at the end of Victory Road. Tap any team member below for their moves and ability.
+        </div>
+      </div>
+
+      <!-- ================= GYM TEAM MEMBER MODAL ================= -->
+      <div class="guide-overlay" id="gym-mon-overlay">
+        <div class="guide-modal" id="gym-mon-modal"></div>
       </div>
 
       <!-- ================= CHARACTERS ================= -->
@@ -1271,6 +1383,32 @@
       <!-- ================= POKÉDEX ENTRY MODAL ================= -->
       <div class="guide-overlay" id="dex-overlay">
         <div class="guide-modal dex-modal-inner" id="dex-modal"></div>
+      </div>
+
+      <!-- ================= WILD POKÉMON AREAS ================= -->
+      <div class="page" id="page-routes">
+        <section class="block">
+          <h2>Wild Pokémon Areas</h2>
+          <div class="prose">
+            <p>Every route from the original Pokémon Brick Bronze, plus the other named forests, caves, and special areas with their own wild encounters — places like Gale Forest or Victory Road that aren't numbered routes. Each card is ready for its own encounter table — <b>Pokémon, Method, Time/Weather, Rarity,</b> and <b>Notes</b> (for anything like a day/night split, a rod type, a hidden-grass patch, or a weather requirement) are all intentionally left blank for now.</p>
+          </div>
+          <div class="callout sky">
+            <b>Wiki editors:</b> fill in any area by editing its <code>encounters</code> array in the page script — each entry takes <code>name</code>, <code>method</code>, <code>time</code>, <code>rarity</code>, and <code>notes</code>. Once an array has entries, its table renders automatically.
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>Routes</h2>
+        </section>
+        <div id="routes-list"></div>
+
+        <section class="block" style="margin-top:8px;">
+          <h2>Other Wild Areas</h2>
+          <div class="prose">
+            <p>Forests, caves, islands, and other named locations outside the numbered routes — some tied to story events, some just off the beaten path.</p>
+          </div>
+        </section>
+        <div id="areas-list"></div>
       </div>
 
       <!-- ================= FRONTIER ADDITIONS ================= -->
@@ -1696,8 +1834,83 @@
   const STAT_LABELS = [['hp','HP'],['atk','Atk'],['def','Def'],['spa','SpA'],['spd','SpD'],['spe','Spe']];
   const STAT_MAX = 140;
 
-  function spriteUrl(dex){
+  /* PokeAPI's official-artwork folder does NOT store Megas as "<dex>-mega.png" — each Mega Evolution has
+     its own separate national-dex-style ID (e.g. Mega Garchomp is image 10058.png, not 445-mega.png).
+     This maps "<dex>-<megaForm>" to that ID for every currently released Mega. */
+  const MEGA_SPRITE_IDS = {
+    '3-mega':10033, '6-mega-x':10034, '6-mega-y':10035, '9-mega':10036, '65-mega':10037,
+    '94-mega':10038, '115-mega':10039, '127-mega':10040, '130-mega':10041, '142-mega':10042,
+    '150-mega-x':10043, '150-mega-y':10044, '181-mega':10045, '212-mega':10046, '214-mega':10047,
+    '229-mega':10048, '248-mega':10049, '257-mega':10050, '282-mega':10051, '303-mega':10052,
+    '306-mega':10053, '308-mega':10054, '310-mega':10055, '354-mega':10056, '359-mega':10057,
+    '445-mega':10058, '448-mega':10059, '460-mega':10060, '380-mega':10062, '381-mega':10063,
+    '260-mega':10064, '254-mega':10065, '302-mega':10066, '334-mega':10067, '475-mega':10068,
+    '531-mega':10069, '319-mega':10070, '80-mega':10071, '208-mega':10072, '18-mega':10073,
+    '362-mega':10074, '719-mega':10075, '376-mega':10076, '384-mega':10079, '323-mega':10087,
+    '428-mega':10088, '373-mega':10089, '15-mega':10090,
+  };
+
+  /* Regional Forms (Alolan / Galarian / Hisuian / Paldean) also get their own national-dex-style
+     official-artwork IDs, same idea as MEGA_SPRITE_IDS above. Maps "<dex>-<region>" to that ID. */
+  const REGION_META = {
+    alola:  { label:'Alolan',   short:'A' },
+    galar:  { label:'Galarian', short:'G' },
+    hisui:  { label:'Hisuian',  short:'H' },
+    paldea: { label:'Paldean',  short:'P' },
+  };
+  const REGIONAL_SPRITE_IDS = {
+    '19-alola':10091, '20-alola':10092, '26-alola':10100, '27-alola':10101, '28-alola':10102,
+    '37-alola':10103, '38-alola':10104, '50-alola':10105, '51-alola':10106, '52-alola':10107,
+    '53-alola':10108, '74-alola':10109, '75-alola':10110, '76-alola':10111, '88-alola':10112,
+    '89-alola':10113, '103-alola':10114, '105-alola':10115,
+    '52-galar':10161, '77-galar':10162, '78-galar':10163, '79-galar':10164, '80-galar':10165,
+    '83-galar':10166, '110-galar':10167, '122-galar':10168, '144-galar':10169, '145-galar':10170,
+    '146-galar':10171, '199-galar':10172, '222-galar':10173, '263-galar':10174, '264-galar':10175,
+    '554-galar':10176, '555-galar':10177, '562-galar':10179, '618-galar':10180,
+    '58-hisui':10229, '59-hisui':10230, '100-hisui':10231, '101-hisui':10232, '157-hisui':10233,
+    '211-hisui':10234, '215-hisui':10235, '503-hisui':10236, '549-hisui':10237, '570-hisui':10238,
+    '571-hisui':10239, '628-hisui':10240, '705-hisui':10241, '706-hisui':10242, '713-hisui':10243,
+    '724-hisui':10244,
+    '128-paldea':10250, '194-paldea':10253,
+  };
+
+  /* Other Alternate Forms — Pokémon whose forme changes aren't a Mega Evolution or a Regional Form
+     (e.g. Rotom's appliance forms) still get their own official-artwork IDs the same way. Maps
+     "<dex>-<altForm>" to that ID, and ALT_FORM_META gives each a display label + a badge letter. */
+  const ALT_FORM_META = {
+    heat:  { label:'Heat Rotom',  short:'H',  name:'Heat' },
+    wash:  { label:'Wash Rotom',  short:'W',  name:'Wash' },
+    frost: { label:'Frost Rotom', short:'F',  name:'Frost' },
+    fan:   { label:'Fan Rotom',   short:'Fn', name:'Fan' },
+    mow:   { label:'Mow Rotom',   short:'M',  name:'Mow' },
+  };
+  const ALT_FORM_SPRITE_IDS = {
+    '479-heat':10008, '479-wash':10009, '479-frost':10010, '479-fan':10011, '479-mow':10012,
+  };
+
+  function spriteUrl(dex, form){
+    if(form){
+      const formId = MEGA_SPRITE_IDS[`${dex}-${form}`] || REGIONAL_SPRITE_IDS[`${dex}-${form}`] || ALT_FORM_SPRITE_IDS[`${dex}-${form}`];
+      if(formId) return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${formId}.png`;
+      // no known alt-form sprite for this dex/form combo — fall back to the regular sprite below
+    }
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${dex}.png`;
+  }
+
+  /* Works out which "special form" (if any) a team member is in — Mega Evolution, a Regional Form, or
+     another Alternate Form — and returns the shared info needed to render its sprite/badge/tag. A member
+     should only ever set one of mega / region / altForm. */
+  function teamMonForm(p){
+    if(p.mega) return { spriteKey: p.megaForm || 'mega', badgeLabel:'Mega Evolution', badgeShort:'M', tagLabel:'Mega Evolution', nameSuffix:'Mega' };
+    if(p.region && REGION_META[p.region]){
+      const r = REGION_META[p.region];
+      return { spriteKey:p.region, badgeLabel:`${r.label} Form`, badgeShort:r.short, tagLabel:`${r.label} Form`, nameSuffix:r.label, cssClass:'region' };
+    }
+    if(p.altForm && ALT_FORM_META[p.altForm]){
+      const f = ALT_FORM_META[p.altForm];
+      return { spriteKey:p.altForm, badgeLabel:f.label, badgeShort:f.short, tagLabel:f.label, nameSuffix:f.name, cssClass:'altform' };
+    }
+    return null;
   }
 
   function typePill(t){
@@ -2661,29 +2874,288 @@
 
   /* ===== Gym Leaders ===== */
   const GYMS = [
-    { num:1, name:'Chad', meta:'Silvent City · Arc Badge', type:'Electric', color:'#E8B23A', team:[
-    { name: 'Shinx', dex: 403, level: 14 },
-    { name: 'Pikachu', dex: 25, level: 14 },
-] },
-    { num:2, name:'Sebastian', meta:'Brimber City · Brimstone Badge', type:'Fire', color:'#E8623A', team:[] },
-    { num:3, name:'Quentin', meta:'Rosecove City · Float Badge', type:'Water', color:'#3E9CDC', team:[] },
-    { num:4, name:'Stephen', meta:'Anthian City · oversees the Anthian Airport', type:'Flying', color:'#8FB8E8', team:[] },
-    { num:5, name:'Prince Ryan', meta:"Aredia City · Roria's warrior prince, first Leader to Mega Evolve", type:'Ground', color:'#C7924A', team:[] },
-    { num:6, name:'Fissy', meta:'Fluoruma City', type:'Grass', color:'#5FAE5A', team:[] },
-    { num:7, name:'Zeek', meta:'Frostveil City · Contrast Badge', type:'Dark', color:'#5B5468', team:[] },
-    { num:8, name:'Captain B.', meta:"Crescent Gym · Haunted Badge · Roria's only female Gym Leader", type:'Ghost', color:'#6C5A8C', team:[] },
+    { num:1, name:'Chad', meta:'Silvent City · Arc Badge', type:'Electric', color:'#E8B23A',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/image-Photoroom%20(6).png?raw=true', levelCap:14, team:[
+        { name: 'Shinx', dex: 403, level: 13, ability:'Intimidate', moves:['Tackle','Charge Beam','Charge'] },
+        { name: 'Pikachu', dex: 25, level: 14, ability:'Static', moves:['Charge Beam','Quick Attack','Thunder Wave'] },
+      ], rewards:[
+      'Arc Badge',
+      'TM57 Charge Beam',
+      '2240 PokeDollars',
+      ] },
+    { num:2, name:'Sebastian', meta:'Brimber City · Brimstone Badge', type:'Fire', color:'#E8623A',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/image-Photoroom%20(7).png?raw=true', levelCap:25, team:[
+        { name: 'Litleo', dex: 667, level: 22, ability:'Unknown', moves:['Overheat','Take Down','Noble Roar'] },
+        { name: 'Growlithe', dex: 58, level: 22, ability:'Intimidate (?)', moves:['Overheat','Reversal','Flame Wheel'] },
+        { name: 'Magmar', dex: 126, level: 25, ability:'Unknown', moves:['Overheat','Flame Burst','Feint Attack'] },
+      ], rewards:[
+      'Brimstone Badge',
+      'TM50 Overheat',
+      '4000 PokeDollars',
+      ] },
+    { num:3, name:'Quentin', meta:'Rosecove City · Float Badge', type:'Water', color:'#3E9CDC',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/image-Photoroom%20(8).png?raw=true', levelCap:37, team:[
+        { name: 'Wailmer', dex: 320, level: 35, ability:'Unknown', moves:['Scald','Brine','Rollout'] },
+        { name: 'Gorebyss', dex: 368, level: 368, ability:'Swift Swim', moves:['Scald','Psychic','Draining Kiss'] },
+        { name: 'Huntail', dex: 367, level: 37, ability:'Swift Swim', moves:['Scald','Ice Fang','Crunch'] },
+      ], rewards:[
+      'Float Badge',
+      'TM55 Scald',
+      '5920 PokeDollars',
+      ] },
+    { num:4, name:'Stephen', meta:'Anthian City · oversees the Anthian Airport', type:'Flying', color:'#8FB8E8',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/image-removebg-preview.png?raw=true', levelCap:50, team:[
+        { name: 'Staraptor', dex: 398, level: 46, ability:'Intimidate', moves:['Close Combat','Aerial Ace','Take Down','Agility'] },
+        { name: 'Staraptor', dex: 398, level: 46, ability:'Intimidate', moves:['Close Combat','Aerial Ace','Take Down','Agility'] },
+        { name: 'Aerodactyl', dex: 142, level: 46, ability:'Unknown', moves:['Aerial Ace','Earthquake','Fire Fang','Thunder Fang'] },
+        { name: 'Skarmory', dex: 227, level: 47, ability:'Sturdy (?)', moves:['Aerial Ace','Slash','Steel Wing','Spikes'] },
+        { name: 'Braviary', dex: 628, level: 50, ability:'Unknown', moves:['Aerial Ace','Zen Headbutt','Crush Claw','Superpower'] },
+      ], rewards:[
+      'Soaring Badge',
+      'TM40 Aerial Ace',
+      '8480 PokeDollars',
+      ] },
+    { num:5, name:'Prince Ryan', meta:"Aredia City · Roria's warrior prince, first Leader to Mega Evolve", type:'Ground', color:'#C7924A',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/image-Photoroom%20(9).png?raw=true', levelCap:57, team:[
+        { name: 'Quagsire', dex: 195, level: 55, ability:'Unknown', moves:['Ice Beam','Slam','Muddy Water','Bulldoze'] },
+        { name: 'Steelix', dex: 208, level: 56, ability:'Unknown', moves:['Aqua Tail','Thunder Fang','Iron Tail','Bulldoze'] },
+        { name: 'Claydol', dex: 344, level: 56, ability:'Levitate', moves:['Bulldoze','Psychic','Shadow Ball','Dazzling Gleam'] },
+        { name: 'Excadrill', dex: 530, level: 56, ability:'Unknown', moves:['Bulldoze','Metal Claw','X-Scissor','Poison Jab'] },
+        { name: 'Garchomp', dex: 445, level: 57, ability:'Sand Force', moves:['Bulldoze','Dragon Claw','Iron Head','Fire Fang'], mega:true, megaForm:'mega', megaStone:'Garchompite' },
+      ], rewards:[
+      'Crater Badge',
+      'TM78 Bulldoze',
+      '9120 PokeDollars',
+      ] },
+    { num:6, name:'Fissy', meta:'Fluoruma City', type:'Grass', color:'#5FAE5A',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/image-Photoroom%20(10).png?raw=true', levelCap:66, team:[
+        { name: 'Leavanny', dex: 542, level: 64, ability:'Unknown', moves:['Sticky Web','Leaf Blade','Poison Jab','X-Scissor'] },
+        { name: 'Breloom', dex: 286, level: 64, ability:'Unknown', moves:['Mach Punch','Spore','Seed Bomb','Stone Edge'] },
+        { name: 'Tropius', dex: 357, level: 65, ability:'Unknown', moves:['Earthquake','Energy Ball','Steel Wing','Synthesis'] },
+        { name: 'Roserade', dex: 407, level: 65, ability:'Levitate', moves:['Sludge Bomb','Sunny Day','Toxic','Solar Beam'] },
+        { name: 'Tangrowth', dex: 465, level: 65, ability:'Unknown', moves:['Energy Ball','Sunny Day','Knock Off','Solar Beam'] },
+        { name: 'Venusaur', dex: 3, level: 66, ability:'Thick Fat', moves:['Sunny Day','Earthquake','Sludge Bomb','Solar Beam'], mega:true, megaForm:'mega', megaStone:'Venusaurite' },
+      ], rewards:[
+      'Harvest Badge',
+      'TM22 Solar Beam',
+      '10560 PokeDollars',
+      ] },
+    { num:7, name:'Zeek', meta:'Frostveil City · Contrast Badge', type:'Dark', color:'#5B5468',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/image-Photoroom%20(11).png?raw=true', levelCap:74, team:[
+        { name: 'Honchkrow', dex: 430, level: 72, ability:'Super Luck', moves:['Foul Play','Feather Dance','Swagger','Drill Peck'] },
+        { name: 'Krookodile', dex: 553, level: 72, ability:'Intimidate', moves:['Earthquake','Fire Fang','Outrage','Crunch'] },
+        { name: 'Bisharp', dex: 625, level: 72, ability:'Inner Focus', moves:['Iron Head','Poison Jab','Shadow Claw','Sucker Punch'] },
+        { name: 'Umbreon', dex: 197, level: 73, ability:'Synchronize', moves:['Toxic','Moonlight','Confuse Ray','Assurance'] },
+        { name: 'Pangoro', dex: 675, level: 73, ability:'Iron Fist', moves:['Dark Pulse','Low Sweep','Storm Throw','Rock Slide'] },
+        { name: 'Houndoom', dex: 229, level: 74, ability:'Solar Power', moves:['Inferno','Dark Pulse','Sludge Bomb','Shadow Ball'], mega:true, megaForm:'mega', megaStone:'Houndoomnite' },
+      ], rewards:[
+      'Contrast Badge',
+      'TM97 Dark Pulse',
+      '11840 PokeDollars',
+      ] },
+    { num:8, name:'Captain B.', meta:"Crescent Gym · Haunted Badge · Roria's only female Gym Leader", type:'Ghost', color:'#6C5A8C',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/image-Photoroom%20(12).png?raw=true', levelCap:83, team:[
+        { name: 'Gengar', dex: 94, level: 81, ability:'Cursed Body', moves:['Shadow Ball','Sludge Bomb','Focus Blast','Destiny Bond'] },
+        { name: 'Decidueye', dex: 724, level: 81, ability:'Long Reach', moves:['Swords Dance','Leaf Blade','Shadow Claw','Sucker Punch'] },
+        { name: 'Spiritomb', dex: 442, level: 81, ability:'Pressure', moves:['Rest','Sleep Talk','Calm Mind','Snarl'] },
+        { name: 'Mismagius', dex: 429, level: 81, ability:'Levitate', moves:['Nasty Plot','Power Gem','Dazzling Gleam','Shadow Ball'] },
+        { name: 'Aegislash', dex: 681, level: 81, ability:'Stance Change', moves:['Swords Dance','Kings Shield','Shadow Claw','Sacred Sword'] },
+        { name: 'Sableye', dex: 302, level: 83, ability:'Magic Bounce', moves:['Toxic','Foul Play','Recover','Will-o-wisp'], mega:true, megaForm:'mega', megaStone:'Sablenite' },
+      ], rewards:[
+      'Haunted Badge',
+      'TM65 Shadow Claw',
+      '13280 PokeDollars',
+      ] },
   ];
 
-  /* Fill in each Gym Leader's team here, e.g.
-     team: [ { name:'Magnemite', dex:81, level:14 }, { name:'Voltorb', dex:100, level:14 } ]
-     — leave a Leader's team as [] and the modal shows a placeholder until it's added. */
+  /* Fill in each Gym Leader's roster here:
+     - badge: a PNG (e.g. a data:image/png;base64,... string, or a relative image path) to show as their badge icon. Leave null for a placeholder.
+     - levelCap: an optional number shown as a "Lv. cap" chip next to the gym info. Leave null to hide it.
+     - team: [ { name:'Magnemite', dex:81, level:14, ability:'Sturdy', moves:['Thunder Shock','Sonic Boom'] }, ... ]
+       ability and moves are both optional — ability falls back to the Pokémon's first regular ability from the
+       Pokédex data if left null, and moves shows a "not yet added" placeholder in the popup until filled in.
+     - Mega Evolutions: add `mega:true` and `megaForm:'mega'` (or `'mega-x'` / `'mega-y'` for the Charizard/
+       Mewtwo split forms) to a team member to mark it as Mega Evolved — e.g. Prince Ryan's Mega Garchomp.
+       This swaps in the Mega Evolution sprite, adds a small "M" badge to its icon, and shows a
+       "Mega Evolution" tag in the popup. Optionally set `megaStone` to name the stone/item that triggers it.
+     - Regional Forms: add `region:'alola'` (or `'galar'` / `'hisui'` / `'paldea'`) to a team member to mark
+       it as that regional form — e.g. { name:'Muk', dex:89, level:80, region:'alola', ... } for an Alolan
+       Muk. Use the Pokémon's normal `dex` number (Muk is still #89) — the regional form's own sprite is
+       looked up automatically. This swaps in the regional-form sprite, adds a small colored letter badge
+       to its icon (A/G/H/P), and shows a "<Region> Form" tag in the popup. Only Pokémon with a known
+       regional form will render correctly — see REGIONAL_SPRITE_IDS near spriteUrl() for the full list of
+       supported dex numbers.
+     - Other Alternate Forms (not a Mega or a Regional Form): add `altForm:'wash'` to a team member to mark
+       it as that form — e.g. { name:'Rotom', dex:479, level:96, altForm:'wash', ... } for a Wash Rotom.
+       Same idea as `region` above (normal dex number, sprite/badge/tag all handled automatically) — see
+       ALT_FORM_META and ALT_FORM_SPRITE_IDS near spriteUrl() for the currently supported forms (Rotom's
+       five appliance forms out of the box) and to add more.
+     - A team member should only ever set ONE of `mega` / `region` / `altForm` — if more than one is set,
+       `mega` wins, then `region`, then `altForm`.
+     - rewards: [ 'string', 'string', ... ] — e.g. ['5,000 Poké Dollars', 'TM26 Earthquake']. Shown in the
+       "Rewards" half of the gym card next to the team. Leave as [] for a "not yet added" placeholder. */
+
+  /* ===== Elite Four & Champion ===== */
+  const ELITE4 = [
+    { num:1, role:'Elite Four #1', name:'Bellara', meta:'', type:'Poison', color:'#674EA7',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/Poison_icon_SwSh.png?raw=true', levelCap:98, team:[
+        { name: 'Toxapex', dex: 748, level: 91, ability:'Unknown', moves:['Toxic Spikes','Scald','Recover','Baneful Bunker'] },
+        { name: 'Crobat', dex: 169, level: 92, ability:'Unknown', moves:['Cross Poison','Acrobatics','U-Turn','Unknown'] },
+        { name: 'Muk', dex: 89, level: 92, region:'alola', ability:'Unknown', moves:['Poison Jab','Knock Off','Shadow Sneak','Ice Punch'] },
+        { name: 'Dragalge', dex: 691, level: 93, ability:'Unknown', moves:['Sludge Wave','Draco Meteor','Unknown','Unknown'] },
+        { name: 'Salazzle', dex: 758, level: 94, ability:'Corrosion', moves:['Sludge Bomb','Flamethrower','Will-o-Wisp','Toxic'] },
+        { name: 'Gengar', dex: 94, level: 95, ability:'Shadow Tag', moves:['Unknown','Shadow Ball','Sludge Bomb','Unknown'], mega:true, megaForm:'mega', megaStone:'Gengarite' },
+      ], notes:[
+	'Seems to always lead with Toxic Spikes.',
+	'This data is incomplete. Please send @shiverisc a message on Discord if you can fill out more of this!',
+      ] },
+    { num:2, role:'Elite Four #2', name:'Dwayne', meta:'', type:'Rock', color:'#915B07',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/Rock_icon_SwSh.png?raw=true', levelCap:98, team:[
+        { name: 'Kleavor', dex: 900, level: 92, ability:'Unknown', moves:['Stone Axe','X-Scissor','Unknown','Unknown'] },
+        { name: 'Tyranitar', dex: 248, level: 93, ability:'Sand Stream', moves:['Ice Punch','Rock Slide','Earthquake','Knock Off'] },
+        { name: 'Cradily', dex: 346, level: 93, ability:'Unknown', moves:['Barrier','Giga Drain','Protect','Leech Seed'] },
+        { name: 'Glimmora', dex: 970, level: 94, ability:'Toxic Debris', moves:['Mortal Spin','Meteor Beam','Unknown','Unknown'] },
+        { name: 'Gigalith', dex: 526, level: 95, ability:'Sand Stream', moves:['Earthquake','Curse','Body Press','Stone Edge'] },
+        { name: 'Aerodactyl', dex: 142, level: 95, ability:'Shadow Tag', moves:['Rock Slide','Earthquake','Dragon Claw','Unknown'], mega:true, megaForm:'mega', megaStone:'Aerodactylite' },
+      ], notes:[
+	'Seems to always lead with Stone Axe (Stealth Rock).',
+	'This data is incomplete. Please send @shiverisc a message on Discord if you can fill out more of this!',
+      ] },
+    { num:3, role:'Elite Four #3', name:'Teddy', meta:'', type:'Bug', color:'#9CED9C',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/Bug_icon_SwSh.png?raw=true', levelCap:98, team:[
+        { name: 'Galvantula', dex: 596, level: 93, ability:'Compound Eyes', moves:['Sticky Web','Thunder','Bug Buzz','Energy Ball'] },
+        { name: 'Lokix', dex: 920, level: 94, ability:'Unknown', moves:['Detect','Lunge','Unknown','Knock Off(?)'] },
+        { name: 'Volcarona', dex: 637, level: 94, ability:'Unknown', moves:['Quiver Dance','Fiery Dance','Bug Buzz','Unknown'] },
+        { name: 'Golisopod', dex: 768, level: 95, ability:'Emergency Exit', moves:['Aqua Jet','X-Scissor','Knock Off','Swords Dance(?)'] },
+        { name: 'Frosmoth', dex: 873, level: 96, ability:'Ice Scales(?)', moves:['Ice Beam','Quiver Dance','Bug Buzz','Unknown'] },
+        { name: 'Scizor', dex: 212, level: 95, ability:'Technician', moves:['Bullet Punch','Swords Dance','Brutal Swing','Bug Bite(?)'], mega:true, megaForm:'mega', megaStone:'Scizorite' },
+      ], notes:[
+	'Seems to always lead with Sticky Web.',
+	'This data is incomplete. Please send @shiverisc a message on Discord if you can fill out more of this!',
+      ] },
+    { num:4, role:'Elite Four #4', name:'Lena', meta:'', type:'Fairy', color:'#FFAAD4',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/Fairy_icon_SwSh.png?raw=true', levelCap:98, team:[
+        { name: 'Grimmsnarl', dex: 861, level: 94, ability:'Prankster', moves:['Reflect','Thunder Wave','Light Screen','Spirit Break'] },
+        { name: 'Mimikyu', dex: 778, level: 95, ability:'Disguise', moves:['Swords Dance','Shadow Sneak','Drain Punch','Play Rough'] },
+        { name: 'Dedenne', dex: 702, level: 96, ability:'Unknown', moves:['Nuzzle','Super Fang','Thunderbolt','Draining Kiss(?)'] },
+        { name: 'Primarina', dex: 730, level: 96, ability:'Unknown', moves:['Calm Mind','Moonblast','Sparkling Aria','Unknown'] },
+        { name: 'Shiinotic', dex: 756, level: 97, ability:'Unknown', moves:['Spore','Energy Ball','Moonblast','Unknown'] },
+        { name: 'Mawile', dex: 303, level: 98, ability:'Intimidate', moves:['Swords Dance','Sucker Punch','Play Rough','Iron Head'], mega:true, megaForm:'mega', megaStone:'Mawilite' },
+      ], notes:[
+	'Seems to always lead with screens.',
+	'This data is incomplete. Please send @shiverisc a message on Discord if you can fill out more of this!',
+      ] },
+    { num:5, role:'Champion of Roria', name:'Brad', meta:'', type:'Various', color:'#B5793A',
+      badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/canva-crown-vector-icon-MAFJn8GRZO0.png?raw=true', levelCap:100, team:[
+        { name: 'Klefki', dex: 707, level: 95, ability:'Prankster', moves:['Reflect','Spikes','Light Screen','Foul Play'] },
+        { name: 'Rotom', dex: 479, level: 96, altForm:'wash', ability:'Levitate', moves:['Will-o-Wisp','Hydro Pump','Thunderbolt','Unknown'] },
+        { name: 'Annihilape', dex: 979, level: 97, ability:'Unknown', moves:['Ice Punch','Rage Fist','Close Combat(?)','Bulk Up'] },
+        { name: 'Coalossal', dex: 839, level: 98, ability:'Unknown', moves:['Stealth Rock','Rapid Spin','Scald','Unknown'] },
+        { name: 'Goodra', dex: 706, level: 98, ability:'Unknown', moves:['Dragon Pulse','Sludge Bomb','Ice Beam','Unknown'] },
+        { name: 'Metagross', dex: 376, level: 100, ability:'Clear Body', moves:['Bullet Punch','Pursuit','Meteor Mash','Zen Headbutt(?)'], mega:true, megaForm:'mega', megaStone:'Metagrossite' },
+      ], notes:[] },
+  ];
+
+  /* Fill in each Elite Four member / the Champion here — same shape as GYMS above:
+     - name / meta: the Trainer's name, plus any short flavor text (e.g. their type specialty).
+     - type / color: used for the type-style chip in the corner of their card. Set type to 'Various' for a
+       Champion who doesn't run a single type theme.
+     - badge: an optional portrait PNG, same as a Gym Leader's badge. Leave null for a placeholder icon.
+     - levelCap: an optional number shown as a "Lv. cap" chip. Leave null to hide it.
+     - team / notes: same shape as a Gym Leader's team/rewards — team:[ { name, dex, level, ability, moves,
+       mega, megaForm, megaStone, region, altForm }, ... ], notes:[ 'string', ... ] for anything worth
+       calling out (e.g. a signature Legendary, a double battle, etc). `region` and `altForm` work the same
+       as they do for Gym Leaders — see the Regional Forms / Other Alternate Forms notes above GYMS, e.g.
+       Bellara's Alolan Muk and the Champion's Wash Rotom below. Leave both as [] for "not yet added"
+       placeholders. */
+
+  function pokedexEntry(dex){
+    return POKEDEX.find(p => p.dex === dex);
+  }
+
+  /* group: 'gym' or 'elite4' — lets the team-icon buttons and modal know which
+     array (GYMS or ELITE4) to look the Pokémon up in. */
+  function renderTeamCol(g, group, arrName){
+    const team = g.team || [];
+    if(!team.length){
+      return `<div class="gym-team-col"><span class="gts-label">Team</span><span class="gym-team-empty">not yet added — fill in ${arrName}[${g.num-1}].team in the page's script</span></div>`;
+    }
+    const icons = team.map((p,i) => {
+      const form = teamMonForm(p);
+      const titleSuffix = form ? ` (${form.badgeLabel})` : '';
+      const badgeHtml = form ? `<span class="mega-badge${form.cssClass ? ' ' + form.cssClass + '-badge' : ''}" title="${escapeHtml(form.badgeLabel)}">${escapeHtml(form.badgeShort)}</span>` : '';
+      return `
+      <button class="gym-mon-icon" data-group="${group}" data-num="${g.num}" data-idx="${i}" title="${escapeHtml(p.name || '')}${titleSuffix}">
+        ${p.dex ? `<img src="${spriteUrl(p.dex, form ? form.spriteKey : null)}" alt="${escapeHtml(p.name||'')}" loading="lazy">` : ''}
+        ${badgeHtml}
+      </button>
+    `;
+    }).join('');
+    return `<div class="gym-team-col"><span class="gts-label">Team</span>${icons}</div>`;
+  }
+
+  function renderGymRewardsCol(g){
+    const rewards = g.rewards || [];
+    if(!rewards.length){
+      return `<div class="gym-rewards-col"><span class="gts-label">Rewards</span><span class="gym-rewards-empty">not yet added — fill in GYMS[${g.num-1}].rewards in the page's script</span></div>`;
+    }
+    const items = rewards.map(r => `<li>${escapeHtml(r)}</li>`).join('');
+    return `<div class="gym-rewards-col"><span class="gts-label">Rewards</span><ul class="gym-rewards-list">${items}</ul></div>`;
+  }
+
+  function renderElite4NotesCol(g){
+    const notes = g.notes || [];
+    if(!notes.length){
+      return `<div class="gym-rewards-col"><span class="gts-label">Notes</span><span class="gym-rewards-empty">not yet added — fill in ELITE4[${g.num-1}].notes in the page's script</span></div>`;
+    }
+    const items = notes.map(r => `<li>${escapeHtml(r)}</li>`).join('');
+    return `<div class="gym-rewards-col"><span class="gts-label">Notes</span><ul class="gym-rewards-list">${items}</ul></div>`;
+  }
 
   function renderGymRow(g){
+    const badgeHtml = g.badge
+      ? `<div class="gym-badge-slot filled"><img src="${g.badge}" alt="${escapeHtml(g.name)} badge"></div>`
+      : `<div class="gym-badge-slot" title="Add a badge PNG via GYMS[${g.num-1}].badge">🏅</div>`;
+    const capHtml = g.levelCap
+      ? `<div class="gym-cap-chip">Lv. cap ${g.levelCap}</div>`
+      : '';
     return `
-      <div class="gym-row" data-num="${g.num}">
-        <div class="num">${g.num}</div>
-        <div><h4>${g.name}</h4><div class="meta">${g.meta}</div></div>
-        <div class="type-chip" style="background:${g.color};">${g.type.toUpperCase()}</div>
+      <div class="gym-card" id="gym-card-${g.num}">
+        <div class="gym-row">
+          <div class="num">${g.num}</div>
+          ${badgeHtml}
+          <div><h4>${g.name}</h4><div class="meta">${g.meta}</div></div>
+          ${capHtml}
+          <div class="type-chip" style="background:${g.color};">${g.type.toUpperCase()}</div>
+        </div>
+        <div class="gym-team-split">
+          ${renderTeamCol(g, 'gym', 'GYMS')}
+          ${renderGymRewardsCol(g)}
+        </div>
+      </div>
+    `;
+  }
+
+  function renderElite4Row(g){
+    const badgeHtml = g.badge
+      ? `<div class="gym-badge-slot filled"><img src="${g.badge}" alt="${escapeHtml(g.name)} portrait"></div>`
+      : `<div class="gym-badge-slot" title="Add a portrait PNG via ELITE4[${g.num-1}].badge">${g.role === 'Champion' ? '👑' : '🏆'}</div>`;
+    const capHtml = g.levelCap
+      ? `<div class="gym-cap-chip">Lv. cap ${g.levelCap}</div>`
+      : '';
+    return `
+      <div class="gym-card" id="elite4-card-${g.num}">
+        <div class="gym-row">
+          <div class="num">${g.role === 'Champion' ? '★' : g.num}</div>
+          ${badgeHtml}
+          <div><h4>${g.name}</h4><div class="meta">${g.role}${g.meta ? ' · ' + g.meta : ''}</div></div>
+          ${capHtml}
+          <div class="type-chip" style="background:${g.color};">${g.type.toUpperCase()}</div>
+        </div>
+        <div class="gym-team-split">
+          ${renderTeamCol(g, 'elite4', 'ELITE4')}
+          ${renderElite4NotesCol(g)}
+        </div>
       </div>
     `;
   }
@@ -2692,55 +3164,230 @@
     const list = document.getElementById('gym-list');
     if(!list) return;
     list.innerHTML = GYMS.map(renderGymRow).join('');
-    list.querySelectorAll('.gym-row').forEach(row => {
-      row.addEventListener('click', () => openGymModal(Number(row.dataset.num)));
+    list.querySelectorAll('.gym-mon-icon').forEach(btn => {
+      btn.addEventListener('click', () => openGymMonModal(btn.dataset.group, Number(btn.dataset.num), Number(btn.dataset.idx)));
     });
   }
   renderGymList();
 
-  function openGymModal(num){
-    const g = GYMS.find(x => x.num === num);
+  function renderElite4List(){
+    const list = document.getElementById('elite4-list');
+    if(!list) return;
+    list.innerHTML = ELITE4.map(renderElite4Row).join('');
+    list.querySelectorAll('.gym-mon-icon').forEach(btn => {
+      btn.addEventListener('click', () => openGymMonModal(btn.dataset.group, Number(btn.dataset.num), Number(btn.dataset.idx)));
+    });
+  }
+  renderElite4List();
+
+  function flashGymCard(num){
+    const card = document.getElementById(`gym-card-${num}`);
+    if(!card) return;
+    card.scrollIntoView({ behavior:'smooth', block:'center' });
+    card.classList.add('flash');
+    setTimeout(() => card.classList.remove('flash'), 1600);
+  }
+
+  function flashElite4Card(num){
+    const card = document.getElementById(`elite4-card-${num}`);
+    if(!card) return;
+    card.scrollIntoView({ behavior:'smooth', block:'center' });
+    card.classList.add('flash');
+    setTimeout(() => card.classList.remove('flash'), 1600);
+  }
+
+  function openGymMonModal(group, num, idx){
+    const source = group === 'elite4' ? ELITE4 : GYMS;
+    const sourceName = group === 'elite4' ? 'ELITE4' : 'GYMS';
+    const g = source.find(x => x.num === num);
     if(!g) return;
-    const overlay = document.getElementById('gym-overlay');
-    const modal = document.getElementById('gym-modal');
-    const team = g.team || [];
-    const teamHtml = team.length
-      ? `<div class="team-slot-row">${team.map((p,i) => `
-          <div class="team-slot">
-            ${p.dex ? `<img src="${spriteUrl(p.dex)}" alt="${p.name}" style="width:52px;height:52px;object-fit:contain;margin:0 auto 4px;display:block;">` : ''}
-            <div style="font-weight:800;font-size:12px;">${p.name || ''}</div>
-            ${p.level ? `<div style="font-size:10.5px;color:var(--ink-soft);">Lv. ${p.level}</div>` : ''}
-          </div>
-        `).join('')}</div>`
-      : `<div class="guide-empty">Team not yet added — fill in GYMS[${num-1}].team in the page's script (name, dex number, level) and the roster will show up here.</div>`;
+    const p = (g.team || [])[idx];
+    if(!p) return;
+    const dexInfo = p.dex ? pokedexEntry(p.dex) : null;
+    const ability = p.ability || (dexInfo ? (dexInfo.abilities.find(a => !a.hidden) || dexInfo.abilities[0] || {}).name : null);
+    const types = dexInfo ? dexInfo.types.map(typePill).join('') : '';
+    const overlay = document.getElementById('gym-mon-overlay');
+    const modal = document.getElementById('gym-mon-modal');
+
+    const movesHtml = (p.moves && p.moves.length)
+      ? `<ul class="dex-ability-list">${p.moves.map(m => `<li>${escapeHtml(m)}</li>`).join('')}</ul>`
+      : `<div class="guide-empty">No moves added yet — fill in ${sourceName}[${num-1}].team[${idx}].moves in the page's script and they'll show up here.</div>`;
+    const form = teamMonForm(p);
+    const formTagHtml = form
+      ? `<div class="mega-tag${form.cssClass ? ' ' + form.cssClass + '-tag' : ''}">⬡ ${escapeHtml(form.tagLabel)}${p.mega && p.megaStone ? ` · ${escapeHtml(p.megaStone)}` : ''}</div>`
+      : '';
 
     modal.innerHTML = `
-      <button class="guide-close" id="gym-close" aria-label="Close">✕</button>
+      <button class="guide-close" id="gym-mon-close" aria-label="Close">✕</button>
       <div class="guide-head">
-        <div class="num" style="width:44px;height:44px;background:${g.color};color:var(--white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;">${g.num}</div>
+        ${p.dex ? `<div class="guide-head-sprite"><img src="${spriteUrl(p.dex, form ? form.spriteKey : null)}" alt="${escapeHtml(p.name||'')}">${form ? `<span class="mega-badge${form.cssClass ? ' ' + form.cssClass + '-badge' : ''}" title="${escapeHtml(form.badgeLabel)}">${escapeHtml(form.badgeShort)}</span>` : ''}</div>` : ''}
         <div>
-          <div class="name">${g.name}</div>
-          <div class="guide-quote">${g.meta}</div>
+          <div class="name">${escapeHtml(p.name || '')}${form ? ` <span style="font-weight:600;">(${escapeHtml(form.nameSuffix)})</span>` : ''}</div>
+          <div class="guide-quote">${g.name}'s team${p.level ? ` · Lv. ${p.level}` : ''}</div>
+          <div class="types">${types}</div>
+          ${formTagHtml}
         </div>
       </div>
-      <div class="guide-encounter"><span class="type-chip" style="background:${g.color};">${g.type.toUpperCase()}</span></div>
-      <div class="guide-steps-label">TEAM</div>
-      ${teamHtml}
+      <div class="dex-modal-section">
+        <h5>Ability</h5>
+        ${ability ? `<div class="ability-line"><b>${escapeHtml(ability)}</b></div>` : `<div class="dex-none">Not known</div>`}
+      </div>
+      <div class="dex-modal-section">
+        <h5>Moves</h5>
+        ${movesHtml}
+      </div>
     `;
     overlay.classList.add('open');
-    document.getElementById('gym-close').addEventListener('click', closeGymModal);
+    document.getElementById('gym-mon-close').addEventListener('click', closeGymMonModal);
   }
 
-  function closeGymModal(){
-    document.getElementById('gym-overlay').classList.remove('open');
+  function closeGymMonModal(){
+    document.getElementById('gym-mon-overlay').classList.remove('open');
   }
 
-  document.getElementById('gym-overlay').addEventListener('click', (e) => {
-    if(e.target.id === 'gym-overlay') closeGymModal();
+  document.getElementById('gym-mon-overlay').addEventListener('click', (e) => {
+    if(e.target.id === 'gym-mon-overlay') closeGymMonModal();
   });
   document.addEventListener('keydown', (e) => {
-    if(e.key === 'Escape') closeGymModal();
+    if(e.key === 'Escape') closeGymMonModal();
   });
+
+  /* ===== Wild Pokémon Routes ===== */
+  /* Fill in each route's `encounters` array to build its table. Each entry
+     takes: { name, method, time, rarity, notes }
+     - name:   Pokémon name
+     - method: how it's found (Grass, Surf, Old/Good/Super Rod, Rock Smash, Headbutt, etc.)
+     - time:   Day / Night / Morning / Any / a specific weather condition, etc.
+     - rarity: Common / Uncommon / Rare / Very Rare, or an encounter %
+     - notes:  anything else — held items, evolution notes, version differences, etc.
+     Example: { name:'Zigzagoon', method:'Grass', time:'Any', rarity:'Common', notes:'' } */
+  const ROUTES = [
+    { num:1, name:'Route 1', terrain:'Grassland', connects:'Mitis Town → Cheshma Town', note:"Roria's very first route, with the lowest-level wild encounters in the game (around Lv. 2–4).", encounters:[] },
+    { num:2, name:'Route 2', terrain:'River', connects:'Cheshma Town → Route 3', note:'A bridge crossing blocked until the Gale Forest story mission is finished; the first route with a Rock Climb slope.', encounters:[] },
+    { num:3, name:'Route 3', terrain:'Grassland', connects:'Route 2 → Silvent City', note:"Sits in Silvent City's magnetic field, and most of its wild Pokémon are Electric-type.", encounters:[] },
+    { num:4, name:'Route 4', terrain:'Savannah', connects:'Silvent City → Route 5', note:'Savannah terrain covered in "The Savannah" story chapter, alongside Route 5 and the Old Graveyard.', encounters:[] },
+    { num:5, name:'Route 5', terrain:'Savannah', connects:'Route 4 → Old Graveyard / Brimber City', note:'Continues the savannah, near the Old Graveyard; the second rival battle happens around here.', encounters:[] },
+    { num:6, name:'Route 6', terrain:'Volcanic', connects:'Brimber City → Mt. Igneus', note:'Volcanic terrain leading toward Mt. Igneus during the "Volcanic Showdown" chapter.', encounters:[] },
+    { num:7, name:'Route 7', terrain:'Lakeside', connects:'Brimber City → Lagoona Lake & Trenches', note:'Leads to Lagoona Lake and the Lagoona Trenches, which rain constantly.', encounters:[] },
+    { num:8, name:'Route 8', terrain:'Coastal / Rainy', connects:'→ Rosecove Beach & Rosecove City', note:'Covered during the "Downpour" chapter — frequent rain on the way to Rosecove.', encounters:[] },
+    { num:9, name:'Route 9', terrain:'Coastal', connects:'Rosecove City → Grove of Dreams', note:"A good EV-training spot (Speed EVs from several of its wild Pokémon), also home to Camper Pal.", encounters:[] },
+    { num:10, name:'Route 10', terrain:'Forest', connects:'→ Fortulose Manor / Grove of Dreams', note:'Leads to Fortulose Manor and the Grove of Dreams during the "Mischief, Mythical, Disaster" chapter.', encounters:[] },
+    { num:11, name:'Route 11', terrain:'Desert', connects:'Sky Train → Aredia City', note:"Roria's only route with a permanent sandstorm. Deep, darker sand slows movement (and disables running) — a Hoverboard or Repels help.", encounters:[] },
+    { num:12, name:'Route 12', terrain:'Cavern', connects:'Glistening Grotto → Nature\u2019s Den', note:'Cavern terrain covered in the "Cavern Route" chapter, between Glistening Grotto and Nature\u2019s Den.', encounters:[] },
+    { num:13, name:'Route 13', terrain:'Cavern', connects:"Nature's Den → Fluoruma City", note:'Continues the "Cavern Route" chapter past Nature\u2019s Den on the way to Fluoruma City.', encounters:[] },
+    { num:14, name:'Route 14', terrain:'Unspecified', connects:'→ Route 15', note:'Covered just before the "Betrayal!" story beat, on the way to Route 15 and Frostveil City.', encounters:[] },
+    { num:15, name:'Route 15', terrain:'Snowfield', connects:'Route 14 → Frostveil City', note:'Always snowy, though not severely enough to affect battles.', encounters:[] },
+    { num:16, name:'Route 16', terrain:'Icy', connects:'Frostveil City → Freezing Fissure', note:'Icy terrain past the Frostveil Gym, leading to the Freezing Fissure.', encounters:[] },
+    { num:17, name:'Route 17', terrain:'Water / Islands', connects:'Decca Beach → Ocean\u2019s Origin / Crescent Town', note:"A mostly-water route of scattered islands with old ruins. Sandygast are said to lurk on the islands at night.", encounters:[] },
+    { num:18, name:'Route 18', terrain:'Swamp', connects:'Crescent Town → Aborille Outpost', note:'Swampland on Crescent Island, only accessible after infiltrating the Eclipse Base. Deep swamp slows movement like the deep sand on Route 11.', encounters:[] },
+  ];
+
+  function encounterTable(encounters, hint){
+    if(!encounters || !encounters.length){
+      return `<div class="guide-empty">No encounters logged yet — add objects to ${hint} in the page script (each with name, method, time, rarity, notes) and they'll appear here as a table.</div>`;
+    }
+    const rows = encounters.map(e => `
+      <tr>
+        <td>${escapeHtml(e.name || '')}</td>
+        <td>${escapeHtml(e.method || '')}</td>
+        <td>${escapeHtml(e.time || '')}</td>
+        <td>${escapeHtml(e.rarity || '')}</td>
+        <td>${escapeHtml(e.notes || '')}</td>
+      </tr>
+    `).join('');
+    return `
+      <table class="encounter-table">
+        <thead><tr><th>Pokémon</th><th>Method</th><th>Time</th><th>Rarity</th><th>Notes</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    `;
+  }
+
+  function renderRoutes(){
+    const list = document.getElementById('routes-list');
+    if(!list) return;
+    list.innerHTML = ROUTES.map(r => `
+      <div class="card route-card" id="route-card-${r.num}">
+        <div class="route-card-head">
+          <h3>${escapeHtml(r.name)} <span class="route-terrain-tag">${escapeHtml(r.terrain)}</span></h3>
+          <span class="route-connects">${escapeHtml(r.connects)}</span>
+        </div>
+        <p class="route-note">${escapeHtml(r.note)}</p>
+        ${encounterTable(r.encounters, `ROUTES[${r.num - 1}].encounters`)}
+      </div>
+    `).join('');
+  }
+  renderRoutes();
+
+  function flashRouteCard(num){
+    const card = document.getElementById(`route-card-${num}`);
+    if(!card) return;
+    card.scrollIntoView({ behavior:'smooth', block:'center' });
+    card.classList.add('search-hit');
+    setTimeout(() => card.classList.remove('search-hit'), 1800);
+  }
+
+  /* Other named wild-encounter areas (not numbered routes) — Gale Forest,
+     Victory Road, and the like. Same shape as ROUTES: fill in each area's
+     `encounters` array to build its table. `group` controls which
+     sub-heading it's sorted under on the page. */
+  const OTHER_AREAS = [
+    { slug:'gale-forest', name:'Gale Forest', group:'Forests & Groves', terrain:'Forest', connects:'Next to Cheshma Town', note:'Home to mostly Bug- and Poison-type Pokémon; also where the player first fights Team Eclipse (Linda).', encounters:[] },
+    { slug:'grove-of-dreams', name:'Grove of Dreams', group:'Forests & Groves', terrain:'Forest', connects:'Off Route 9, near Rosecove City', note:"Home to Jirachi's questline and the three Elemental Monkeys, each found under its matching Giant Tree.", encounters:[] },
+    { slug:'secret-grove', name:'Secret Grove', group:'Forests & Groves', terrain:'Forest', connects:'Reached via Cragonos Spring ("Go Surfing" chapter)', note:'Grove tied to the Cobalion/Terrakion/Virizion and Keldeo questline.', encounters:[] },
+    { slug:'old-aredia', name:'Old Aredia', group:'Deserts & Ruins', terrain:'Desert Ruins', connects:'Aredia City → Aredia Ruins', note:'The abandoned, long-buried part of the former Roria capital; deep sand patches slow movement like on Route 11.', encounters:[] },
+    { slug:'desert-catacombs', name:'Desert Catacombs', group:'Deserts & Ruins', terrain:'Tomb', connects:'Middle of Route 11 (needs Rock Smash)', note:'Home only to Unown — the different forms are scattered throughout the catacombs.', encounters:[] },
+    { slug:'old-graveyard', name:'Old Graveyard', group:'Deserts & Ruins', terrain:'Graveyard', connects:'Off Route 5', note:"Roria's first Ghost-type encounters, but only at night.", encounters:[] },
+    { slug:'glistening-grotto', name:'Glistening Grotto', group:'Caves & Mines', terrain:'Cave', connects:'Extension of Route 5 (needs Rock Smash + Crater Badge)', note:'A crystal-lined cave; the right-hand path leads to a waterfall and Sablenite.', encounters:[] },
+    { slug:'lower-cragonos-mines', name:'Lower Cragonos Mines', group:'Caves & Mines', terrain:'Cave', connects:'Mt. Cragonos', note:'Rock-type-heavy mine with a high encounter rate; leads up toward the Upper Mines and, via Surf, to Cragonos Spring.', encounters:[] },
+    { slug:'upper-cragonos-mines', name:'Upper Cragonos Mines', group:'Caves & Mines', terrain:'Cave', connects:'Mt. Cragonos', note:'Continues above the Lower Mines on the way to Cragonos Cliffs and Cragonos Peak.', encounters:[] },
+    { slug:'cragonos-cliffs', name:'Cragonos Cliffs', group:'Caves & Mines', terrain:'Mountain', connects:'Mt. Cragonos', note:'Outdoor cliffside stretch of Mt. Cragonos between the mines and the peak.', encounters:[] },
+    { slug:'cragonos-peak', name:'Cragonos Peak', group:'Caves & Mines', terrain:'Mountain', connects:'Top of Mt. Cragonos', note:"The summit of Mt. Cragonos.", encounters:[] },
+    { slug:'cragonos-spring', name:'Cragonos Spring', group:'Caves & Mines', terrain:'Cave / Water', connects:'Surf-accessible from Lower Cragonos Mines', note:'A long water channel reachable with Rock Climb + Surf; Lapras appears here every Monday.', encounters:[] },
+    { slug:'freezing-fissure', name:'Freezing Fissure', group:'Caves & Mines', terrain:'Icy Cave', connects:'Near Frostveil City, past Route 16', note:'Icy cave area covered during the "Contrast Badge" chapter.', encounters:[] },
+    { slug:'path-of-truth', name:'Path of Truth', group:'Caves & Mines', terrain:'Cave', connects:'Reached via Cragonos Spring ("Go Surfing" chapter)', note:'Cave tied to the Cobalion/Terrakion/Virizion and Keldeo questline.', encounters:[] },
+    { slug:'frigidia-cavern', name:'Frigidia Cavern', group:'Islands', terrain:'Icy Cave', connects:'Frigidia Island', note:'An icy cavern of crystal and rock, home to Articuno and some event-turned-permanent Pokémon like Alolan Sandshrew and Vulpix.', encounters:[] },
+    { slug:'voltridia-cavern', name:'Voltridia Cavern', group:'Islands', terrain:'Cave', connects:'Voltridia Island', note:'Cave on Voltridia Island.', encounters:[] },
+    { slug:'obsidia-cavern', name:'Obsidia Cavern', group:'Islands', terrain:'Cave', connects:'Obsidia Island', note:'Cave on Obsidia Island.', encounters:[] },
+    { slug:'lost-islands', name:'Lost Islands', group:'Islands', terrain:'Island', connects:'Reached via Decca Travel Agency ("Archipelago" chapter)', note:'Outlying islands beyond the main Roria map, reached by boat.', encounters:[] },
+    { slug:'deep-jungle', name:'Deep Jungle', group:'Islands', terrain:'Jungle', connects:'Lost Islands ("Archipelago" chapter)', note:'Dense jungle area on the Lost Islands.', encounters:[] },
+    { slug:'oceans-origin', name:"Ocean's Origin", group:'Islands', terrain:'Ruins', connects:'Route 17', note:'Flooded ruins on the fourth island of Route 17, tied to the local legend of the "sand ghosts."', encounters:[] },
+    { slug:'victory-road', name:'Victory Road', group:'Post-Game', terrain:'Cave', connects:'Past the Roria League, before the Elite Four', note:'A domed, spiralling cave path with a clear-water pond partway through (non-surfable, but Pokémon like Arrokuda and Wimpod live in it).', encounters:[] },
+    { slug:'roria-safari-zone', name:'Roria Safari Zone', group:'Post-Game', terrain:'Special Area', connects:'Decca Beach ("Safari Game" chapter)', note:'Has the widest single-area wild Pokémon selection in the game.', encounters:[] },
+  ];
+
+  function renderAreas(){
+    const list = document.getElementById('areas-list');
+    if(!list) return;
+    const groups = [];
+    OTHER_AREAS.forEach(a => {
+      let g = groups.find(x => x.name === a.group);
+      if(!g){ g = { name:a.group, items:[] }; groups.push(g); }
+      g.items.push(a);
+    });
+    list.innerHTML = groups.map(g => `
+      <div class="guide-extras-label">${escapeHtml(g.name)}</div>
+      ${g.items.map(a => `
+        <div class="card route-card" id="area-card-${a.slug}">
+          <div class="route-card-head">
+            <h3>${escapeHtml(a.name)} <span class="route-terrain-tag">${escapeHtml(a.terrain)}</span></h3>
+            <span class="route-connects">${escapeHtml(a.connects)}</span>
+          </div>
+          <p class="route-note">${escapeHtml(a.note)}</p>
+          ${encounterTable(a.encounters, `OTHER_AREAS.find(x => x.slug === '${a.slug}').encounters`)}
+        </div>
+      `).join('')}
+    `).join('');
+  }
+  renderAreas();
+
+  function flashAreaCard(slug){
+    const card = document.getElementById(`area-card-${slug}`);
+    if(!card) return;
+    card.scrollIntoView({ behavior:'smooth', block:'center' });
+    card.classList.add('search-hit');
+    setTimeout(() => card.classList.remove('search-hit'), 1800);
+  }
 
   /* ===== Redeemable Codes tracker ===== */
   /* Change this to whatever password you want to require before someone
@@ -2938,6 +3585,10 @@
       idx.push({ title:g.name, page:'gyms', category:'Gym Leader · '+g.type, action:{ type:'gym', num:g.num } });
     });
 
+    ELITE4.forEach(g => {
+      idx.push({ title:g.name, page:'elite4', category:g.role, action:{ type:'elite4', num:g.num } });
+    });
+
     STARTERS.forEach(fam => {
       const first = fam.stages[0].name;
       idx.push({ title:`${first} Line`, page:'starters', category:'Starter · '+fam.region, action:{ type:'starter', region:fam.region, family:first } });
@@ -2956,6 +3607,14 @@
 
     POKEDEX.forEach(p => {
       idx.push({ title:p.name, page:'pokedex', category:'Pokédex · #'+String(p.dex).padStart(4,'0')+' · Gen '+p.gen, action:{ type:'pokedex', dex:p.dex } });
+    });
+
+    ROUTES.forEach(r => {
+      idx.push({ title:r.name, page:'routes', category:'Wild Pokémon Areas · Route', action:{ type:'route', num:r.num } });
+    });
+
+    OTHER_AREAS.forEach(a => {
+      idx.push({ title:a.name, page:'routes', category:'Wild Pokémon Areas · '+a.group, action:{ type:'area', slug:a.slug } });
     });
 
     return idx;
@@ -3051,7 +3710,13 @@
           renderMythicals('All');
           openMythicalGuide(entry.action.name);
         } else if(entry.action && entry.action.type === 'gym'){
-          openGymModal(entry.action.num);
+          flashGymCard(entry.action.num);
+        } else if(entry.action && entry.action.type === 'elite4'){
+          flashElite4Card(entry.action.num);
+        } else if(entry.action && entry.action.type === 'route'){
+          flashRouteCard(entry.action.num);
+        } else if(entry.action && entry.action.type === 'area'){
+          flashAreaCard(entry.action.slug);
         } else if(entry.action && entry.action.type === 'pokedex'){
           const genTabs = document.getElementById('dex-gen-tabs');
           if(genTabs){
