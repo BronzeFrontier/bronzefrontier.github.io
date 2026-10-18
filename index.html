@@ -1033,7 +1033,9 @@
   .map-wild-src:first-of-type{margin-top:0;}
   .map-wild-src b{color:var(--text);}
   .map-wild-src span{font-size:11.5px;color:var(--text-soft);}
-  .map-wild-src a{font-size:11.5px;color:var(--cyan);cursor:pointer;white-space:nowrap;}
+  .map-wild-src a{display:none!important;}
+  .nav-link[hidden]{display:none!important;}
+  .page.bf-hidden{display:none!important;}
   .map-wild-src a:hover{text-decoration:underline;}
   .map-enc-scroll{max-height:330px;overflow-y:auto;border:1px solid var(--line);border-radius:10px;background:#16203a;}
   .map-enc{width:100%;border-collapse:collapse;font-size:12px;line-height:1.35;}
@@ -1078,6 +1080,100 @@
   .qna-fig figcaption{font-size:12px;color:var(--text-soft);margin-top:6px;line-height:1.5;}
   .qna-empty{font-size:13.5px;color:var(--text-soft);padding:18px 4px;}
   .map-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#0c1324;border:1px solid var(--cyan);padding:8px 14px;border-radius:10px;font-size:13px;z-index:99;display:none;}
+  /* ===== Team Builder ===== */
+  .tb-bar{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+  .tb-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px;margin-bottom:28px}
+  .tb-slot{background:var(--glass);border:2px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;font-size:12.5px}
+  .tb-empty{align-items:center;justify-content:center;min-height:150px;border-style:dashed}
+  .tb-n{color:var(--text-soft);font-size:11px}
+  .tb-top{display:flex;gap:10px;align-items:center}.tb-top>div{flex:1}.tb-top img{width:64px;height:64px;object-fit:contain}
+  .tb-types{display:flex;gap:4px;margin:3px 0}
+  .tb-pick,.tb-rm{background:var(--tile);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;font-weight:600;cursor:pointer;font-size:12px}
+  .tb-pick:hover,.tb-rm:hover{background:var(--tile-hover)}.tb-rm{padding:4px 8px}
+  .tb-slot label{display:flex;flex-direction:column;gap:3px;color:var(--text-soft);font-size:11px;font-weight:600}
+  .tb-slot select,.tb-slot input,.tb-ovbox input{background:#0c1324;color:var(--text);border:1px solid var(--line);border-radius:8px;padding:6px 8px;font:inherit;font-size:12.5px;width:100%}
+  .tb-moves{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+  .tb-stats{display:grid;grid-template-columns:auto 1fr auto;gap:2px 6px;align-items:center;font-size:10.5px;color:var(--text-soft)}
+  .tb-stats i{height:6px;background:#0c1324;border-radius:4px;overflow:hidden}.tb-stats u{display:block;height:100%;background:var(--cyan)}.tb-stats em{font-style:normal;color:var(--text)}
+  .tb-h3{font-family:'Sora';font-size:15px;margin:22px 0 10px;color:var(--gold)}
+  .tb-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+  .tb-tbl{border-collapse:collapse;width:100%;font-size:12px;text-align:center}
+  .tb-tbl th,.tb-tbl td{padding:3px 2px;border-bottom:1px solid #26334f;min-width:30px}
+  .tb-tbl th img{width:34px;height:34px;object-fit:contain;display:block;margin:auto}
+  .tb-tbl thead span{display:block;color:#fff;font-size:9px;font-weight:700;padding:3px 0;border-radius:4px;margin:2px}
+  .tb-w{background:rgba(232,98,58,.35)}.tb-w2{background:rgba(217,58,74,.65);font-weight:700}.tb-r{background:rgba(95,174,90,.3)}.tb-im{background:rgba(60,194,221,.4)}.tb-bad{background:#d93a4a;font-weight:700}
+  .tb-sum th{font-size:11px;color:var(--text-soft)}
+  .tb-cov{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px}
+  .tb-cov div{border-radius:8px;padding:6px;text-align:center;font-size:11px;border:1px solid var(--line)}
+  .tb-cov b{display:block;font-size:14px;margin-top:2px}.tb-cg{background:rgba(95,174,90,.3)}.tb-cn{background:var(--tile)}.tb-cr{background:rgba(217,58,74,.35)}
+  .tb-ins{display:grid;gap:6px;margin:0 0 6px}.tb-ins div{padding:9px 12px;border-radius:10px;background:var(--tile);border-left:4px solid var(--gold);font-size:13px}
+  .tb-ins .bad{border-color:#d93a4a}.tb-ins .good{border-color:#5FAE5A}
+  .tb-m{background:var(--glass);border:1px solid var(--line);border-radius:12px;margin-bottom:8px}
+  .tb-m summary{display:flex;align-items:center;gap:10px;padding:10px 14px;cursor:pointer;flex-wrap:wrap;list-style:none}
+  .tb-m summary::-webkit-details-marker{display:none}.tb-m summary img{width:30px;height:30px;object-fit:contain}
+  .tb-rate{margin-left:auto;color:#10192c;font-weight:800;font-size:11px;padding:3px 10px;border-radius:20px}
+  .tb-bar2{width:100%;height:5px;background:#0c1324;border-radius:4px;overflow:hidden}.tb-bar2 i{display:block;height:100%}
+  .tb-foe{display:flex;gap:10px;align-items:center;padding:7px 14px;border-top:1px solid #26334f;font-size:12.5px}
+  .tb-foe img{width:36px;height:36px;object-fit:contain}.tb-foe>div:first-of-type{flex:1}
+  .tb-ov{display:none;position:fixed;inset:0;background:rgba(5,9,20,.78);z-index:90;justify-content:center;align-items:flex-start;padding:6vh 14px}
+  .tb-ov.open{display:flex}.tb-ovbox{background:var(--glass);border:2px solid var(--line);border-radius:14px;padding:14px;width:min(640px,100%);max-height:84vh;display:flex;flex-direction:column;gap:10px}
+  .tb-res{overflow-y:auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px}
+  .tb-res button{background:var(--tile);border:1px solid var(--line);border-radius:10px;color:var(--text);padding:6px;font-size:11px;cursor:pointer}
+  .tb-res button:hover{background:var(--tile-hover)}.tb-res img{width:56px;height:56px;object-fit:contain;display:block;margin:auto}
+
+  /* ===== Roria Investigator ===== */
+  .inv-ask{display:flex;gap:8px;margin:16px 0 8px}
+  .inv-ask input,.inv-panel input[type=text],.inv-panel select{flex:1;background:var(--glass);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:10px 12px;font:inherit;min-width:0}
+  .inv-ask input:focus,.inv-panel input:focus,.inv-panel select:focus{outline:2px solid var(--cyan);outline-offset:0}
+  .inv-ex{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+  .inv-ex button{background:none;border:1px dashed var(--line);color:var(--text-soft);border-radius:999px;padding:5px 12px;font:inherit;font-size:12.5px;cursor:pointer}
+  .inv-ex button:hover{color:var(--text);border-color:var(--cyan)}
+  .inv-modes{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:18px}
+  .inv-mode{background:var(--tile);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:left;color:var(--text);font:inherit;cursor:pointer}
+  .inv-mode:hover{background:var(--tile-hover)}
+  .inv-mode.active{border-color:var(--cyan);background:var(--tile-hover)}
+  .inv-mode b{display:block;font-size:14px}.inv-mode span{font-size:12px;color:var(--text-soft)}
+  .inv-panel{background:var(--glass);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:18px}
+  .inv-panel label{display:block;font-weight:600;margin-bottom:8px}
+  .inv-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;align-items:center}
+  .inv-row label{display:inline-flex;gap:6px;align-items:center;font-weight:500;font-size:13px;color:var(--text-soft);margin:0}
+  .inv-go{background:#1f86a3;border:1px solid #5fd0e8;color:#fff;border-radius:10px;padding:9px 18px;font:inherit;font-weight:600;cursor:pointer}
+  .inv-ask .inv-go{flex:none}
+  .inv-chips,.inv-types{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
+  .inv-chip{background:var(--tile-hover);border:1px solid var(--cyan);color:var(--text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
+  .inv-tbtn{border:2px solid transparent;border-radius:8px;padding:5px 10px;color:#fff;font:inherit;font-size:12px;font-weight:700;cursor:pointer;opacity:.55}
+  .inv-tbtn.on{opacity:1;border-color:#fff}
+  #inv-out h3{margin:18px 0 10px;font-family:Sora,sans-serif;font-size:17px}
+  #inv-out h3 small{color:var(--text-soft);font-weight:500;font-size:12px;margin-left:6px}
+  .inv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+  .inv-mon{display:flex;gap:10px;align-items:center;background:var(--tile);border:1px solid var(--line);border-radius:12px;padding:8px 10px;cursor:pointer;min-width:0}
+  .inv-mon:hover{background:var(--tile-hover)}
+  .inv-mon img{width:56px;height:56px;object-fit:contain;flex:none}
+  .inv-mon small{color:var(--text-soft)}
+  .inv-mon .type-pill{margin-right:4px}
+  .inv-x{font-size:12px;color:var(--gold);margin-top:2px}
+  .inv-w{font-size:12px;color:var(--text-soft);margin-top:2px}.inv-w.ok{color:#7fe3a0}
+  .inv-note{background:var(--tile);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--text-soft);font-size:13.5px;margin:10px 0}
+  .inv-note.warn{border-color:var(--accent);color:var(--text)}
+  .inv-evo{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
+  .inv-evo>.inv-mon{flex:1;min-width:210px}
+  .inv-arrow{color:var(--cyan);font-weight:700}
+  .inv-tbl{width:100%;border-collapse:collapse;font-size:13px}
+  .inv-tbl td,.inv-tbl th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+  .inv-link{background:var(--tile);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:8px 12px;font:inherit;cursor:pointer;margin:0 6px 6px 0}
+  .inv-link:hover{background:var(--tile-hover)}
+  .inv-q summary{cursor:pointer;font-weight:600;padding:8px 0}.inv-q div{padding:0 0 8px;color:var(--text-soft)}
+
+  /* ===== Nuzlocke Tracker ===== */
+  .nz-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:18px}
+  .nz-stat{background:var(--tile);border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center}
+  .nz-stat b{display:block;font:700 22px Sora,sans-serif}.nz-stat span{font-size:12px;color:var(--text-soft)}
+  .nz-stat.dead b{color:var(--accent)}.nz-stat.ok b{color:#7fe3a0}
+  .nz-add{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+  .nz-add input,.nz-add select,.nz-tbl select{background:var(--glass);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px;font:inherit;min-width:0}
+  .nz-tbl img{width:36px;height:36px;object-fit:contain;vertical-align:middle;cursor:pointer}
+  .nz-tbl tr.dead td{opacity:.6}.nz-x{background:none;border:0;color:var(--text-soft);cursor:pointer;font-size:15px}
+  .nz-tip{border-left:3px solid var(--gold)}.nz-bad{border-left:3px solid var(--accent)}.nz-good{border-left:3px solid #7fe3a0}
 </style>
 </head>
 <body>
@@ -1113,25 +1209,28 @@
       <div class="nav-title">TRAINERS</div>
       <button class="nav-link" data-page="gyms"><span class="dot"></span>Gym Leaders</button>
       <button class="nav-link" data-page="elite4"><span class="dot"></span>Elite Four &amp; Champion</button>
-      <button class="nav-link" data-page="characters"><span class="dot"></span>Rivals &amp; Team Eclipse</button>
+      <button class="nav-link" data-page="characters" hidden aria-hidden="true" tabindex="-1"><span class="dot"></span>Rivals &amp; Team Eclipse</button>
     </div>
 
     <div class="nav-group">
       <div class="nav-title">POKÉMON</div>
       <button class="nav-link" data-page="starters"><span class="dot"></span>Starter Pokémon</button>
       <button class="nav-link" data-page="legendaries"><span class="dot"></span>Legendary Pokémon</button>
-      <button class="nav-link" data-page="mythicals"><span class="dot"></span>Mythical Pokémon</button>
-      <button class="nav-link" data-page="pokedex"><span class="dot"></span>National Pokédex</button>
-      <button class="nav-link" data-page="routes"><span class="dot"></span>Wild Pokémon Areas</button>
+      <button class="nav-link" data-page="mythicals" hidden aria-hidden="true" tabindex="-1"><span class="dot"></span>Mythical Pokémon</button>
+      <button class="nav-link" data-page="pokedex" hidden aria-hidden="true" tabindex="-1"><span class="dot"></span>National Pokédex</button>
+      <button class="nav-link" data-page="routes" hidden aria-hidden="true" tabindex="-1"><span class="dot"></span>Wild Pokémon Areas</button>
+      <button class="nav-link" data-page="teambuilder"><span class="dot"></span>Team Builder</button>
+      <button class="nav-link" data-page="investigator"><span class="dot"></span>Roria Investigator</button>
+      <button class="nav-link" data-page="nuzlocke"><span class="dot"></span>Nuzlocke Tracker</button>
     </div>
 
     <div class="nav-group">
       <div class="nav-title">BRONZE FRONTIER</div>
-      <button class="nav-link" data-page="frontier"><span class="dot"></span>What's New Here</button>
+      <button class="nav-link" data-page="frontier" hidden aria-hidden="true" tabindex="-1"><span class="dot"></span>What's New Here</button>
       <button class="nav-link" data-page="daily"><span class="dot"></span>Daily Bonus</button>
       <button class="nav-link" data-page="codes"><span class="dot"></span>In-Game Codes</button>
       <button class="nav-link" data-page="credits"><span class="dot"></span>Credits</button>
-      <button class="nav-link" data-page="qna"><span class="dot"></span>QnA</button>
+      <button class="nav-link" data-page="qna" hidden aria-hidden="true" tabindex="-1"><span class="dot"></span>QnA</button>
     </div>
   </aside>
 
@@ -1325,13 +1424,38 @@
         </div>
       </div>
 
+      <!-- ================= TEAM BUILDER ================= -->
+      <div class="page" id="page-teambuilder">
+        <section class="block"><h2>Team Builder</h2></section>
+        <div class="callout">Pick up to six Pokémon, then choose a form, ability, held item and four moves for each. The builder shows your team's weaknesses, move/type coverage, and how it matches up against every Gym Leader, Elite Four member and the Champion. Moves and items are free choice (not limited to what a Pokémon can actually learn in-game), and levels aren't factored in — it's a type-matchup tool. Your team is saved in this browser.</div>
+        <div class="tb-bar"><button class="region-tab" id="tb-share">Copy team code</button><button class="region-tab" id="tb-load">Load team code</button><button class="region-tab" id="tb-clear">Clear team</button></div>
+        <datalist id="tb-moves"></datalist>
+        <div id="tb-slots" class="tb-slots"></div>
+        <div id="tb-analysis"></div>
+        <div class="tb-ov" id="tb-ov"><div class="tb-ovbox"><input id="tb-q" type="text" placeholder="Search by name, type or #…" autocomplete="off"><div class="tb-res" id="tb-res"></div></div></div>
+      </div>
+
+      <!-- ================= RORIA INVESTIGATOR ================= -->
+      <div class="page" id="page-investigator">
+        <section class="block"><h2>Roria Investigator</h2></section>
+        <div class="callout">Stuck on a Pokémon mystery? Describe it below, or pick the kind of clue you have. The Investigator cross-checks the wiki's Pokédex, wild Pokémon areas and gym teams with the Pokémon database (PokeAPI), so you don't have to dig through pages.</div>
+        <div id="inv-root"></div>
+      </div>
+
+      <!-- ================= NUZLOCKE TRACKER ================= -->
+      <div class="page" id="page-nuzlocke">
+        <section class="block"><h2>Nuzlocke Tracker</h2></section>
+        <div class="callout">Log your encounters, mark deaths, and prep for the next Gym Leader. Your run is saved in this browser. Use “Copy run code” to back it up or move it to another device.</div>
+        <div id="nz-root"></div>
+      </div>
+
       <!-- ================= GYM TEAM MEMBER MODAL ================= -->
       <div class="guide-overlay" id="gym-mon-overlay">
         <div class="guide-modal" id="gym-mon-modal"></div>
       </div>
 
       <!-- ================= CHARACTERS ================= -->
-      <div class="page" id="page-characters">
+      <div class="page bf-hidden" id="page-characters" aria-hidden="true">
         <section class="block">
           <h2>Rivals</h2>
           <div class="grid-2">
@@ -1393,7 +1517,7 @@
       </div>
 
       <!-- ================= MYTHICAL POKÉMON ================= -->
-      <div class="page" id="page-mythicals">
+      <div class="page bf-hidden" id="page-mythicals" aria-hidden="true">
         <section class="block">
           <h2>Mythical Pokémon</h2>
           <div class="prose">
@@ -1412,7 +1536,7 @@
       </div>
 
       <!-- ================= NATIONAL POKÉDEX ================= -->
-      <div class="page" id="page-pokedex">
+      <div class="page bf-hidden" id="page-pokedex" aria-hidden="true">
         <section class="block">
           <h2>National Pokédex</h2>
           <div class="prose">
@@ -1462,7 +1586,7 @@
       </div>
 
       <!-- ================= WILD POKÉMON AREAS ================= -->
-      <div class="page" id="page-routes">
+      <div class="page bf-hidden" id="page-routes" aria-hidden="true">
         <section class="block">
           <h2>Wild Pokémon Areas</h2>
           <div class="prose">
@@ -1527,7 +1651,7 @@
       </div>
 
       <!-- ================= FRONTIER ADDITIONS ================= -->
-      <div class="page" id="page-frontier">
+      <div class="page bf-hidden" id="page-frontier" aria-hidden="true">
         <section class="block">
           <h2>What's New in Bronze Frontier <small>WORK IN PROGRESS</small></h2>
           <div class="prose">
@@ -1691,13 +1815,21 @@
           </div>
         </section>
 
+        <section class="block">
+          <h2>Special Mention</h2>
+          <div class="prose">
+            <p><b>Mr_Headshot (Red)</b></p>
+            <p>This is a special thank you to Red from the official PBFL Discord. Thank you for your continued effort in making this community a better place. From answering questions on the daily, to breeding entire mons for the community. Your contributions have not gone unnoticed. You are a pillar in the community, and it's crazy to think how much the community depends on you now. Thank you for being you.</p>
+          </div>
+        </section>
+
         <div class="callout sky">
           Pokémon is a trademark of Nintendo, Game Freak, and Creatures Inc. This wiki is not affiliated with Nintendo or The Pokémon Company.
         </div>
       </div>
 
       <!-- ================= QNA ================= -->
-      <div class="page" id="page-qna">
+      <div class="page bf-hidden" id="page-qna" aria-hidden="true">
         <section class="block">
           <h2>QnA</h2>
           <div class="prose">
@@ -1727,7 +1859,10 @@
   const pages = document.querySelectorAll('.page');
   const crumb = document.getElementById('crumb');
 
+  /* Pages kept in the file but not reachable by visitors */
+  const HIDDEN_PAGES = ['characters', 'mythicals', 'pokedex', 'routes', 'frontier', 'qna'];
   function goTo(id){
+    if(HIDDEN_PAGES.includes(id)) return;
     links.forEach(l=>l.classList.toggle('active', l.dataset.page===id));
     pages.forEach(p=>p.classList.toggle('active', p.id==='page-'+id));
     const label = document.querySelector('.nav-link[data-page="'+id+'"]').textContent.trim();
@@ -2476,7 +2611,7 @@
 
     { group:'Bronze Frontier Addition', name:'Ho-Oh', dex:250, types:['Fire','Flying'], location:'Tinbell Construction Site' },
     { group:'Bronze Frontier Addition', name:'Regieleki', dex:894, types:['Electric'], location:'' },
-    { group:'Bronze Frontier Addition', name:'Zygarde', dex:718, types:['Dragon','Ground'], location:'' },
+    { group:'Bronze Frontier Addition', name:'Zygarde', dex:718, types:['Dragon','Ground'], location:'Lagoona Trenches' },
     { group:'Bronze Frontier Addition', name:'Chi-Yu', dex:1004, types:['Dark','Fire'], location:'' },
     { group:'Bronze Frontier Addition', name:'Kubfu', dex:891, types:['Fighting'], location:'' },
     { group:'Bronze Frontier Addition', name:'Articuno-Galar', dex:'10169', types:['Psychic','Flying'], location:'Route 15 → Roaming Pokémon' },
@@ -2611,10 +2746,17 @@
          { title: 'WILL BE ADDED LATER!', text: 'At this point in time, confirming and double-checking our sources is not possible. Will be added sometime soon!'},
     ],
     'Zygarde': [
-         { title: 'WILL BE ADDED LATER!', text: 'At this point in time, confirming and double-checking our sources is not possible. Will be added sometime soon!'},
+         { title: 'Get your 8th Badge', text: 'In order to get Zygarde, you will need all 8 gym badges. Please do this before proceeding.'},
+         { title: 'Gather the Relics', text: 'You must collect 6 relics from diving in Lagoona Trenches. These relics are really rare, so I highly recommend gathering plenty of UMV batteries before attempting to go for them.'},
+         { title: 'Find the Door', text: 'Located somewhere in the center of the trenches is a door with 6 holes in it. Once you have obtained the 6 relics. simply interact with the door to place them in.'},
+         { title: 'Battle Zygarde', text: 'With the door opened, enter the chamber and start the battle!'},
     ],
     'Chi-Yu': [
-         { title: 'WILL BE ADDED LATER!', text: 'At this point in time, confirming and double-checking our sources is not possible. Will be added sometime soon!'},
+         { title: 'Get Heatproof Rod Base', text: 'First step to obtaining Chi-Yu is obtaining the Heatproof Rod Base. To get this item, go to Bobs Magikarp Pond in Cosmeos Valley. Talk to the lady behind the counter and buy the base for 10 grand.'},
+         { title: 'Get a Heat Rock', text: 'Secondly, You will need a Heat Rock. You can get a Heat Rock for yourself from UMV dives. They seem to be relatively uncommon. So it should not take you too long.'},
+         { title: 'Get a Charcoal', text: 'Next, You will need a Charcoal. You can get a Charcoal for yourself by looking behind the house next closest to the Pokemon Center in Brimber City.'},
+         { title: 'Create the Rod', text: 'Once you have all the items, head into the house directly next to the Pokemon Center and talk to the guy there. He will hand you the Ashen Rod.'},
+         { title: 'Fish for Chi-yu', text: 'Upon obtaining the rod, go to mt. Igneus and start fishing in the lava closest to the rock climb wall. This is where you can obtain Chi-yu'},
     ],
     'Kubfu': [
          { title: 'WILL BE ADDED LATER!', text: 'At this point in time, confirming and double-checking our sources is not possible. Will be added sometime soon!'},
@@ -2703,6 +2845,12 @@
     ],
     'Moltres-Galar': [
       { type:'video', title:'', text:'Visual Guide', url:'https://youtu.be/qqPzBa49xUI?si=d3CAmVVDtjTI1tSZ' },
+    ],
+    'Zygarde': [
+      { type:'tip', title:'Safety Net', text:'Similarly to all other soft-resettables, make sure you turn off autosave and save manually right before talking to it. This ensures that if you fail, you can try again!' }
+    ],
+    'Chi-Yu': [
+      { type:'video', title:'', text:'Visual Guide', url:'https://youtube.com/shorts/PKh5_DGer5M?si=spRH7xrdNs_23U9X' },
     ],
   };
 
@@ -3164,7 +3312,7 @@
         { name: 'Gengar', dex: 94, level: 95, ability:'Shadow Tag', moves:['Unknown','Shadow Ball','Sludge Bomb','Unknown'], mega:true, megaForm:'mega', megaStone:'Gengarite' },
       ], notes:[
 	'Seems to always lead with Toxic Spikes.',
-	'This data is incomplete. Please send @shiverisc a message on Discord if you can fill out more of this!',
+	'This data is incomplete. Please send @thecoldclover a message on Discord if you can fill out more of this!',
       ] },
     { num:2, role:'Elite Four #2', name:'Dwayne', meta:'', type:'Rock', color:'#915B07',
       badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/Rock_icon_SwSh.png?raw=true', levelCap:98, team:[
@@ -3176,7 +3324,7 @@
         { name: 'Aerodactyl', dex: 142, level: 95, ability:'Shadow Tag', moves:['Rock Slide','Earthquake','Dragon Claw','Unknown'], mega:true, megaForm:'mega', megaStone:'Aerodactylite' },
       ], notes:[
 	'Seems to always lead with Stone Axe (Stealth Rock).',
-	'This data is incomplete. Please send @shiverisc a message on Discord if you can fill out more of this!',
+	'This data is incomplete. Please send @thecoldclover a message on Discord if you can fill out more of this!',
       ] },
     { num:3, role:'Elite Four #3', name:'Teddy', meta:'', type:'Bug', color:'#9CED9C',
       badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/Bug_icon_SwSh.png?raw=true', levelCap:98, team:[
@@ -3188,7 +3336,7 @@
         { name: 'Scizor', dex: 212, level: 95, ability:'Technician', moves:['Bullet Punch','Swords Dance','Brutal Swing','Bug Bite(?)'], mega:true, megaForm:'mega', megaStone:'Scizorite' },
       ], notes:[
 	'Seems to always lead with Sticky Web.',
-	'This data is incomplete. Please send @shiverisc a message on Discord if you can fill out more of this!',
+	'This data is incomplete. Please send @thecoldclover a message on Discord if you can fill out more of this!',
       ] },
     { num:4, role:'Elite Four #4', name:'Lena', meta:'', type:'Fairy', color:'#FFAAD4',
       badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/Fairy_icon_SwSh.png?raw=true', levelCap:98, team:[
@@ -3200,7 +3348,7 @@
         { name: 'Mawile', dex: 303, level: 98, ability:'Intimidate', moves:['Swords Dance','Sucker Punch','Play Rough','Iron Head'], mega:true, megaForm:'mega', megaStone:'Mawilite' },
       ], notes:[
 	'Seems to always lead with screens.',
-	'This data is incomplete. Please send @shiverisc a message on Discord if you can fill out more of this!',
+	'This data is incomplete. Please send @thecoldclover a message on Discord if you can fill out more of this!',
       ] },
     { num:5, role:'Champion of Roria', name:'Brad', meta:'', type:'Various', color:'#B5793A',
       badge:'https://github.com/BronzeFrontier/bronzefrontier.github.io/blob/main/canva-crown-vector-icon-MAFJn8GRZO0.png?raw=true', levelCap:100, team:[
@@ -4323,6 +4471,9 @@
   function buildSearchIndex(){
     const idx = [
       { title:'Welcome to the Bronze Frontier Wiki', page:'home', category:'Home', match:'Welcome to the' },
+      { title:'Team Builder', page:'teambuilder', category:'Tool', match:'Team Builder' },
+      { title:'Roria Investigator', page:'investigator', category:'Tool', match:'Roria Investigator' },
+      { title:'Nuzlocke Tracker', page:'nuzlocke', category:'Tool', match:'Nuzlocke Tracker' },
       { title:'Mitis Town', page:'home', category:'Story', match:'Mitis Town' },
       { title:'Rival Jake', page:'home', category:'Story', match:'Rival Jake' },
       { title:'Professor Cypress', page:'home', category:'Story', match:'Professor Cypress' },
@@ -4415,7 +4566,7 @@
       idx.push({ title:x.q, page:'qna', category:'QnA' + (x.tag ? ' \u00b7 ' + x.tag : ''), action:{ type:'qna', id:i } });
     });
 
-    return idx;
+    return idx.filter(e => !HIDDEN_PAGES.includes(e.page));
   }
 
   function scrollToAndHighlight(containerSelector, textMatch){
@@ -4672,6 +4823,515 @@
   })();
 
   initSearch();
+  /* ===== Team Builder ===== */
+  (function initTeamBuilder(){
+    const TYPES = Object.keys(TYPE_COLORS);
+    const SE={Normal:'',Fire:'Grass Ice Bug Steel',Water:'Fire Ground Rock',Electric:'Water Flying',Grass:'Water Ground Rock',Ice:'Grass Ground Flying Dragon',Fighting:'Normal Ice Rock Dark Steel',Poison:'Grass Fairy',Ground:'Fire Electric Poison Rock Steel',Flying:'Grass Fighting Bug',Psychic:'Fighting Poison',Bug:'Grass Psychic Dark',Rock:'Fire Ice Flying Bug',Ghost:'Psychic Ghost',Dragon:'Dragon',Dark:'Psychic Ghost',Steel:'Ice Rock Fairy',Fairy:'Fighting Dragon Dark'};
+    const NV={Normal:'Rock Steel',Fire:'Fire Water Rock Dragon',Water:'Water Grass Dragon',Electric:'Electric Grass Dragon',Grass:'Fire Grass Poison Flying Bug Dragon Steel',Ice:'Fire Water Ice Steel',Fighting:'Poison Flying Psychic Bug Fairy',Poison:'Poison Ground Rock Ghost',Ground:'Grass Bug',Flying:'Electric Rock Steel',Psychic:'Psychic Steel',Bug:'Fire Fighting Poison Flying Ghost Steel Fairy',Rock:'Fighting Ground Steel',Ghost:'Dark',Dragon:'Steel',Dark:'Fighting Dark Fairy',Steel:'Fire Water Electric Steel',Fairy:'Fire Poison Steel'};
+    const IM={Normal:'Ghost',Electric:'Ground',Fighting:'Ghost',Poison:'Steel',Ground:'Flying',Psychic:'Dark',Ghost:'Normal',Dragon:'Fairy'};
+    const has=(s,t)=>(s||'').split(' ').includes(t);
+    const eff=(a,d)=>d.reduce((m,t)=>m*(has(IM[a],t)?0:has(SE[a],t)?2:has(NV[a],t)?.5:1),1);
+
+    /* Move → type table (damaging moves only; status moves give no coverage). Add more here as needed. */
+    const MV_RAW={
+      Normal:'Tackle,Scratch,Pound,Quick Attack,Body Slam,Double-Edge,Hyper Beam,Giga Impact,Take Down,Slam,Facade,Extreme Speed,Hyper Voice,Swift,Boomburst,Super Fang,Fake Out,Headbutt,Tri Attack,Return,Judgment,Last Resort,Mega Kick,Crush Claw,Strength,Thrash,Slash,Techno Blast,Retaliate',
+      Fire:'Flamethrower,Fire Blast,Overheat,Flare Blitz,Fire Punch,Flame Wheel,Flame Burst,Fire Fang,Inferno,Fiery Dance,Heat Wave,Lava Plume,Blast Burn,Eruption,Sacred Fire,Ember,Blue Flare,Mystical Fire,Burn Up,Pyro Ball,Armor Cannon,Torch Song',
+      Water:'Surf,Hydro Pump,Scald,Waterfall,Aqua Tail,Aqua Jet,Muddy Water,Brine,Liquidation,Crabhammer,Water Pulse,Bubble Beam,Origin Pulse,Hydro Cannon,Razor Shell,Surging Strikes,Wave Crash,Sparkling Aria,Water Spout,Fishious Rend',
+      Electric:'Thunderbolt,Thunder,Thunder Punch,Wild Charge,Volt Tackle,Charge Beam,Thunder Fang,Discharge,Spark,Volt Switch,Nuzzle,Zap Cannon,Bolt Strike,Fusion Bolt,Thunder Shock,Plasma Fists,Electro Ball,Wildbolt Storm',
+      Grass:'Giga Drain,Energy Ball,Leaf Blade,Solar Beam,Seed Bomb,Wood Hammer,Power Whip,Leaf Storm,Petal Dance,Grass Knot,Horn Leech,Needle Arm,Frenzy Plant,Petal Blizzard,Trop Kick,Apple Acid,Grav Apple,Leafage,Razor Leaf,Seed Flare,Solar Blade,Leaf Tornado',
+      Ice:'Ice Beam,Blizzard,Ice Punch,Icicle Spear,Ice Shard,Avalanche,Freeze-Dry,Icicle Crash,Ice Fang,Frost Breath,Glaciate,Aurora Beam,Triple Axel,Freeze Shock,Ice Burn,Icy Wind,Mountain Gale',
+      Fighting:'Close Combat,Superpower,Brick Break,Drain Punch,Focus Blast,Aura Sphere,Mach Punch,Sacred Sword,Dynamic Punch,Cross Chop,High Jump Kick,Low Sweep,Storm Throw,Hammer Arm,Rock Smash,Vital Throw,Sky Uppercut,Force Palm,Revenge,Reversal,Counter,Focus Punch,Secret Sword,Body Press,Axe Kick,Collision Course,Upper Hand,Jump Kick,Double Kick,Arm Thrust,Circle Throw,Seismic Toss,Submission,Karate Chop,Low Kick',
+      Poison:'Sludge Bomb,Sludge Wave,Poison Jab,Gunk Shot,Cross Poison,Venoshock,Poison Fang,Belch,Mortal Spin,Dire Claw,Acid,Sludge,Poison Sting,Malignant Chain,Barb Barrage,Acid Spray',
+      Ground:'Earthquake,Earth Power,Bulldoze,Drill Run,High Horsepower,Mud Shot,Mud Bomb,Precipice Blades,Lands Wrath,Thousand Arrows,Fissure,Dig,Mud-Slap,Stomping Tantrum,Bonemerang,Bone Rush,Scorching Sands,Headlong Rush,Sand Tomb',
+      Flying:'Brave Bird,Aerial Ace,Air Slash,Hurricane,Drill Peck,Fly,Acrobatics,Wing Attack,Peck,Dragon Ascent,Sky Attack,Oblivion Wing,Bleakwind Storm,Gust,Aeroblast,Chatter,Pluck,Beak Blast,Air Cutter',
+      Psychic:'Psychic,Psyshock,Zen Headbutt,Psycho Cut,Future Sight,Psystrike,Extrasensory,Stored Power,Psybeam,Confusion,Luster Purge,Mist Ball,Expanding Force,Psyblade,Photon Geyser,Prismatic Laser,Esper Wing,Freezing Glare',
+      Bug:'Bug Buzz,U-turn,X-Scissor,Megahorn,Lunge,Bug Bite,Signal Beam,Leech Life,Pin Missile,Silver Wind,First Impression,Attack Order,Struggle Bug,Fell Stinger,Skitter Smack,Pollen Puff,Fury Cutter,Steamroller,Twineedle',
+      Rock:'Stone Edge,Rock Slide,Rock Blast,Power Gem,Ancient Power,Rock Tomb,Head Smash,Meteor Beam,Stone Axe,Accelerock,Diamond Storm,Smack Down,Rollout,Rock Wrecker,Rock Throw,Salt Cure,Mighty Cleave',
+      Ghost:'Shadow Ball,Shadow Claw,Shadow Sneak,Phantom Force,Hex,Astonishing,Night Shade,Shadow Punch,Poltergeist,Moongeist Beam,Spectral Thief,Lick,Shadow Bone,Spirit Shackle,Last Respects,Rage Fist,Bitter Malice,Infernal Parade',
+      Dragon:'Dragon Claw,Dragon Pulse,Outrage,Draco Meteor,Dragon Rush,Dragon Tail,Dual Chop,Spacial Rend,Roar of Time,Dragon Darts,Core Enforcer,Clanging Scales,Dragon Breath,Twister,Dragon Hammer,Glaive Rush,Dragon Energy,Eternabeam',
+      Dark:'Crunch,Dark Pulse,Knock Off,Sucker Punch,Foul Play,Night Slash,Pursuit,Assurance,Brutal Swing,Payback,Throat Chop,Bite,Feint Attack,Thief,Snarl,Darkest Lariat,Wicked Blow,Ceaseless Edge,Lash Out,Beat Up,Jaw Lock',
+      Steel:'Iron Head,Flash Cannon,Meteor Mash,Bullet Punch,Iron Tail,Steel Wing,Metal Claw,Gyro Ball,Heavy Slam,Smart Strike,Doom Desire,Make It Rain,Sunsteel Strike,Anchor Shot,Mirror Shot,Magnet Bomb,Behemoth Blade,Behemoth Bash,Steel Beam,Spin Out,Steel Roller,Gigaton Hammer,Double Iron Bash',
+      Fairy:'Moonblast,Play Rough,Dazzling Gleam,Draining Kiss,Spirit Break,Fleur Cannon,Disarming Voice,Light of Ruin,Strange Steam,Misty Explosion,Fairy Wind,Alluring Voice'
+    };
+    const nk=s=>String(s||'').toLowerCase().replace(/[^a-z]/g,'');
+    const MOVE={}, MOVE_NAMES=[];
+    Object.entries(MV_RAW).forEach(([t,l])=>l.split(',').forEach(m=>{ MOVE[nk(m)]=t; MOVE_NAMES.push(m); }));
+    MOVE_NAMES.sort();
+    document.getElementById('tb-moves').innerHTML = MOVE_NAMES.map(m=>`<option value="${m}">${MOVE[nk(m)]}</option>`).join('');
+
+    /* Form type changes (Megas that change type, regional forms, Rotom forms). Key: "<dex>-<form>". */
+    const FT={};
+    ('6-mega-x:Fire/Dragon 6-mega-y:Fire/Flying 15-mega:Bug/Poison 127-mega:Bug/Flying 130-mega:Water/Dark 150-mega-x:Psychic/Fighting 181-mega:Electric/Dragon 254-mega:Grass/Dragon 306-mega:Steel 334-mega:Dragon/Fairy 428-mega:Normal/Fighting 531-mega:Normal/Fairy '+
+     '19-alola:Dark/Normal 20-alola:Dark/Normal 26-alola:Electric/Psychic 27-alola:Ice/Steel 28-alola:Ice/Steel 37-alola:Ice 38-alola:Ice/Fairy 50-alola:Ground/Steel 51-alola:Ground/Steel 52-alola:Dark 53-alola:Dark 74-alola:Rock/Electric 75-alola:Rock/Electric 76-alola:Rock/Electric 88-alola:Poison/Dark 89-alola:Poison/Dark 103-alola:Grass/Dragon 105-alola:Fire/Ghost '+
+     '52-galar:Steel 77-galar:Psychic 78-galar:Psychic/Fairy 79-galar:Psychic 80-galar:Poison/Psychic 83-galar:Fighting 110-galar:Poison/Fairy 122-galar:Ice/Psychic 144-galar:Psychic/Flying 145-galar:Fighting/Flying 146-galar:Dark/Flying 199-galar:Poison/Psychic 222-galar:Ghost 263-galar:Dark/Normal 264-galar:Dark/Normal 554-galar:Ice 555-galar:Ice 562-galar:Ground/Ghost 618-galar:Ground/Steel '+
+     '58-hisui:Fire/Rock 59-hisui:Fire/Rock 100-hisui:Electric/Grass 101-hisui:Electric/Grass 157-hisui:Fire/Ghost 211-hisui:Dark/Poison 215-hisui:Fighting/Poison 503-hisui:Water/Dark 549-hisui:Grass/Fighting 570-hisui:Normal/Ghost 571-hisui:Normal/Ghost 628-hisui:Psychic/Flying 705-hisui:Steel/Dragon 706-hisui:Steel/Dragon 713-hisui:Ice/Rock 724-hisui:Grass/Fighting '+
+     '128-paldea:Fighting 194-paldea:Poison/Ground 479-heat:Electric/Fire 479-wash:Electric/Water 479-frost:Electric/Ice 479-fan:Electric/Flying 479-mow:Electric/Grass'
+    ).split(' ').forEach(x=>{ const [k,v]=x.split(':'); FT[k]=v.split('/'); });
+    const typesOf=(dex,key)=>{ const p=pokedexEntry(dex); return p ? ((key && FT[dex+'-'+key]) || p.types) : []; };
+    const mega=k=>!!k && k.startsWith('mega');
+    function formsFor(d){
+      const o=[];
+      Object.keys(MEGA_SPRITE_IDS).forEach(k=>{ if(k.startsWith(d+'-mega')) o.push(k.slice(String(d).length+1)); });
+      Object.keys(REGIONAL_SPRITE_IDS).forEach(k=>{ if(k.startsWith(d+'-')) o.push(k.split('-')[1]); });
+      Object.keys(ALT_FORM_SPRITE_IDS).forEach(k=>{ if(k.startsWith(d+'-')) o.push(k.split('-')[1]); });
+      return o;
+    }
+    const fLabel=k=>!k?'Base':mega(k)?('Mega'+(k.slice(5)?' '+k.slice(5).toUpperCase():'')):(REGION_META[k]?REGION_META[k].label+' form':(ALT_FORM_META[k]?ALT_FORM_META[k].label:k));
+
+    /* Abilities that change type matchups. Values are damage multipliers per attacking type. */
+    const AB={Levitate:{Ground:0},'Flash Fire':{Fire:0},'Water Absorb':{Water:0},'Volt Absorb':{Electric:0},'Lightning Rod':{Electric:0},'Storm Drain':{Water:0},'Sap Sipper':{Grass:0},'Motor Drive':{Electric:0},'Earth Eater':{Ground:0},'Well-Baked Body':{Fire:0},'Dry Skin':{Water:0,Fire:1.25},'Thick Fat':{Fire:.5,Ice:.5},Heatproof:{Fire:.5},'Water Bubble':{Fire:.5},Fluffy:{Fire:2}};
+    const BERRY={Occa:'Fire',Passho:'Water',Wacan:'Electric',Rindo:'Grass',Yache:'Ice',Chople:'Fighting',Kebia:'Poison',Shuca:'Ground',Coba:'Flying',Payapa:'Psychic',Tanga:'Bug',Charti:'Rock',Kasib:'Ghost',Haban:'Dragon',Colbur:'Dark',Babiri:'Steel',Roseli:'Fairy'};
+    const ITEM_OPTS=[...['Leftovers','Life Orb','Choice Band','Choice Specs','Choice Scarf','Focus Sash','Assault Vest','Eviolite','Rocky Helmet','Sitrus Berry','Lum Berry','Heavy-Duty Boots','Air Balloon','Expert Belt','Weakness Policy','Black Sludge','Shell Bell','Light Clay','Scope Lens','Wide Lens','Muscle Band','Wise Glasses','Safety Goggles','Flame Orb','Toxic Orb','Black Belt','Charcoal','Mystic Water','Magnet','Miracle Seed','Never-Melt Ice','Sharp Beak','Soft Sand','Spell Tag','Dragon Fang','Silk Scarf','Twisted Spoon','Silver Powder','Hard Stone','Metal Coat','Poison Barb','Fairy Feather'].map(n=>[n,n]),
+      ...Object.entries(BERRY).map(([n,t])=>[n+' Berry',n+' Berry ('+t+' resist)'])];
+    const BERRY_T={}; Object.entries(BERRY).forEach(([n,t])=>BERRY_T[n+' Berry']=t);
+
+    /* Damage multiplier an attacking type deals to mon m, including ability / item effects. */
+    function dm(m,a){
+      let x=eff(a,m.types);
+      if(a==='Ground' && m.item==='Air Balloon') return 0;
+      const q=AB[m.ab]; if(q && q[a]!==undefined) x*=q[a];
+      if(m.ab==='Wonder Guard' && x<=1) return 0;
+      if(x>1 && /^(Filter|Solid Rock|Prism Armor)$/.test(m.ab)) x*=.75;
+      if(BERRY_T[m.item]===a && x>1) x*=.5;
+      return x;
+    }
+    const dmgTypes=m=>[...new Set((m.moves||[]).map(x=>MOVE[nk(x)]).filter(Boolean))];
+    const offTypes=m=>{ const t=dmgTypes(m); return t.length?t:m.types; };
+    const off=(m,f)=>Math.max(0,...offTypes(m).map(t=>dm(f,t)));
+    const L=x=>x===0?-2:Math.max(-2,Math.min(2,Math.log2(x)));
+    const fx=x=>x===.5?'½':x===.25?'¼':String(x);
+    const cleanAb=a=>String(a||'').replace(/\(\?\)/,'').trim();
+
+    /* ---------- state ---------- */
+    const $=id=>document.getElementById(id);
+    const KEY='bf-wiki-team-builder';
+    let team=[null,null,null,null,null,null];
+    const norm=s=>s&&pokedexEntry(s.dex)?{dex:s.dex,form:s.form||'',ability:s.ability||'',item:s.item||'',moves:[0,1,2,3].map(j=>(s.moves&&s.moves[j])||'')}:null;
+    try{ const r=JSON.parse(localStorage.getItem(KEY)||'null'); if(Array.isArray(r)&&r.length===6) team=r.map(norm); }catch(e){}
+    const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(team)); }catch(e){} };
+    const members=()=>team.filter(Boolean).map(s=>{ const p=pokedexEntry(s.dex); return {s,p,name:p.name,dex:s.dex,form:s.form,types:typesOf(s.dex,s.form),ab:mega(s.form)?'':s.ability,item:s.item,moves:s.moves.filter(Boolean)}; });
+    const foeOf=p=>{ const key=p.mega?(p.megaForm||'mega'):(p.region||p.altForm||''); return {name:p.name,dex:p.dex,form:key,level:p.level,types:typesOf(p.dex,key),ab:cleanAb(p.ability),item:'',moves:p.moves||[]}; };
+    const isUnavail=p=>dexUnavailable.has(p.dex)||dexUnavailable.has(String(p.dex));
+
+    /* ---------- slots ---------- */
+    const STATS=[['HP','hp'],['Atk','atk'],['Def','def'],['SpA','spa'],['SpD','spd'],['Spe','spe']];
+    const opt=(v,l,sel)=>`<option value="${escapeHtml(v)}"${sel?' selected':''}>${escapeHtml(l)}</option>`;
+    function slotHtml(s,i){
+      if(!s) return `<div class="tb-slot tb-empty"><button class="tb-pick" data-i="${i}">+ Add Pokémon</button><span class="tb-n">Slot ${i+1}</span></div>`;
+      const p=pokedexEntry(s.dex), fs=formsFor(s.dex), ty=typesOf(s.dex,s.form), mg=mega(s.form);
+      const bst=STATS.reduce((a,x)=>a+p.stats[x[1]],0);
+      return `<div class="tb-slot">
+        <div class="tb-top"><img src="${spriteUrl(s.dex,s.form||null)}" alt=""><div><b>${escapeHtml(p.name)}</b><div class="tb-types">${ty.map(typePill).join('')}</div><small>BST ${bst}</small></div><button class="tb-rm" data-i="${i}" title="Remove">✕</button></div>
+        <button class="tb-pick" data-i="${i}">Change Pokémon</button>
+        <label>Form<select data-i="${i}" data-f="form">${opt('','Base',!s.form)}${fs.map(k=>opt(k,fLabel(k),s.form===k)).join('')}</select></label>
+        <label>Ability<select data-i="${i}" data-f="ability"${mg?' disabled':''}>${mg?'<option>Mega ability (not modeled)</option>':p.abilities.map(a=>opt(a.name,a.name+(a.hidden?' (Hidden)':''),s.ability===a.name)).join('')}</select></label>
+        <label>Held item<select data-i="${i}" data-f="item">${opt('','— none —',!s.item)}${ITEM_OPTS.map(o=>opt(o[0],o[1],s.item===o[0])).join('')}</select></label>
+        <div class="tb-moves">${[0,1,2,3].map(j=>`<input list="tb-moves" data-i="${i}" data-m="${j}" value="${escapeHtml(s.moves[j])}" placeholder="Move ${j+1}">`).join('')}</div>
+        <div class="tb-stats">${STATS.map(x=>`<span>${x[0]}</span><i><u style="width:${Math.min(100,p.stats[x[1]]/1.6)}%"></u></i><em>${p.stats[x[1]]}</em>`).join('')}</div>
+      </div>`;
+    }
+    const renderSlots=()=>{ $('tb-slots').innerHTML=team.map(slotHtml).join(''); };
+
+    /* ---------- analysis ---------- */
+    function defTable(ms){
+      const cell=x=>`<td class="${x===0?'tb-im':x>=4?'tb-w2':x>1?'tb-w':x<1?'tb-r':''}">${x===0?'0':x===1?'':x===.25?'¼':x===.5?'½':x>1?String(x):x.toFixed(2)}</td>`;
+      const wk=TYPES.map(t=>ms.filter(m=>dm(m,t)>1).length), rs=TYPES.map(t=>ms.filter(m=>dm(m,t)<1).length);
+      let h='<div class="tb-scroll"><table class="tb-tbl"><thead><tr><th></th>'+TYPES.map(t=>`<th><span style="background:${TYPE_COLORS[t]}" title="${t}">${t.slice(0,3).toUpperCase()}</span></th>`).join('')+'</tr></thead><tbody>';
+      ms.forEach(m=>{ h+=`<tr><th><img src="${spriteUrl(m.dex,m.form||null)}" alt="" title="${escapeHtml(m.name)}"></th>`+TYPES.map(t=>cell(dm(m,t))).join('')+'</tr>'; });
+      h+='<tr class="tb-sum"><th>Weak</th>'+wk.map((n,i)=>`<td class="${n>=2&&!rs[i]?'tb-bad':n?'tb-w':''}">${n||''}</td>`).join('')+'</tr>';
+      h+='<tr class="tb-sum"><th>Resist</th>'+rs.map(n=>`<td class="${n?'tb-r':''}">${n||''}</td>`).join('')+'</tr></tbody></table></div>';
+      return {h,wk,rs};
+    }
+    function covTiles(ms){
+      const cov=TYPES.map(T=>{ let b=0; const who=[]; ms.forEach(m=>{ const x=Math.max(0,...offTypes(m).map(t=>eff(t,[T]))); if(x>1) who.push(m.name); b=Math.max(b,x); }); return {T,b,who}; });
+      const h='<div class="tb-cov">'+cov.map(c=>`<div class="${c.b>1?'tb-cg':c.b<1?'tb-cr':'tb-cn'}" title="${escapeHtml(c.who.join(', ')||'No super-effective hit')}"><span style="color:${TYPE_COLORS[c.T]};font-weight:700">${c.T}</span><b>${c.b>1?'×'+c.b:c.b===0?'×0':'×'+fx(c.b)}</b><small>${c.who.length?c.who.length+' hit SE':'—'}</small></div>`).join('')+'</div>';
+      return {h,cov};
+    }
+    const RATE=v=>v>=1.2?['Excellent','#5FAE5A']:v>=.5?['Good','#9BBF2A']:v>=-.2?['Even','#F4C77A']:v>=-1?['Risky','#E8823A']:['Tough','#e0475a'];
+    function matchHtml(ms){
+      return [['Gym Leaders',GYMS],['Elite Four & Champion',ELITE4]].map(([title,arr])=>`<h3 class="tb-h3">${title}</h3>`+arr.map(t=>{
+        const foes=(t.team||[]).map(foeOf).filter(f=>f.types.length);
+        if(!foes.length) return '';
+        const rows=foes.map(f=>{
+          let b=null,bv=-9;
+          ms.forEach(m=>{ const o=off(m,f), d=Math.max(0,...offTypes(f).map(x=>dm(m,x))), v=L(o)-L(d); if(v>bv){ bv=v; b={m,o,d}; } });
+          return {f,b,bv,hit:ms.some(m=>off(m,f)>1)};
+        });
+        const avg=rows.reduce((a,r)=>a+r.bv,0)/rows.length, [lab,col]=RATE(avg), hits=rows.filter(r=>r.hit).length;
+        const name=(t.role||('Gym '+t.num))+' · '+t.name;
+        const detail=rows.map(r=>{
+          const {m,o,d}=r.b;
+          const ans=o>1&&d<=1?`<span style="color:#7fd67a">✔ ${escapeHtml(m.name)} — hits ×${fx(o)}, takes ×${fx(d)}</span>`
+            :o>1?`<span style="color:#F4C77A">⚠ ${escapeHtml(m.name)} hits ×${fx(o)} but takes ×${fx(d)}</span>`
+            :`<span style="color:#ff8a97">✖ No super-effective answer (best: ${escapeHtml(m.name)}, ×${fx(o)} / takes ×${fx(d)})</span>`;
+          return `<div class="tb-foe"><img src="${spriteUrl(r.f.dex,r.f.form||null)}" alt=""><div><b>${escapeHtml(r.f.name)}</b> <small>Lv ${r.f.level}</small><div class="tb-types">${r.f.types.map(typePill).join('')}</div></div><div>${ans}</div></div>`;
+        }).join('');
+        return `<details class="tb-m"><summary>${rows.map(r=>`<img src="${spriteUrl(r.f.dex,r.f.form||null)}" alt="" title="${escapeHtml(r.f.name)}">`).join('')}<b>${escapeHtml(name)}</b><small>${hits}/${rows.length} hit super-effectively</small><span class="tb-rate" style="background:${col}">${lab}</span><div class="tb-bar2"><i style="width:${Math.round(Math.max(0,Math.min(1,(avg+2)/4))*100)}%;background:${col}"></i></div></summary>${detail}</details>`;
+      }).join('')).join('');
+    }
+    function renderAnalysis(){
+      const ms=members(), el=$('tb-analysis');
+      if(!ms.length){ el.innerHTML='<div class="callout">Add at least one Pokémon to see your team\'s weaknesses, coverage and gym matchups.</div>'; return; }
+      const D=defTable(ms), C=covTiles(ms), ins=[];
+      const shared=TYPES.filter((t,i)=>D.wk[i]>=2&&!D.rs[i]);
+      shared.forEach(t=>ins.push(`<div class="bad"><b>Shared weakness:</b> ${D.wk[TYPES.indexOf(t)]} members are weak to ${t} and none resist it.</div>`));
+      const gaps=C.cov.filter(c=>c.b<=1).map(c=>c.T);
+      ins.push(gaps.length?`<div class="${gaps.length>3?'bad':''}"><b>Coverage gaps:</b> nothing on your team hits ${gaps.join(', ')} super-effectively.</div>`:'<div class="good"><b>Full coverage:</b> every type is hit super-effectively by at least one move.</div>');
+      const noMoves=ms.filter(m=>!dmgTypes(m).length).length;
+      if(noMoves) ins.push(`<div><b>${noMoves} member${noMoves>1?'s have':' has'} no damaging moves picked</b> — their own types are used as a stand-in (STAB estimate).</div>`);
+      const avgs=STATS.map(x=>Math.round(ms.reduce((a,m)=>a+m.p.stats[x[1]],0)/ms.length));
+      el.innerHTML=`<h3 class="tb-h3">Team Summary</h3><div class="tb-ins">${ins.join('')}</div>
+        <h3 class="tb-h3">Weaknesses &amp; Resistances <small style="color:var(--text-soft);font-weight:400">(damage taken, includes abilities, Air Balloon and resist berries)</small></h3>${D.h}
+        <h3 class="tb-h3">Type Coverage <small style="color:var(--text-soft);font-weight:400">(best multiplier your moves deal to each type · hover for who)</small></h3>${C.h}
+        <h3 class="tb-h3">Average Base Stats</h3><div class="tb-stats" style="max-width:420px">${STATS.map((x,i)=>`<span>${x[0]}</span><i><u style="width:${Math.min(100,avgs[i]/1.6)}%"></u></i><em>${avgs[i]}</em>`).join('')}</div>
+        <h2 style="margin-top:34px;border-bottom:1px solid var(--line);padding-bottom:10px">Matchups vs. Roria's Trainers</h2>
+        <p style="color:var(--text-soft);font-size:13px;margin:10px 0 0">Each rating compares your best answer to every opposing Pokémon: how hard your moves hit it versus how hard its known moves (or its own types, if unknown) hit you. Tap a trainer for the breakdown.</p>
+        ${matchHtml(ms)}`;
+    }
+    const refresh=()=>{ save(); renderAnalysis(); };
+
+    /* ---------- picker ---------- */
+    let pickSlot=0;
+    function renderPicker(){
+      const q=$('tb-q').value.trim().toLowerCase();
+      const list=POKEDEX.filter(p=>!isUnavail(p)&&(!q||p.name.toLowerCase().includes(q)||String(p.dex)===q.replace('#','')||p.types.some(t=>t.toLowerCase()===q))).slice(0,90);
+      $('tb-res').innerHTML=list.map(p=>`<button data-dex="${p.dex}"><img src="${spriteUrl(p.dex)}" alt="" loading="lazy">${escapeHtml(p.name)}</button>`).join('')||'<span style="color:var(--text-soft)">No matches.</span>';
+    }
+    const closePicker=()=>$('tb-ov').classList.remove('open');
+    $('tb-res').addEventListener('click',e=>{
+      const b=e.target.closest('button[data-dex]'); if(!b) return;
+      const dex=+b.dataset.dex, p=pokedexEntry(dex), old=team[pickSlot];
+      const ab=p.abilities.find(a=>!a.hidden)||p.abilities[0];
+      team[pickSlot]={dex,form:'',ability:ab?ab.name:'',item:old?old.item:'',moves:old?old.moves:['','','','']};
+      closePicker(); renderSlots(); refresh();
+    });
+    $('tb-q').addEventListener('input',renderPicker);
+    $('tb-ov').addEventListener('click',e=>{ if(e.target.id==='tb-ov') closePicker(); });
+    document.addEventListener('keydown',e=>{ if(e.key==='Escape') closePicker(); });
+
+    $('tb-slots').addEventListener('click',e=>{
+      const pk=e.target.closest('.tb-pick'), rm=e.target.closest('.tb-rm');
+      if(pk){ pickSlot=+pk.dataset.i; $('tb-q').value=''; renderPicker(); $('tb-ov').classList.add('open'); $('tb-q').focus(); }
+      if(rm){ team[+rm.dataset.i]=null; renderSlots(); refresh(); }
+    });
+    $('tb-slots').addEventListener('change',e=>{
+      const t=e.target, s=team[+t.dataset.i]; if(!s) return;
+      if(t.dataset.m!==undefined){
+        const v=t.value.trim(), hit=MOVE_NAMES.find(m=>nk(m)===nk(v));
+        s.moves[+t.dataset.m]=hit||v; if(hit) t.value=hit;
+      } else if(t.dataset.f==='form'){ s.form=t.value; renderSlots(); }
+      else s[t.dataset.f]=t.value;
+      refresh();
+    });
+
+    /* ---------- toolbar ---------- */
+    const flash=(btn,msg)=>{ const o=btn.textContent; btn.textContent=msg; setTimeout(()=>btn.textContent=o,1500); };
+    $('tb-clear').addEventListener('click',()=>{ if(!team.some(Boolean)||confirm('Clear your whole team?')){ team=[null,null,null,null,null,null]; renderSlots(); refresh(); } });
+    $('tb-share').addEventListener('click',function(){
+      const code=btoa(unescape(encodeURIComponent(JSON.stringify(team))));
+      if(navigator.clipboard) navigator.clipboard.writeText(code).then(()=>flash(this,'Copied!'),()=>prompt('Copy your team code:',code));
+      else prompt('Copy your team code:',code);
+    });
+    $('tb-load').addEventListener('click',function(){
+      const c=prompt('Paste a team code:'); if(!c) return;
+      try{ const r=JSON.parse(decodeURIComponent(escape(atob(c.trim())))); if(!Array.isArray(r)||r.length!==6) throw 0; team=r.map(norm); renderSlots(); refresh(); }
+      catch(e){ flash(this,'Invalid code'); }
+    });
+
+    renderSlots(); renderAnalysis();
+  })();
+
+
+  /* ===== Roria Investigator ===== */
+  (function initInvestigator(){
+    const root = document.getElementById('inv-root'); if(!root) return;
+    const esc = escapeHtml, nk = s => String(s||'').toLowerCase().replace(/[^a-z0-9]/g,''), $ = s => root.querySelector(s);
+    const hum = s => String(s).split('-').map(w => w.charAt(0).toUpperCase()+w.slice(1)).join(' ');
+    const slug = s => String(s).toLowerCase().trim().replace(/[’'.]/g,'').replace(/[\s_]+/g,'-').replace(/[^a-z0-9-]/g,'');
+    const TYPES = Object.keys(TYPE_COLORS);
+    const P = s => Object.fromEntries(s.split('|').map(x => { const [a,b] = x.split(':'); return [a, b.split(' ').filter(Boolean)]; }));
+    const SE = P('Normal:|Fire:Grass Ice Bug Steel|Water:Fire Ground Rock|Electric:Water Flying|Grass:Water Ground Rock|Ice:Grass Ground Flying Dragon|Fighting:Normal Ice Rock Dark Steel|Poison:Grass Fairy|Ground:Fire Electric Poison Rock Steel|Flying:Grass Fighting Bug|Psychic:Fighting Poison|Bug:Grass Psychic Dark|Rock:Fire Ice Flying Bug|Ghost:Psychic Ghost|Dragon:Dragon|Dark:Psychic Ghost|Steel:Ice Rock Fairy|Fairy:Fighting Dragon Dark');
+    const NV = P('Normal:Rock Steel|Fire:Fire Water Rock Dragon|Water:Water Grass Dragon|Electric:Electric Grass Dragon|Grass:Fire Grass Poison Flying Bug Dragon Steel|Ice:Fire Water Ice Steel|Fighting:Poison Flying Psychic Bug Fairy|Poison:Poison Ground Rock Ghost|Ground:Grass Bug|Flying:Electric Rock Steel|Psychic:Psychic Steel|Bug:Fire Fighting Poison Flying Ghost Steel Fairy|Rock:Fighting Ground Steel|Ghost:Dark|Dragon:Steel|Dark:Fighting Dark Fairy|Steel:Fire Water Electric Steel|Fairy:Fire Poison Steel');
+    const IM = {Normal:'Ghost',Electric:'Ground',Fighting:'Ghost',Poison:'Steel',Ground:'Flying',Psychic:'Dark',Ghost:'Normal',Dragon:'Fairy'};
+    const eff = (a,d) => d.reduce((m,t) => m*(IM[a]===t?0:SE[a].includes(t)?2:NV[a].includes(t)?.5:1), 1); window.BFEff = eff;
+    const bst = p => Object.values(p.stats).reduce((a,b) => a+b, 0);
+    const byDex = {}, byName = {};
+    POKEDEX.forEach(p => { byDex[p.dex] = p; byName[nk(p.name)] = p; });
+
+    /* --- PokeAPI --- */
+    const cache = {};
+    const api = path => cache[path] || (cache[path] = fetch('https://pokeapi.co/api/v2/'+path).then(r => {
+      if(r.status === 404) throw new Error('Nothing named “'+hum(path.split('/')[1]||path)+'” in the Pokémon database.');
+      if(!r.ok) throw new Error('The Pokémon database (PokeAPI) had a problem. Try again in a moment.');
+      return r.json();
+    }, () => { throw new Error('Couldn’t reach the Pokémon database (PokeAPI). Check your connection and try again.'); }).catch(e => { delete cache[path]; throw e; }));
+    const MVL = api('move?limit=2000').then(r => r.results.map(x => x.name)).catch(() => []);
+    const idOf = u => +u.split('/').filter(Boolean).pop();
+
+    /* --- Roria wild data (rebuilt each search so wiki edits are picked up) --- */
+    let W = {};
+    const buildWild = () => { W = {}; const add = (s,l) => (s.encounters||[]).forEach(e => { const m = encounterMon(e); if(m.name && m.dex) (W[m.dex] = W[m.dex]||[]).push({area:l, m:e.method, t:e.time, r:e.rarity, reg:m.region||''}); }); ROUTES.forEach(r => add(r,r.name)); OTHER_AREAS.forEach(a => add(a,a.name)); };
+    const wildOf = (d,reg) => (W[d]||[]).filter(e => e.reg === (reg||''));
+    const where = (d,reg) => { const a = [...new Set(wildOf(d,reg).map(e => e.area))]; return a.length ? '📍 '+a.slice(0,3).map(esc).join(', ')+(a.length>3 ? ' +'+(a.length-3)+' more' : '') : 'Not found in the wild'; };
+
+    const mc = (p,x,reg) => `<div class="inv-mon" data-dex="${p.dex}"><img src="${spriteUrl(p.dex,reg||null)}" alt="" loading="lazy" onerror="this.style.visibility='hidden'"><div><b>${esc((reg?hum(reg)+' ':'')+p.name)}</b> <small>#${p.dex}</small>${reg?'':'<div>'+p.types.map(typePill).join('')+'</div>'}${x?'<div class="inv-x">'+x+'</div>':''}<div class="inv-w ${wildOf(p.dex,reg).length?'ok':''}">${where(p.dex,reg)}</div></div></div>`;
+    const opts = () => ({wild: !!($('#inv-wild')&&$('#inv-wild').checked), leg: !!($('#inv-leg')&&$('#inv-leg').checked)});
+    function listOut(list, o2){
+      o2 = o2||{}; const o = opts(), lim = o2.limit||60;
+      const l = list.filter(p => (!o.wild || wildOf(p.dex).length) && (!o.leg || !(p.legendary||p.mythical)));
+      l.sort(o2.sort || ((a,b) => (wildOf(b.dex).length>0)-(wildOf(a.dex).length>0) || bst(b)-bst(a)));
+      const h = `<h3>${o2.title||'Results'}<small>${l.length} found</small></h3>${o2.note||''}`;
+      if(!l.length) return h+`<div class="inv-note">No matches in the wiki's Pokédex${o.wild||o.leg ? ' with those filters. Try loosening them' : ''}.</div>`;
+      return h+`<div class="inv-grid">${l.slice(0,lim).map(p => mc(p, o2.extra ? o2.extra(p) : '')).join('')}</div>`+(l.length>lim ? `<div class="inv-note">Showing the first ${lim}. Tick “Only ones I can catch in Roria” to narrow it down.</div>` : '');
+    }
+    const wildTable = d => { const w = wildOf(d); return w.length ? `<table class="inv-tbl"><tr><th>Where</th><th>Method</th><th>Time</th><th>Rarity</th></tr>${w.map(e => `<tr><td>${esc(e.area)}</td><td>${esc(e.m||'')}</td><td>${esc(e.t||'')}</td><td>${esc(e.r||'')}</td></tr>`).join('')}</table>` : ''; };
+
+    /* --- Evolution helpers --- */
+    const flat = (n,from,o) => { o = o||[]; const id = idOf(n.species.url); o.push({id, from, det:n.evolution_details}); n.evolves_to.forEach(c => flat(c,id,o)); return o; };
+    const family = async d => { const sp = await api('pokemon-species/'+d); return flat((await api(sp.evolution_chain.url.split('/v2/')[1])).chain, 0); };
+    const evoCond = ds => (ds||[]).map(d => { const o = [];
+      if(d.min_level) o.push('Lv. '+d.min_level); if(d.item) o.push(hum(d.item.name));
+      if(d.trigger && d.trigger.name === 'trade') o.push('Trade'+(d.held_item ? ' holding '+hum(d.held_item.name) : '')); else if(d.held_item) o.push('holding '+hum(d.held_item.name));
+      if(d.min_happiness) o.push('high friendship'); if(d.known_move) o.push('knowing '+hum(d.known_move.name)); if(d.known_move_type) o.push('knowing a '+hum(d.known_move_type.name)+' move');
+      if(d.time_of_day) o.push('at '+d.time_of_day); if(d.location) o.push('at '+hum(d.location.name)); if(d.gender) o.push(d.gender===1 ? 'female' : 'male'); if(d.needs_overworld_rain) o.push('while raining');
+      return o.join(', ') || (d.trigger ? hum(d.trigger.name) : ''); }).filter(Boolean).join(' or ');
+
+    /* --- Evolution stones (stones are fixed, so they're built in) --- */
+    const STONES = {'Fire Stone':'37>38,58>59,133>136,513>514,951>952','Water Stone':'61>62,90>91,120>121,133>134,271>272,515>516','Thunder Stone':'25>26,133>135,603>604,938>939','Leaf Stone':'44>45,70>71,102>103,102>103:alola,274>275,511>512','Moon Stone':'30>31,33>34,35>36,39>40,300>301,517>518','Sun Stone':'44>182,191>192,546>547,548>549,694>695','Shiny Stone':'176>468,315>407,572>573,670>671','Dusk Stone':'198>430,200>429,608>609,680>681','Dawn Stone':'281>475,361>478','Ice Stone':'27>28:alola,37>38:alola,554>555:galar,974>975'};
+
+    const S = {moves:[], def:[]};
+    const tpl = {
+      chips: () => { const c = $('#inv-chips'); if(c) c.innerHTML = S.moves.map((m,i) => `<button class="inv-chip" data-rm="${i}" title="Remove">${esc(hum(m))} ✕</button>`).join(''); },
+      types: () => root.querySelectorAll('.inv-tbtn').forEach(b => b.classList.toggle('on', S.def.includes(b.dataset.t)))
+    };
+    const OPTS = `<div class="inv-row"><label><input type="checkbox" id="inv-wild"> Only ones I can catch in Roria</label><label><input type="checkbox" id="inv-leg" checked> Hide legendaries &amp; mythicals</label></div>`;
+    const MODES = {
+      move: {t:'Learns a move', ex:'False Swipe, Fly + Surf…', opts:1,
+        form:`<label>Which move(s) must it learn?</label><div class="inv-chips" id="inv-chips"></div><input type="text" id="inv-in" list="inv-moves" placeholder="e.g. False Swipe. Press Enter to add another move">`,
+        async run(){
+          if(!S.moves.length) throw new Error('Add at least one move first.');
+          const data = await Promise.all(S.moves.map(m => api('move/'+slug(m)))); let ids = null;
+          data.forEach(d => { const s = new Set(d.learned_by_pokemon.map(x => idOf(x.url))); ids = ids ? new Set([...ids].filter(i => s.has(i))) : s; });
+          const info = data.map(d => `<div class="inv-note"><b>${esc(hum(d.name))}</b> ${typePill(hum(d.type.name))} · ${esc(hum(d.damage_class.name))} · Power ${d.power||'—'} · Acc ${d.accuracy||'—'} · PP ${d.pp}<br>${esc(((d.effect_entries.find(e => e.language.name==='en')||{}).short_effect||'').replace(/\$effect_chance/g,d.effect_chance||''))}</div>`).join('');
+          return info+listOut([...ids].map(i => byDex[i]).filter(Boolean), {title:'Pokémon that can learn '+S.moves.map(hum).join(' + '), note:'<div class="inv-note">Learnsets come from the main games. Whether a TM or tutor is available in Bronze Frontier may differ, so double-check in game.</div>'});
+        }},
+      stone: {t:'Evolution stones', ex:'What evolves with a Moon Stone?',
+        form:`<label>Which stone?</label><select id="inv-st">${Object.keys(STONES).map(s => `<option>${s}</option>`).join('')}</select><div class="inv-row"><label><input type="checkbox" id="inv-wild"> Only show evolutions where I can catch the Pokémon in Roria</label></div>`,
+        async run(){
+          const st = $('#inv-st').value, o = opts();
+          const rows = STONES[st].split(',').map(x => { const [pair,reg] = x.split(':'), [a,b] = pair.split('>'); return {a:byDex[a], b:byDex[b], reg}; }).filter(r => r.a && r.b && (!o.wild || wildOf(r.a.dex,r.reg).length || wildOf(r.b.dex,r.reg).length));
+          return `<h3>Evolves with a ${esc(st)}<small>${rows.length} found</small></h3>`+(rows.length ? rows.map(r => `<div class="inv-evo">${mc(r.a,'',r.reg)}<span class="inv-arrow">→ ${esc(st)} →</span>${mc(r.b,'',r.reg)}</div>`).join('') : '<div class="inv-note">Nothing matches. Untick the Roria filter to see them all.</div>');
+        }},
+      counter: {t:'Counter a type', ex:'Something that beats Water types', opts:1,
+        form:`<label>What are you up against? Pick up to 2 types, or type a Pokémon.</label><div class="inv-types">${TYPES.map(t => `<button class="inv-tbtn" data-t="${t}" style="background:${TYPE_COLORS[t]}">${t.toUpperCase()}</button>`).join('')}</div><input type="text" id="inv-in" list="inv-mons" placeholder="…or a Pokémon, e.g. Gyarados">`,
+        async run(){
+          const d = S.def; if(!d.length) throw new Error('Pick a type (or a Pokémon) to counter.');
+          const m = TYPES.map(t => [t, eff(t,d)]), grp = f => m.filter(f).sort((a,b) => b[1]-a[1]).map(([t,x]) => typePill(t)+(x>=4 ? '<b>×4</b> ' : x===0 ? '<b>×0</b> ' : '')).join(' ') || '—';
+          const safe = TYPES.filter(t => d.every(x => eff(x,[t]) <= .5)).map(typePill).join(' ') || '—';
+          const rows = POKEDEX.map(p => ({p, a:Math.max(...p.types.map(t => eff(t,d))), df:Math.max(...d.map(x => eff(x,p.types)))})).filter(r => r.a>=2 && r.df<=1);
+          const per = rows.filter(r => r.df<=.5).map(r => r.p), good = rows.filter(r => r.df>.5).map(r => r.p);
+          return `<h3>Up against ${esc(d.join('/'))}</h3><div class="inv-note"><b>Hits it super effectively:</b> ${grp(x => x[1]>=2)}<br><br><b>Avoid (resisted or immune):</b> ${grp(x => x[1]<1)}<br><br><b>Types that shrug off its own-type moves:</b> ${safe}</div>`
+            +listOut(per, {title:'Best counters', note:'<div class="inv-note">These hit it super effectively <i>and</i> resist its STAB attacks.</div>'})+listOut(good, {title:'Good attackers', limit:30, note:'<div class="inv-note">Super effective, but they take normal damage back.</div>'});
+        }},
+      find: {t:'Find / evolve a Pokémon', ex:'Where is Gible? How does Eevee evolve?',
+        form:`<label>Which Pokémon?</label><input type="text" id="inv-in" list="inv-mons" placeholder="e.g. Pikachu">`,
+        async run(){
+          const p = byName[nk($('#inv-in').value)]; if(!p) throw new Error('That Pokémon isn’t in the wiki’s Pokédex. Check the spelling.');
+          let h = `<h3>${esc(p.name)}</h3><div class="inv-grid">${mc(p)}</div>`;
+          const w = wildTable(p.dex), lg = LEGENDARIES.concat(MYTHICALS).find(l => l.dex === p.dex);
+          h += w ? `<h3>Wild encounters in Roria</h3>${w}` : '<div class="inv-note">No wild encounters are documented for this Pokémon yet. See its evolution family below.</div>';
+          if(lg) h += `<h3>Special Pokémon</h3><div class="inv-note">${esc(lg.name)} is ${LEGENDARIES.includes(lg)?'a Legendary':'a Mythical'}${lg.location ? ' found at <b>'+esc(lg.location)+'</b>' : ''}.</div><button class="inv-link" data-guide="${esc(lg.name)}" data-k="${LEGENDARIES.includes(lg)?'l':'m'}">Open capture guide</button>`;
+          try { const f = await family(p.dex); if(f.length > 1) h += `<h3>Evolution family</h3>`+f.map(n => { const q = byDex[n.id]; return q ? `<div class="inv-evo">${n.from ? `<span class="inv-arrow">${esc(byDex[n.from] ? byDex[n.from].name : '')} → ${esc(evoCond(n.det)||'evolves')} →</span>` : '<span class="inv-arrow">Base form</span>'}${mc(q)}</div>` : ''; }).join(''); } catch(e){ h += `<div class="inv-note warn">${esc(e.message)}</div>`; }
+          return h;
+        }},
+      ability: {t:'Has an ability', ex:'Who has Intimidate?', opts:1,
+        form:`<label>Which ability?</label><input type="text" id="inv-in" list="inv-abs" placeholder="e.g. Intimidate">`,
+        async run(){ const v = nk($('#inv-in').value); if(!v) throw new Error('Type an ability name first.');
+          return listOut(POKEDEX.filter(p => p.abilities.some(a => nk(a.name) === v)), {title:'Pokémon with '+esc($('#inv-in').value.trim()), extra:p => p.abilities.find(a => nk(a.name) === v).hidden ? 'Hidden Ability' : ''}); }},
+      item: {t:'Holds an item', ex:'Who holds Leftovers?', opts:1,
+        form:`<label>Which held item?</label><input type="text" id="inv-in" list="inv-items" placeholder="e.g. Silver Powder">`,
+        async run(){ const v = nk($('#inv-in').value); if(!v) throw new Error('Type an item name first.');
+          return listOut(POKEDEX.filter(p => p.heldItems.some(i => nk(i.name) === v)), {title:'Wild Pokémon holding '+esc($('#inv-in').value.trim()), extra:p => 'Hold chance: '+p.heldItems.find(i => nk(i.name) === v).rarity+'%'}); }},
+      stat: {t:'Top of a stat', ex:'Fastest Fire type', opts:1,
+        form:`<label>Type and stat</label><div class="inv-row"><select id="inv-t"><option value="">Any type</option>${TYPES.map(t => `<option>${t}</option>`).join('')}</select><select id="inv-s">${[['spe','Speed'],['atk','Attack'],['spa','Sp. Atk'],['def','Defense'],['spd','Sp. Def'],['hp','HP'],['bst','Total stats']].map(s => `<option value="${s[0]}">${s[1]}</option>`).join('')}</select></div>`,
+        async run(){ const t = $('#inv-t').value, s = $('#inv-s').value, v = p => s === 'bst' ? bst(p) : p.stats[s];
+          return listOut(POKEDEX.filter(p => !t || p.types.includes(t)), {title:'Highest '+$('#inv-s').selectedOptions[0].text+(t ? ' among '+t+' types' : ''), limit:15, sort:(a,b) => v(b)-v(a), extra:p => $('#inv-s').selectedOptions[0].text+': '+v(p)}); }},
+      gym: {t:'Gym Leader prep', ex:'How do I beat Chad?',
+        form:`<label>Which Gym Leader?</label><select id="inv-g">${GYMS.map(g => `<option value="${g.num}">${g.num}. ${esc(g.name)} (${esc(g.type)})</option>`).join('')}</select>`,
+        async run(){ const g = GYMS.find(x => x.num == $('#inv-g').value), team = g.team.map(m => ({m, p:byDex[m.dex]})).filter(x => x.p);
+          const wk = TYPES.map(t => [t, team.filter(x => eff(t,x.p.types) >= 2).length]).filter(x => x[1]).sort((a,b) => b[1]-a[1]).slice(0,6);
+          return `<h3>${esc(g.name)}<small>${esc(g.meta)} · Level cap ${g.levelCap}</small></h3><div class="inv-note"><b>Specialty:</b> ${typePill(g.type)}<br><br><b>Best attacking types against their team:</b> ${wk.map(([t,n]) => typePill(t)+' <small>('+n+'/'+team.length+')</small>').join(' ')||'—'}</div><div class="inv-grid">${team.map(x => mc(x.p, 'Lv. '+x.m.level+' · '+esc(x.m.ability||'')+'<br>'+esc((x.m.moves||[]).join(', ')))).join('')}</div><div style="margin-top:12px"><button class="inv-link" data-go="gyms">Open Gym Leaders page</button></div>`; }},
+      wiki: {t:'Search the wiki', ex:'Daily bonus, codes, Mitis Town',
+        form:`<label>What are you looking for?</label><input type="text" id="inv-in" placeholder="e.g. daily bonus, Team Eclipse, Cheshma Town">`,
+        async run(){ const q = $('#inv-in').value.toLowerCase().trim(); if(!q) throw new Error('Type something to search for.');
+          const hits = buildSearchIndex().filter(e => (e.title+' '+e.category+' '+(e.match||'')).toLowerCase().includes(q)).slice(0,12);
+          const qa = QNA.filter(x => (x.q+' '+x.a.replace(/<[^>]+>/g,' ')).toLowerCase().includes(q)).slice(0,8);
+          return `<h3>Pages<small>${hits.length}</small></h3>`+(hits.map(e => `<button class="inv-link" data-go="${e.page}">${esc(e.title)} <small>· ${esc(e.category||'')}</small></button>`).join('')||'<div class="inv-note">No matching pages.</div>')+`<h3>Q&amp;A<small>${qa.length}</small></h3>`+(qa.map(x => `<details class="inv-q"><summary>${esc(x.q)}</summary><div>${x.a}</div></details>`).join('')||'<div class="inv-note">No matching questions.</div>'); }}
+    };
+
+    /* --- Layout --- */
+    root.innerHTML = `<div class="inv-ask"><input type="text" id="inv-nl" placeholder="Describe your problem, e.g. “I need a Pokémon that can use Fly and Surf”" autocomplete="off"><button class="inv-go" id="inv-nl-go">Investigate</button></div>
+      <div class="inv-ex">${['I\'m looking for a Pokémon that can learn False Swipe','I need a Pokémon that can use Fly and Surf','Where can I find a Pokémon that evolves with a Moon Stone?','I need a Pokémon that counters Water types'].map(x => `<button data-ex="${esc(x)}">${esc(x)}</button>`).join('')}</div>
+      <div class="inv-modes">${Object.entries(MODES).map(([k,m]) => `<button class="inv-mode" data-mode="${k}"><b>${m.t}</b><span>${esc(m.ex)}</span></button>`).join('')}</div>
+      <div id="inv-panel" class="inv-panel" style="display:none"></div><div id="inv-out"></div>
+      <datalist id="inv-moves"></datalist><datalist id="inv-mons">${POKEDEX.map(p => `<option value="${esc(p.name)}">`).join('')}</datalist>
+      <datalist id="inv-abs">${[...new Set(POKEDEX.flatMap(p => p.abilities.map(a => a.name)))].sort().map(a => `<option value="${esc(a)}">`).join('')}</datalist>
+      <datalist id="inv-items">${[...new Set(POKEDEX.flatMap(p => p.heldItems.map(i => i.name)))].sort().map(a => `<option value="${esc(a)}">`).join('')}</datalist>`;
+    const out = $('#inv-out'); let cur = null;
+    MVL.then(n => { $('#inv-moves').innerHTML = n.map(x => `<option value="${hum(x)}">`).join(''); });
+
+    function open(k){
+      cur = k; const m = MODES[k], pn = $('#inv-panel');
+      root.querySelectorAll('.inv-mode').forEach(b => b.classList.toggle('active', b.dataset.mode === k));
+      pn.style.display = ''; pn.innerHTML = m.form+(m.opts ? OPTS : '')+`<div class="inv-row"><button class="inv-go" id="inv-run">Search</button></div>`;
+      out.innerHTML = ''; tpl.chips(); tpl.types();
+    }
+    async function run(){
+      buildWild(); out.innerHTML = '<div class="inv-note">Investigating…</div>';
+      try { out.innerHTML = await MODES[cur].run(); } catch(e){ out.innerHTML = `<div class="inv-note warn">${esc(e.message||'Something went wrong.')}</div>`; }
+      out.scrollIntoView({behavior:'smooth', block:'nearest'});
+    }
+    async function addMove(v){
+      v = slug(v); if(!v) return; const names = await MVL;
+      if(names.length && !names.includes(v)){ out.innerHTML = `<div class="inv-note warn">“${esc(hum(v))}” isn’t a move in the database. Check the spelling.</div>`; return; }
+      if(!S.moves.includes(v)) S.moves.push(v); tpl.chips();
+    }
+
+    /* --- Natural-language routing --- */
+    async function ask(text){
+      const t = ' '+text.toLowerCase().replace(/[^a-z0-9 ]+/g,' ').replace(/\s+/g,' ').trim()+' ';
+      const st = ['fire','water','thunder','leaf','moon','sun','shiny','dusk','dawn','ice'].find(s => t.includes(' '+s+' stone '));
+      if(st){ open('stone'); $('#inv-st').value = hum(st)+' Stone'; return run(); }
+      const tys = TYPES.filter(x => new RegExp('\\b'+x.toLowerCase()+'s?\\b').test(t)).slice(0,2);
+      const mon = POKEDEX.slice().sort((a,b) => b.name.length-a.name.length).find(p => t.includes(' '+p.name.toLowerCase().replace(/[^a-z0-9 ]/g,'')+' '));
+      if(/\b(counters?|beats?|weak to|strong against|good against|resists?|stops?)\b/.test(t) && (tys.length || mon)){ open('counter'); S.def = tys.length ? tys : mon.types.slice(); tpl.types(); return run(); }
+      const mv = (await MVL).filter(s => s !== 'counter' && t.includes(' '+s.replace(/-/g,' ')+' '));
+      const mv2 = mv.filter(a => !mv.some(b => b !== a && b.length > a.length && b.includes(a)));
+      if(mv2.length && /\b(learn|learns|use|uses|know|knows|move|moves|teach)\b/.test(t)){ open('move'); S.moves = mv2; tpl.chips(); return run(); }
+      const ab = [...new Set(POKEDEX.flatMap(p => p.abilities.map(a => a.name)))].find(a => /ability/.test(t) && t.includes(' '+a.toLowerCase().replace(/[^a-z0-9 ]/g,'')+' '));
+      if(ab){ open('ability'); $('#inv-in').value = ab; return run(); }
+      const gy = GYMS.find(g => t.includes(' '+g.name.toLowerCase()+' '));
+      if(gy){ open('gym'); $('#inv-g').value = gy.num; return run(); }
+      if(mon){ open('find'); $('#inv-in').value = mon.name; return run(); }
+      open('wiki'); $('#inv-in').value = text.trim(); return run();
+    }
+
+    root.addEventListener('click', e => {
+      const b = e.target.closest('button,.inv-mon'); if(!b) return;
+      if(b.dataset.mode) open(b.dataset.mode);
+      else if(b.id === 'inv-run') run();
+      else if(b.id === 'inv-nl-go'){ const v = $('#inv-nl').value.trim(); if(v) ask(v); }
+      else if(b.dataset.ex){ $('#inv-nl').value = b.dataset.ex; ask(b.dataset.ex); }
+      else if(b.dataset.rm){ S.moves.splice(+b.dataset.rm,1); tpl.chips(); }
+      else if(b.dataset.t){ const i = S.def.indexOf(b.dataset.t); if(i>-1) S.def.splice(i,1); else { if(S.def.length>=2) S.def.shift(); S.def.push(b.dataset.t); } tpl.types(); }
+      else if(b.dataset.go) goTo(b.dataset.go);
+      else if(b.dataset.guide){ goTo(b.dataset.k === 'l' ? 'legendaries' : 'mythicals'); (b.dataset.k === 'l' ? openGuide : openMythicalGuide)(b.dataset.guide); }
+      else if(b.dataset.dex) openDexModal(+b.dataset.dex);
+    });
+    root.addEventListener('keydown', async e => {
+      if(e.key !== 'Enter') return;
+      if(e.target.id === 'inv-nl'){ const v = e.target.value.trim(); if(v) ask(v); }
+      else if(e.target.id === 'inv-in'){ if(cur === 'move'){ await addMove(e.target.value); e.target.value = ''; } else run(); }
+    });
+    root.addEventListener('change', e => {
+      if(e.target.id !== 'inv-in') return;
+      if(cur === 'move'){ addMove(e.target.value).then(() => { e.target.value = ''; }); }
+      else if(cur === 'counter'){ const p = byName[nk(e.target.value)]; if(p){ S.def = p.types.slice(); tpl.types(); } }
+    });
+  })();
+
+
+  /* ===== Nuzlocke Tracker ===== */
+  (function initNuzlocke(){
+    const root = document.getElementById('nz-root'); if(!root || !window.BFEff) return;
+    const KEY = 'bf_nuz_v1', esc = escapeHtml, nk = s => String(s||'').toLowerCase().replace(/[^a-z0-9]/g,''), eff = window.BFEff, TYPES = Object.keys(TYPE_COLORS);
+    const byDex = {}, byName = {}; POKEDEX.forEach(p => { byDex[p.dex] = p; byName[nk(p.name)] = p; });
+    let S = {enc:[], beaten:0, view:0, dupes:true}, draft = '', flash = '';
+    try { Object.assign(S, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch(e){}
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch(e){} };
+    const AREAS = () => ROUTES.map(r => ({n:r.name, e:r.encounters})).concat(OTHER_AREAS.map(a => ({n:a.name, e:a.encounters})));
+    const monsIn = a => [...new Set((a.e||[]).map(e => encounterMon(e).dex).filter(Boolean))].map(d => byDex[d]).filter(p => p && !p.legendary && !p.mythical);
+    const best = (p,t) => Math.max(...p.types.map(x => eff(x,t)));
+    const stat = (n,l,c) => `<div class="nz-stat ${c||''}"><b>${n}</b><span>${l}</span></div>`;
+    const mini = e => { const p = byDex[e.dex]; return p ? `<img src="${spriteUrl(p.dex)}" alt="" data-dex="${p.dex}" onerror="this.style.visibility='hidden'">` : ''; };
+
+    function advice(gym, alive, party, unused){
+      const mt = gym.team.map(m => (byDex[m.dex]||{}).types).filter(Boolean), n = mt.length, out = [];
+      if(!n) return out;
+      const hits = p => mt.filter(t => best(p,t) >= 2).length, weak = p => mt.filter(t => Math.max(...t.map(x => eff(x,p.types))) >= 2).length;
+      const sc = p => mt.reduce((s,t) => s+best(p,t), 0)/n - .6*mt.reduce((s,t) => s+Math.max(...t.map(x => eff(x,p.types))), 0)/n;
+      const ps = alive.map(e => ({e, p:byDex[e.dex]})).filter(x => x.p).sort((a,b) => sc(b.p)-sc(a.p));
+      if(ps.length) out.push(['nz-good', `<b>Suggested lineup vs ${esc(gym.name)}:</b><br>${ps.slice(0,6).map(x => `${esc(x.e.nick||x.p.name)} <small>(${esc(x.p.name)}: hits ${hits(x.p)}/${n}, exposed to ${weak(x.p)}/${n})</small>`).join('<br>')}`]);
+      else out.push(['nz-bad', 'You have no living Pokémon to send in. If that’s your whole run, it may be time to start a new one.']);
+      const cnt = TYPES.map(t => [t, mt.filter(x => eff(t,x) >= 2).length]).filter(x => x[1] >= Math.min(2,n)).sort((a,b) => b[1]-a[1]).slice(0,3);
+      const missing = cnt.filter(([t]) => !alive.some(e => (byDex[e.dex]||{types:[]}).types.includes(t)));
+      if(cnt.length) out.push(['nz-tip', `<b>Types that wreck their team:</b> ${cnt.map(([t,c]) => typePill(t)+' <small>'+c+'/'+n+'</small>').join(' ')}`]);
+      missing.forEach(([t]) => { const f = AREAS().filter(a => unused.includes(a.n)).map(a => ({n:a.n, m:monsIn(a).filter(p => p.types.includes(t))})).filter(x => x.m.length).slice(0,4);
+        out.push(['nz-bad', `<b>Nobody on your team is ${typePill(t)}.</b> ${f.length ? 'Unused areas with one: '+f.map(x => `${esc(x.n)} (${x.m.slice(0,3).map(p => esc(p.name)).join(', ')})`).join('; ') : 'No unused area has a documented one. Try a trade or evolution.'}`]); });
+      const wk = TYPES.map(t => [t, party.filter(e => byDex[e.dex] && eff(t,byDex[e.dex].types) >= 2).length]).filter(x => x[1] >= 3 && party.length >= 4);
+      wk.forEach(([t,c]) => out.push(['nz-bad', `<b>${c} of your party are weak to ${typePill(t)}.</b> Swap someone out or keep a resist in the back.`]));
+      if(party.length < 6 && alive.length > party.length) out.push(['nz-tip', `Your party has ${party.length}/6, and you have ${alive.length-party.length} more alive in the box.`]);
+      out.push(['nz-tip', `Level cap is <b>Lv. ${gym.levelCap}</b>. Their ace is the one to plan around.`]);
+      return out;
+    }
+
+    function render(){
+      const E = S.enc, caught = E.filter(e => e.st !== 'missed'), alive = caught.filter(e => e.st !== 'dead'), dead = caught.filter(e => e.st === 'dead'), party = alive.filter(e => e.st === 'party');
+      const used = new Set(E.map(e => nk(e.area))), all = ['Starter Pokémon', ...new Set(AREAS().map(a => a.n))], unused = all.filter(a => !used.has(nk(a)));
+      const gym = GYMS.find(g => g.num === (S.view || S.beaten+1));
+      const row = (e,i) => { const p = byDex[e.dex]; return `<tr class="${e.st==='dead'?'dead':''}"><td>${mini(e)}</td><td><b>${esc(e.nick||(p?p.name:'—'))}</b>${e.nick&&p?` <small>${esc(p.name)}</small>`:''}</td><td>${esc(e.area)}</td><td>${e.st==='missed' ? 'Missed' : `<select data-st="${i}">${[['party','Party'],['box','Box'],['dead','Dead']].map(o => `<option value="${o[0]}" ${e.st===o[0]?'selected':''}>${o[1]}</option>`).join('')}</select>`}</td><td><button class="nz-x" data-del="${i}" title="Remove">✕</button></td></tr>`; };
+      root.innerHTML = `${flash ? `<div class="inv-note warn">${flash}</div>` : ''}
+      <div class="nz-stats">${stat(E.length,'Encounters')}${stat(caught.length,'Caught')}${stat(alive.length,'Alive','ok')}${stat(dead.length,'Dead','dead')}${stat(S.beaten+'/'+GYMS.length,'Badges')}</div>
+      <section class="block"><h3 style="margin-bottom:10px">Log an encounter</h3><div class="inv-panel"><div class="nz-add">
+        <input id="nz-area" list="nz-areas" placeholder="Area (e.g. Route 1)" value="${esc(draft)}"><input id="nz-mon" list="inv-mons" placeholder="Pokémon"><input id="nz-nick" placeholder="Nickname (optional)"><select id="nz-res"><option value="box">Caught</option><option value="missed">Missed (fled / KO'd)</option></select><button class="inv-go" data-a="add">Add</button></div>
+        <div class="inv-row"><label><input type="checkbox" id="nz-dupes" ${S.dupes?'checked':''}> Dupes clause (skip species I already have)</label></div>
+        <datalist id="nz-areas">${all.map(a => `<option value="${esc(a)}">`).join('')}</datalist></div>
+        <div class="inv-note"><b>Areas still unused (${unused.length}):</b> ${unused.slice(0,40).map(a => `<button class="inv-chip" data-area="${esc(a)}">${esc(a)}</button>`).join(' ')||'All areas used!'}</div></section>
+      <section class="block"><h3 style="margin-bottom:10px">Encounters <small style="color:var(--text-soft)">(party ${party.length}/6)</small></h3>${E.length ? `<table class="inv-tbl nz-tbl"><tr><th></th><th>Pokémon</th><th>Area</th><th>Status</th><th></th></tr>${E.map(row).join('')}</table>` : '<div class="inv-note">Nothing logged yet. Add your first encounter above.</div>'}</section>
+      ${dead.length ? `<section class="block"><h3 style="margin-bottom:10px">Graveyard</h3><div class="inv-grid">${dead.map(e => { const p = byDex[e.dex]; return p ? `<div class="inv-mon" data-dex="${p.dex}"><img src="${spriteUrl(p.dex)}" alt="" style="filter:grayscale(1)"><div><b>${esc(e.nick||p.name)}</b> <small>${esc(p.name)}</small><div class="inv-w">${esc(e.area)}${e.cause ? ' · '+esc(e.cause) : ''}</div></div></div>` : ''; }).join('')}</div></section>` : ''}
+      <section class="block"><h3 style="margin-bottom:10px">Next boss fight</h3>
+        <div class="inv-row" style="margin:0 0 10px"><select id="nz-g" style="background:var(--glass);border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px;font:inherit">${GYMS.map(g => `<option value="${g.num}" ${gym&&gym.num===g.num?'selected':''}>${g.num}. ${esc(g.name)} (${esc(g.type)})${g.num<=S.beaten?' ✓':''}</option>`).join('')}</select>
+        ${S.beaten < GYMS.length ? '<button class="inv-link" data-a="beat">Mark next gym beaten</button>' : ''}${S.beaten ? '<button class="inv-link" data-a="unbeat">Undo</button>' : ''}</div>
+        ${gym ? `<div class="inv-note"><b>${esc(gym.name)}</b> · ${esc(gym.meta)} · Level cap ${gym.levelCap} · ${typePill(gym.type)}</div><div class="inv-grid">${gym.team.map(m => byDex[m.dex] ? `<div class="inv-mon" data-dex="${m.dex}"><img src="${spriteUrl(m.dex)}" alt=""><div><b>${esc(m.name)}</b> <small>Lv. ${m.level}</small><div>${byDex[m.dex].types.map(typePill).join('')}</div></div></div>` : '').join('')}</div>${advice(gym, alive, party, unused).map(a => `<div class="inv-note ${a[0]}">${a[1]}</div>`).join('')}` : '<div class="inv-note nz-good">All gym badges collected. On to the Elite Four!</div>'}</section>
+      <div class="inv-row"><button class="inv-link" data-a="copy">Copy run code</button><button class="inv-link" data-a="load">Load run code</button><button class="inv-link" data-a="reset">Start new run</button></div>`;
+      flash = '';
+    }
+
+    root.addEventListener('click', e => {
+      const b = e.target.closest('[data-a],[data-del],[data-area],[data-dex]'); if(!b) return;
+      if(b.dataset.dex){ if(typeof openDexModal === 'function') openDexModal(+b.dataset.dex); return; }
+      if(b.dataset.area){ draft = b.dataset.area; render(); const m = root.querySelector('#nz-mon'); if(m) m.focus(); return; }
+      if(b.dataset.del){ S.enc.splice(+b.dataset.del,1); save(); return render(); }
+      const a = b.dataset.a;
+      if(a === 'add'){
+        const area = root.querySelector('#nz-area').value.trim(), p = byName[nk(root.querySelector('#nz-mon').value)], nick = root.querySelector('#nz-nick').value.trim(), res = root.querySelector('#nz-res').value;
+        S.dupes = root.querySelector('#nz-dupes').checked;
+        if(!area) flash = 'Pick an area first.';
+        else if(res !== 'missed' && !p) flash = 'That Pokémon isn’t in the wiki’s Pokédex. Check the spelling.';
+        else if(S.enc.some(x => nk(x.area) === nk(area)) && !confirm('You already used '+area+'. Log another anyway?')) flash = '';
+        else if(res !== 'missed' && S.dupes && S.enc.some(x => x.st !== 'missed' && x.dex === p.dex)) flash = esc(p.name)+' is a dupe. Under the dupes clause you get a free reroll, so don’t log it, or untick the rule.';
+        else { S.enc.push({area, dex:p?p.dex:0, nick, st:res}); draft = ''; save(); }
+        return render();
+      }
+      if(a === 'beat'){ S.beaten = Math.min(GYMS.length, S.beaten+1); S.view = 0; save(); }
+      if(a === 'unbeat'){ S.beaten = Math.max(0, S.beaten-1); S.view = 0; save(); }
+      if(a === 'reset' && confirm('Start a new run? This clears all your encounters and badges.')) S = {enc:[], beaten:0, view:0, dupes:S.dupes}, save();
+      if(a === 'copy'){ const c = btoa(unescape(encodeURIComponent(JSON.stringify(S)))); (navigator.clipboard ? navigator.clipboard.writeText(c) : Promise.reject()).then(() => { flash = 'Run code copied to your clipboard.'; render(); }, () => { prompt('Copy your run code:', c); }); return; }
+      if(a === 'load'){ const c = prompt('Paste your run code:'); if(c){ try { S = Object.assign({enc:[],beaten:0,view:0,dupes:true}, JSON.parse(decodeURIComponent(escape(atob(c.trim()))))); save(); } catch(x){ flash = 'That run code didn’t work.'; } } }
+      render();
+    });
+    root.addEventListener('change', e => {
+      const t = e.target;
+      if(t.dataset.st !== undefined){ const i = +t.dataset.st, v = t.value;
+        if(v === 'party' && S.enc.filter(x => x.st === 'party').length >= 6 && S.enc[i].st !== 'party'){ flash = 'Your party is full (6). Box someone first.'; return render(); }
+        if(v === 'dead'){ const c = prompt('What happened? (optional)'); S.enc[i].cause = c ? c.trim() : ''; }
+        S.enc[i].st = v; save(); render(); }
+      else if(t.id === 'nz-g'){ S.view = +t.value === S.beaten+1 ? 0 : +t.value; save(); render(); }
+      else if(t.id === 'nz-dupes'){ S.dupes = t.checked; save(); }
+    });
+    render();
+  })();
+
 </script>
 
 
